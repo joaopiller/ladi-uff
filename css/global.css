@@ -1,0 +1,29 @@
+:root {
+  --azul-escuro: #274359;
+  --azul: #004AAD;
+  --azul-medio: #3A75C8;
+  --azul-claro: #4C91D4;
+  --azul-ceu: #85CFFE;
+  --azul-gelo: #C8E0EF;
+  --fundo: #F5F8FB;
+  --texto: #33414d;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: var(--texto);
+  background-color: var(--fundo);
+  overscroll-behavior: none;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
