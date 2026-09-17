@@ -18,9 +18,38 @@
 </head>
 <body>
 
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="./">
+          <img src="img/logo-ladi.png" alt="Logo da LADI" class="logo">
+          <span class="brand-text">LADI <small>UFF</small></span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+                aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link" href="quem-somos/">Quem somos</a></li>
+            <li class="nav-item"><a class="nav-link" href="eventos/">Eventos</a></li>
+            <li class="nav-item"><a class="nav-link" href="clube-de-leitura/">Clube de leitura</a></li>
+          </ul>
+
+          <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ladi.uff@gmail.com" target="_blank" class="btn btn-contato">
+            <i class="bi bi-envelope me-2"></i>Fale conosco
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
   <main>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/global.js"></script>
 </body>
 </html>
