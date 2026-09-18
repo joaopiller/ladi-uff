@@ -27,3 +27,87 @@ h1, h2, h3, h4 {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+
+#navbar {
+  padding: 18px 0;
+  transition: background-color 0.3s, padding 0.3s, box-shadow 0.3s;
+}
+
+#navbar.rolou {
+  background-color: var(--azul-escuro);
+  padding: 8px 0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: width 0.3s, height 0.3s;
+}
+
+#navbar.rolou .logo {
+  width: 42px;
+  height: 42px;
+}
+
+.brand-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.brand-text small {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--azul-ceu);
+}
+
+.navbar-dark .nav-link {
+  color: #fff;
+  font-weight: 700;
+  margin: 0 10px;
+  position: relative;
+}
+
+.navbar-dark .nav-link:hover,
+.navbar-dark .nav-link:focus {
+  color: var(--azul-ceu);
+}
+
+.navbar-dark .nav-link.active {
+  color: var(--azul-ceu);
+}
+
+.btn-contato {
+  background-color: var(--azul);
+  color: #fff;
+  border-radius: 30px;
+  padding: 8px 22px;
+  font-weight: 700;
+}
+
+.btn-contato:hover {
+  background-color: #fff;
+  color: var(--azul);
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background-color: var(--azul-escuro);
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+
+  .btn-contato {
+    margin-top: 10px;
+  }
+}
+
+.logo-rodape {
+  width: 115px;
+  border-radius: 50%;
+}
