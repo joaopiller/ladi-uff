@@ -107,6 +107,92 @@ h1, h2, h3, h4 {
   }
 }
 
+.banner {
+  position: relative;
+  height: 100vh;
+  min-height: 550px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: #fff;
+}
+
+.banner-fundo {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  bottom: -20px;
+  left: -20px;
+  background-image: url("../img/banner.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(5px);
+}
+
+.banner-camada {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(100deg, rgba(39, 67, 89, 0.95) 0%, rgba(0, 74, 173, 0.7) 60%, rgba(0, 74, 173, 0.35) 100%);
+}
+
+.banner-conteudo {
+  position: relative;
+}
+
+.banner-pre {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 0.9rem;
+  color: var(--azul-ceu);
+  margin-bottom: 10px;
+}
+
+.banner h1 {
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+@media (min-width: 640px) {
+  .banner h1 {
+    font-size: 6vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .banner h1 {
+    font-size: 4.5rem;
+  }
+}
+
+.banner h1 span {
+  color: var(--azul-ceu);
+}
+
+.banner-sub {
+  max-width: 560px;
+  font-size: 1.15rem;
+  font-weight: 300;
+  margin: 20px 0 30px;
+}
+
+.btn-banner {
+  border: 2px solid #fff;
+  color: #fff;
+  border-radius: 30px;
+  padding: 10px 30px;
+  font-weight: 700;
+}
+
+.btn-banner:hover {
+  background-color: #fff;
+  color: var(--azul);
+}
+
 .rodape {
   background-color: var(--azul-escuro);
   color: #fff;
