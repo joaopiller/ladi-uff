@@ -107,7 +107,40 @@ h1, h2, h3, h4 {
   }
 }
 
+.rodape {
+  background-color: var(--azul-escuro);
+  color: #fff;
+  padding: 40px 0;
+}
+
+@media (min-width: 768px) {
+  .coluna-rodape {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
 .logo-rodape {
   width: 115px;
   border-radius: 50%;
+}
+
+.rodape h4 {
+  color: var(--azul-ceu);
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.rodape a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.rodape a:hover {
+  color: var(--azul-ceu);
+}
+
+.redes a {
+  font-size: 1.7rem;
+  margin-right: 15px;
 }
