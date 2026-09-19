@@ -60,3 +60,24 @@
 .card-evento:hover img {
   transform: scale(1.08);
 }
+
+.secao-clube {
+  background-color: var(--azul-escuro);
+  color: #fff;
+}
+
+.secao-clube .titulo-secao {
+  color: #fff;
+}
+
+.secao-clube .titulo-secao strong {
+  color: var(--azul-ceu);
+}
+
+.clube-pre {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 0.9rem;
+  color: var(--azul-ceu);
+  margin-bottom: 10px;
+}

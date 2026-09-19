@@ -253,6 +253,34 @@ h1, h2, h3, h4 {
   box-shadow: 0 15px 35px rgba(39, 67, 89, 0.25);
 }
 
+.livro {
+  text-align: center;
+}
+
+.livro img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.livro-pais {
+  display: inline-block;
+  background-color: var(--azul-claro);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin: 14px 0 6px;
+}
+
+.livro-titulo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  margin: 0;
+}
+
 .rodape {
   background-color: var(--azul-escuro);
   color: #fff;
