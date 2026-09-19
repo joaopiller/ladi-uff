@@ -193,6 +193,56 @@ h1, h2, h3, h4 {
   color: var(--azul);
 }
 
+.secao {
+  padding: 90px 0;
+}
+
+.titulo-secao {
+  color: var(--azul-escuro);
+  font-size: 2.4rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+  overflow-wrap: break-word;
+}
+
+.titulo-secao strong {
+  color: var(--azul);
+  font-weight: 600;
+}
+
+.linha-titulo {
+  width: 70px;
+  height: 3px;
+  background-color: var(--azul-claro);
+  margin-bottom: 20px;
+}
+
+.texto {
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.btn-principal {
+  background-color: var(--azul);
+  color: #fff;
+  border-radius: 30px;
+  padding: 10px 26px;
+  font-weight: 700;
+}
+
+.btn-principal:hover {
+  background-color: var(--azul-escuro);
+  color: #fff;
+}
+
+.foto-quem-somos img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 15px 35px rgba(39, 67, 89, 0.25);
+}
+
 .rodape {
   background-color: var(--azul-escuro);
   color: #fff;
