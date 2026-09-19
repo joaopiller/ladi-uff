@@ -235,6 +235,16 @@ h1, h2, h3, h4 {
   color: #fff;
 }
 
+.tag {
+  align-self: flex-start;
+  background-color: var(--azul-claro);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
 .foto-quem-somos img {
   width: 100%;
   aspect-ratio: 4 / 3;
