@@ -318,3 +318,21 @@ h1, h2, h3, h4 {
   font-size: 1.7rem;
   margin-right: 15px;
 }
+
+.banner-pagina {
+  height: 60vh;
+  min-height: 420px;
+}
+
+.secao-escura {
+  background-color: var(--azul-escuro);
+  color: #fff;
+}
+
+.secao-escura .titulo-secao {
+  color: #fff;
+}
+
+.secao-escura .titulo-secao strong {
+  color: var(--azul-ceu);
+}
