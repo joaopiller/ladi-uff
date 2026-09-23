@@ -44,6 +44,41 @@
   margin: 40px 0 24px;
 }
 
+.membro {
+  text-align: center;
+}
+
+.membro img {
+  width: 100%;
+  max-width: 230px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(39, 67, 89, 0.2);
+  margin-bottom: 14px;
+}
+
+.membro h3 {
+  font-size: 1.2rem;
+  color: var(--azul-escuro);
+  margin-bottom: 4px;
+}
+
+.membro p {
+  color: var(--azul-medio);
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.secao-escura .membro h3 {
+  color: #fff;
+}
+
+.secao-escura .membro p {
+  color: var(--azul-ceu);
+}
+
 .card-tripe {
   height: 100%;
   color: var(--texto);
@@ -71,6 +106,30 @@
 .card-tripe p {
   font-size: 0.95rem;
   margin: 0;
+}
+
+.abas-diretoria {
+  gap: 10px;
+  margin: 30px 0 40px;
+}
+
+.abas-diretoria .nav-link {
+  color: var(--azul-escuro);
+  background-color: #fff;
+  border: 2px solid var(--azul-gelo);
+  border-radius: 30px;
+  font-weight: 700;
+  padding: 8px 20px;
+}
+
+.abas-diretoria .nav-link:hover {
+  border-color: var(--azul-claro);
+}
+
+.abas-diretoria .nav-link.active {
+  background-color: var(--azul);
+  border-color: var(--azul);
+  color: #fff;
 }
 
 .intro-diretorias {
