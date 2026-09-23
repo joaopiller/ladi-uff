@@ -36,3 +36,48 @@
   line-height: 1.7;
   margin: 0;
 }
+
+.subtitulo-diretoria {
+  text-align: center;
+  color: var(--azul-escuro);
+  font-size: 1.3rem;
+  margin: 40px 0 24px;
+}
+
+.card-tripe {
+  height: 100%;
+  color: var(--texto);
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.secao-escura .subtitulo-diretoria {
+  color: #fff;
+}
+
+.card-tripe i {
+  font-size: 2rem;
+  color: var(--azul);
+}
+
+.card-tripe h4 {
+  color: var(--azul-escuro);
+  font-size: 1.2rem;
+  margin: 10px 0 8px;
+}
+
+.card-tripe p {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.intro-diretorias {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.card-tripe .tag {
+  color: #fff;
+}
