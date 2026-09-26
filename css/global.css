@@ -235,6 +235,11 @@ h1, h2, h3, h4 {
   color: #fff;
 }
 
+.btn-principal:disabled {
+  background-color: var(--azul-medio);
+  color: #fff;
+}
+
 .tag {
   align-self: flex-start;
   background-color: var(--azul-claro);
@@ -335,4 +340,36 @@ h1, h2, h3, h4 {
 
 .secao-escura .titulo-secao strong {
   color: var(--azul-ceu);
+}
+
+.secao-gelo {
+  background-color: var(--azul-gelo);
+}
+
+.caixa-inscricao {
+  color: var(--texto);
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 36px 32px;
+  box-shadow: 0 15px 35px rgba(39, 67, 89, 0.15);
+}
+
+.caixa-inscricao h3 {
+  color: var(--azul-escuro);
+  font-size: 1.5rem;
+  margin-bottom: 18px;
+}
+
+.passos {
+  padding-left: 20px;
+  margin-bottom: 26px;
+}
+
+.passos li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.passos strong {
+  color: var(--azul);
 }
