@@ -54,3 +54,44 @@
   font-size: 0.95rem;
   margin: 0;
 }
+
+.livro-lido {
+  max-width: 230px;
+  margin: 0 auto;
+}
+
+.livro-mes {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--azul-medio);
+  margin: 16px 0 4px;
+}
+
+.livro-lido .livro-titulo {
+  color: var(--azul-escuro);
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+
+.livro-autor {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.livro-lido .livro-pais {
+  color: #fff;
+  margin: 0;
+}
+
+.duvidas {
+  text-align: center;
+  font-size: 0.95rem;
+  margin: 18px 0 0;
+}
+
+.duvidas a {
+  color: var(--azul);
+  font-weight: 700;
+}
