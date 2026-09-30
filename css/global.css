@@ -154,6 +154,13 @@ h1, h2, h3, h4 {
   }
 }
 
+@media (max-width: 575px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
 .banner {
   position: relative;
   height: 100vh;
@@ -213,6 +220,12 @@ h1, h2, h3, h4 {
 @media (min-width: 1200px) {
   .banner h1 {
     font-size: 4.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner h1 {
+    font-size: 8vw;
   }
 }
 
@@ -297,6 +310,12 @@ h1, h2, h3, h4 {
   margin-bottom: 8px;
 }
 
+@media (max-width: 575px) {
+  .tag {
+    font-size: 0.65rem;
+  }
+}
+
 .foto-quem-somos img {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -331,6 +350,16 @@ h1, h2, h3, h4 {
   font-family: 'Oswald', sans-serif;
   font-size: 1rem;
   margin: 0;
+}
+
+@media (max-width: 575px) {
+  .livro-pais {
+    font-size: 0.65rem;
+  }
+
+  .livro-titulo {
+    font-size: 0.8rem;
+  }
 }
 
 .rodape {
@@ -376,6 +405,14 @@ h1, h2, h3, h4 {
   min-height: 420px;
 }
 
+@media (max-width: 575px) {
+  .banner-pagina {
+    height: 48vh;
+    min-height: 340px;
+    padding-top: 100px;
+  }
+}
+
 .secao-escura {
   background-color: var(--azul-escuro);
   color: #fff;
@@ -419,4 +456,10 @@ h1, h2, h3, h4 {
 
 .passos strong {
   color: var(--azul);
+}
+
+@media (max-width: 575px) {
+  .caixa-inscricao {
+    padding: 28px 20px;
+  }
 }

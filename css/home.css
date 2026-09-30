@@ -61,6 +61,16 @@
   transform: scale(1.08);
 }
 
+@media (max-width: 575px) {
+  .card-evento-info {
+    padding: 10px;
+  }
+
+  .card-evento h3 {
+    font-size: 0.85rem;
+  }
+}
+
 .secao-clube {
   background-color: var(--azul-escuro);
   color: #fff;

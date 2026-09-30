@@ -79,6 +79,12 @@
   color: var(--azul-ceu);
 }
 
+@media (max-width: 575px) {
+  .membro h3 {
+    font-size: 0.95rem;
+  }
+}
+
 .card-tripe {
   height: 100%;
   color: var(--texto);
@@ -207,6 +213,13 @@
 @media (min-width: 1200px) {
   .seta-carrossel {
     top: 144px;
+  }
+}
+
+@media (max-width: 575px) {
+  .abas-diretoria .nav-link {
+    font-size: 0.85rem;
+    padding: 6px 14px;
   }
 }
 

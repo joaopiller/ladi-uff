@@ -73,3 +73,13 @@
   line-height: 1.6;
   margin: 0;
 }
+
+@media (max-width: 575px) {
+  .linha-tempo li {
+    padding-left: 22px;
+  }
+
+  .texto-timeline {
+    padding: 18px;
+  }
+}
