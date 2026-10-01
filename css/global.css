@@ -13,6 +13,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 70px;
   overscroll-behavior: none;
+  background-color: var(--azul-escuro);
 }
 
 body {
@@ -144,9 +145,22 @@ h1, h2, h3, h4 {
   }
 
   .navbar .dropdown-item:hover,
-  .navbar .dropdown-item:focus {
+  .navbar .dropdown-item:focus,
+  .navbar .dropdown-item:active {
     background-color: transparent;
     color: var(--azul-ceu);
+  }
+
+  .navbar .nav-link,
+  .navbar .dropdown-item {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .navbar .nav-link:focus,
+  .navbar .dropdown-item:focus,
+  .navbar .navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
   }
 
   .navbar .dropdown-toggle::after {

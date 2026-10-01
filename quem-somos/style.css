@@ -252,6 +252,11 @@
   line-height: 1.7;
 }
 
+.perguntas .accordion-body a {
+  color: var(--azul);
+  font-weight: 700;
+}
+
 .chamada {
   max-width: 800px;
   margin: 60px auto 0;

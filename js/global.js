@@ -35,7 +35,6 @@ for (let i = 0; i < linksDropdown.length; i++) {
   linksDropdown[i].addEventListener("click", abrirPaginaDoDropdown);
 }
 
-
 const botaoCopiar = document.getElementById("copiar-email");
 
 function copiarEmail() {
