@@ -1,0 +1,97 @@
+.fundo-clube {
+  background-image: url("../img/banner-clube.jpg");
+}
+
+.lista-objetivos {
+  list-style: none;
+  padding-left: 0;
+  margin: 24px 0 0;
+}
+
+.lista-objetivos li {
+  font-size: 1.05rem;
+  margin-bottom: 12px;
+}
+
+.lista-objetivos i {
+  color: var(--azul);
+  font-size: 1.3rem;
+  margin-right: 10px;
+}
+
+.card-passo {
+  position: relative;
+  height: 100%;
+  background-color: #fff;
+  color: var(--texto);
+  border-radius: 6px;
+  padding: 32px 24px 26px;
+  text-align: center;
+}
+
+.numero-passo {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--azul-gelo);
+}
+
+.card-passo i {
+  font-size: 2.2rem;
+  color: var(--azul);
+}
+
+.card-passo h3 {
+  color: var(--azul-escuro);
+  font-size: 1.2rem;
+  margin: 12px 0 8px;
+}
+
+.card-passo p {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.livro-lido {
+  max-width: 230px;
+  margin: 0 auto;
+}
+
+.livro-mes {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--azul-medio);
+  margin: 16px 0 4px;
+}
+
+.livro-lido .livro-titulo {
+  color: var(--azul-escuro);
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+
+.livro-autor {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.livro-lido .livro-pais {
+  color: #fff;
+  margin: 0;
+}
+
+.duvidas {
+  text-align: center;
+  font-size: 0.95rem;
+  margin: 18px 0 0;
+}
+
+.duvidas a {
+  color: var(--azul);
+  font-weight: 700;
+}

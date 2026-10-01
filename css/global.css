@@ -1,0 +1,512 @@
+:root {
+  --azul-escuro: #274359;
+  --azul: #004AAD;
+  --azul-medio: #3A75C8;
+  --azul-claro: #4C91D4;
+  --azul-ceu: #85CFFE;
+  --azul-gelo: #C8E0EF;
+  --fundo: #F5F8FB;
+  --texto: #33414d;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: var(--texto);
+  background-color: var(--fundo);
+  overscroll-behavior: none;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#navbar {
+  padding: 18px 0;
+  transition: background-color 0.3s, padding 0.3s, box-shadow 0.3s;
+}
+
+#navbar.rolou {
+  background-color: var(--azul-escuro);
+  padding: 8px 0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: width 0.3s, height 0.3s;
+}
+
+#navbar.rolou .logo {
+  width: 42px;
+  height: 42px;
+}
+
+.brand-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.brand-text small {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--azul-ceu);
+}
+
+.navbar-dark .nav-link {
+  color: #fff;
+  font-weight: 700;
+  margin: 0 10px;
+  position: relative;
+}
+
+.navbar-dark .nav-link:hover,
+.navbar-dark .nav-link:focus {
+  color: var(--azul-ceu);
+}
+
+.navbar-dark .nav-link.active {
+  color: var(--azul-ceu);
+}
+
+.dropdown-menu {
+  border: none;
+  border-top: 3px solid var(--azul-claro);
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-item {
+  padding: 8px 20px;
+}
+
+.dropdown-item:hover {
+  background-color: var(--azul-gelo);
+  color: var(--azul);
+}
+
+@media (min-width: 992px) {
+  .navbar .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+  }
+}
+
+.btn-contato {
+  background-color: var(--azul);
+  color: #fff;
+  border-radius: 30px;
+  padding: 8px 22px;
+  font-weight: 700;
+}
+
+.btn-contato:hover {
+  background-color: #fff;
+  color: var(--azul);
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background-color: var(--azul-escuro);
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+
+  .btn-contato {
+    margin-top: 10px;
+  }
+
+  .navbar .dropdown-menu {
+    display: block;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0 0 8px 14px;
+    margin: 0;
+  }
+
+  .navbar .dropdown-item {
+    color: rgba(255, 255, 255, 0.75);
+    padding: 5px 10px;
+  }
+
+  .navbar .dropdown-item:hover,
+  .navbar .dropdown-item:focus {
+    background-color: transparent;
+    color: var(--azul-ceu);
+  }
+
+  .navbar .dropdown-toggle::after {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+.banner {
+  position: relative;
+  height: 100vh;
+  min-height: 550px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: #fff;
+}
+
+.banner-fundo {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  bottom: -20px;
+  left: -20px;
+  background-image: url("../img/banner.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(5px);
+}
+
+.banner-camada {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(100deg, rgba(39, 67, 89, 0.95) 0%, rgba(0, 74, 173, 0.7) 60%, rgba(0, 74, 173, 0.35) 100%);
+}
+
+.banner-conteudo {
+  position: relative;
+}
+
+.banner-pre {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 0.9rem;
+  color: var(--azul-ceu);
+  margin-bottom: 10px;
+}
+
+.banner h1 {
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+@media (min-width: 640px) {
+  .banner h1 {
+    font-size: 6vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .banner h1 {
+    font-size: 4.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner h1 {
+    font-size: 8vw;
+  }
+}
+
+.banner h1 span {
+  color: var(--azul-ceu);
+}
+
+.banner-sub {
+  max-width: 560px;
+  font-size: 1.15rem;
+  font-weight: 300;
+  margin: 20px 0 30px;
+}
+
+.btn-banner {
+  border: 2px solid #fff;
+  color: #fff;
+  border-radius: 30px;
+  padding: 10px 30px;
+  font-weight: 700;
+}
+
+.btn-banner:hover {
+  background-color: #fff;
+  color: var(--azul);
+}
+
+.secao {
+  padding: 90px 0;
+}
+
+.titulo-secao {
+  color: var(--azul-escuro);
+  font-size: 2.4rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+  overflow-wrap: break-word;
+}
+
+.titulo-secao strong {
+  color: var(--azul);
+  font-weight: 600;
+}
+
+.linha-titulo {
+  width: 70px;
+  height: 3px;
+  background-color: var(--azul-claro);
+  margin-bottom: 20px;
+}
+
+.texto {
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.btn-principal {
+  background-color: var(--azul);
+  color: #fff;
+  border-radius: 30px;
+  padding: 10px 26px;
+  font-weight: 700;
+}
+
+.btn-principal:hover {
+  background-color: var(--azul-escuro);
+  color: #fff;
+}
+
+.btn-principal:disabled {
+  background-color: var(--azul-medio);
+  color: #fff;
+}
+
+.tag {
+  align-self: flex-start;
+  background-color: var(--azul-claro);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 575px) {
+  .tag {
+    font-size: 0.65rem;
+  }
+}
+
+.foto-quem-somos img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 15px 35px rgba(39, 67, 89, 0.25);
+}
+
+.livro {
+  text-align: center;
+}
+
+.livro img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.livro-pais {
+  display: inline-block;
+  background-color: var(--azul-claro);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin: 14px 0 6px;
+}
+
+.livro-titulo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  margin: 0;
+}
+
+@media (max-width: 575px) {
+  .livro-pais {
+    font-size: 0.65rem;
+  }
+
+  .livro-titulo {
+    font-size: 0.8rem;
+  }
+}
+
+.rodape {
+  background-color: var(--azul-escuro);
+  color: #fff;
+  padding: 40px 0;
+}
+
+@media (min-width: 768px) {
+  .coluna-rodape {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.logo-rodape {
+  width: 115px;
+  border-radius: 50%;
+}
+
+.rodape h4 {
+  color: var(--azul-ceu);
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.rodape a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.rodape a:hover {
+  color: var(--azul-ceu);
+}
+
+.redes a {
+  font-size: 1.7rem;
+  margin-right: 15px;
+}
+
+.banner-pagina {
+  height: 60vh;
+  min-height: 420px;
+}
+
+@media (max-width: 575px) {
+  .banner-pagina {
+    height: 48vh;
+    min-height: 340px;
+    padding-top: 100px;
+  }
+}
+
+.secao-escura {
+  background-color: var(--azul-escuro);
+  color: #fff;
+}
+
+.secao-escura .titulo-secao {
+  color: #fff;
+}
+
+.secao-escura .titulo-secao strong {
+  color: var(--azul-ceu);
+}
+
+.secao-gelo {
+  background-color: var(--azul-gelo);
+}
+
+.caixa-inscricao {
+  color: var(--texto);
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 36px 32px;
+  box-shadow: 0 15px 35px rgba(39, 67, 89, 0.15);
+}
+
+.caixa-inscricao h3 {
+  color: var(--azul-escuro);
+  font-size: 1.5rem;
+  margin-bottom: 18px;
+}
+
+.passos {
+  padding-left: 20px;
+  margin-bottom: 26px;
+}
+
+.passos li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.passos strong {
+  color: var(--azul);
+}
+
+@media (max-width: 575px) {
+  .caixa-inscricao {
+    padding: 28px 20px;
+  }
+}
+
+
+.janela-contato {
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.janela-contato .modal-header {
+  border-bottom: none;
+}
+
+.janela-contato .modal-title {
+  color: var(--azul-escuro);
+  font-size: 1.6rem;
+}
+
+.email-contato {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--azul);
+  margin-bottom: 20px;
+}
+
+.btn-contorno {
+  border: 2px solid var(--azul);
+  color: var(--azul);
+  border-radius: 30px;
+  padding: 8px 26px;
+  font-weight: 700;
+}
+
+.btn-contorno:hover {
+  background-color: var(--azul);
+  color: #fff;
+}
+
+.instagram-contato {
+  text-align: center;
+  font-size: 0.95rem;
+  margin: 20px 0 0;
+}
+
+.instagram-contato a {
+  color: var(--azul);
+  font-weight: 700;
+}

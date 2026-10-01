@@ -1,0 +1,280 @@
+.fundo-quem-somos {
+  background-image: url("../img/banner-quem-somos.jpg");
+  background-position: center 22%;
+}
+
+.card-missao {
+  height: 100%;
+  color: var(--texto);
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 36px 30px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(39, 67, 89, 0.12);
+}
+
+.icone-missao {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background-color: var(--azul-gelo);
+  color: var(--azul);
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-missao h3 {
+  color: var(--azul-escuro);
+  font-size: 1.5rem;
+}
+
+.card-missao p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.subtitulo-diretoria {
+  text-align: center;
+  color: var(--azul-escuro);
+  font-size: 1.3rem;
+  margin: 40px 0 24px;
+}
+
+.membro {
+  text-align: center;
+}
+
+.membro img {
+  width: 100%;
+  max-width: 230px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(39, 67, 89, 0.2);
+  margin-bottom: 14px;
+}
+
+.membro h3 {
+  font-size: 1.2rem;
+  color: var(--azul-escuro);
+  margin-bottom: 4px;
+}
+
+.membro p {
+  color: var(--azul-medio);
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.secao-escura .membro h3 {
+  color: #fff;
+}
+
+.secao-escura .membro p {
+  color: var(--azul-ceu);
+}
+
+@media (max-width: 575px) {
+  .membro h3 {
+    font-size: 0.95rem;
+  }
+}
+
+.card-tripe {
+  height: 100%;
+  color: var(--texto);
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.secao-escura .subtitulo-diretoria {
+  color: #fff;
+}
+
+.card-tripe i {
+  font-size: 2rem;
+  color: var(--azul);
+}
+
+.card-tripe h4 {
+  color: var(--azul-escuro);
+  font-size: 1.2rem;
+  margin: 10px 0 8px;
+}
+
+.card-tripe p {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.abas-diretoria {
+  gap: 10px;
+  margin: 30px 0 40px;
+}
+
+.abas-diretoria .nav-link {
+  color: var(--azul-escuro);
+  background-color: #fff;
+  border: 2px solid var(--azul-gelo);
+  border-radius: 30px;
+  font-weight: 700;
+  padding: 8px 20px;
+}
+
+.abas-diretoria .nav-link:hover {
+  border-color: var(--azul-claro);
+}
+
+.abas-diretoria .nav-link.active {
+  background-color: var(--azul);
+  border-color: var(--azul);
+  color: #fff;
+}
+
+.carrossel-membros {
+  position: relative;
+}
+
+.linha-rolagem {
+  justify-content: center;
+}
+
+.seta-carrossel {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .janela-carrossel {
+    overflow: hidden;
+    padding: 12px 12px 16px;
+    margin: -12px -12px -16px;
+  }
+
+  .linha-rolagem {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    transition: transform 0.5s ease;
+  }
+
+  .seta-carrossel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 73px;
+    z-index: 1;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background-color: #fff;
+    color: var(--azul);
+    font-size: 1.3rem;
+    box-shadow: 0 4px 12px rgba(39, 67, 89, 0.25);
+  }
+
+  .seta-carrossel:hover {
+    background-color: var(--azul);
+    color: #fff;
+  }
+
+  .seta-carrossel:disabled {
+    opacity: 0.3;
+    background-color: #fff;
+    color: var(--azul);
+  }
+
+  .carrossel-membros {
+    padding: 0 64px;
+  }
+
+  .seta-anterior {
+    left: 0;
+  }
+
+  .seta-proxima {
+    right: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .seta-carrossel {
+    top: 113px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .seta-carrossel {
+    top: 144px;
+  }
+}
+
+@media (max-width: 575px) {
+  .abas-diretoria .nav-link {
+    font-size: 0.85rem;
+    padding: 6px 14px;
+  }
+}
+
+.secao-branca {
+  background-color: #fff;
+}
+
+.perguntas {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.perguntas .accordion-button {
+  font-weight: 700;
+  color: var(--azul);
+  background-color: var(--azul-gelo);
+}
+
+.perguntas .accordion-button.collapsed {
+  color: var(--azul-escuro);
+  background-color: #fff;
+}
+
+.perguntas .accordion-button:focus {
+  box-shadow: none;
+}
+
+.perguntas .accordion-body {
+  line-height: 1.7;
+}
+
+.chamada {
+  max-width: 800px;
+  margin: 60px auto 0;
+  background-color: var(--azul-escuro);
+  color: #fff;
+  border-radius: 8px;
+  padding: 40px 30px;
+  text-align: center;
+}
+
+.chamada h3 {
+  font-size: 1.8rem;
+}
+
+.chamada p {
+  margin-bottom: 24px;
+}
+
+.intro-diretorias {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.card-tripe .tag {
+  color: #fff;
+}
