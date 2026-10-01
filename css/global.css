@@ -130,34 +130,16 @@ h1, h2, h3, h4 {
     margin-top: 10px;
   }
 
-  .navbar .dropdown-menu {
-    display: block;
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    padding: 0 0 8px 14px;
-    margin: 0;
+  .navbar .dropdown-menu,
+  .navbar .dropdown-menu.show {
+    display: none;
   }
 
-  .navbar .dropdown-item {
-    color: rgba(255, 255, 255, 0.75);
-    padding: 5px 10px;
-  }
-
-  .navbar .dropdown-item:hover,
-  .navbar .dropdown-item:focus,
-  .navbar .dropdown-item:active {
-    background-color: transparent;
-    color: var(--azul-ceu);
-  }
-
-  .navbar .nav-link,
-  .navbar .dropdown-item {
+  .navbar .nav-link {
     -webkit-tap-highlight-color: transparent;
   }
 
   .navbar .nav-link:focus,
-  .navbar .dropdown-item:focus,
   .navbar .navbar-toggler:focus {
     outline: none;
     box-shadow: none;
