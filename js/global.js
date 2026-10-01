@@ -34,16 +34,3 @@ function abrirPaginaDoDropdown() {
 for (let i = 0; i < linksDropdown.length; i++) {
   linksDropdown[i].addEventListener("click", abrirPaginaDoDropdown);
 }
-
-const botaoCopiar = document.getElementById("copiar-email");
-
-function copiarEmail() {
-  navigator.clipboard.writeText("ladi.uff@gmail.com");
-  botaoCopiar.innerHTML = '<i class="bi bi-check2 me-2"></i>E-mail copiado!';
-
-  setTimeout(function () {
-    botaoCopiar.innerHTML = '<i class="bi bi-clipboard me-2"></i>Copiar e-mail';
-  }, 2000);
-}
-
-botaoCopiar.addEventListener("click", copiarEmail);
