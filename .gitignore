@@ -5,3 +5,16 @@ Thumbs.db
 # Editores
 .vscode/
 .idea/
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Banco, logs e segredos
+instance/
+logs/
+.env
+
+# Imagens enviadas pelo painel
+static/uploads/
