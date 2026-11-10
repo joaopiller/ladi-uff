@@ -27,91 +27,13 @@
 </head>
 <body>
 
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar">
-      <div class="container">
-        <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('index') }}">
-          <img src="{{ url_for('static', filename='img/logo-ladi.png') }}" alt="Logo da LADI" class="logo">
-          <span class="brand-text">LADI <small>UFF</small></span>
-        </a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
-                aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="menu">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="/quem-somos" role="button"
-                 data-bs-toggle="dropdown" aria-expanded="false">Quem somos</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item link-menu" href="/quem-somos#historia">Nossa história</a></li>
-                <li><a class="dropdown-item link-menu" href="/quem-somos#missao">Missão e visão</a></li>
-                <li><a class="dropdown-item link-menu" href="/quem-somos#diretorias">Nossas diretorias</a></li>
-                <li><a class="dropdown-item link-menu" href="/quem-somos#membros">Alguns de nossos membros</a></li>
-                <li><a class="dropdown-item link-menu" href="/quem-somos#faca-parte">Perguntas frequentes</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="/eventos" role="button"
-                 data-bs-toggle="dropdown" aria-expanded="false">Eventos</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item link-menu" href="/eventos#eventos-realizados">Eventos realizados</a></li>
-                <li><a class="dropdown-item link-menu" href="/eventos#simulacoes">Simulações da ONU</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="/clube-de-leitura" role="button"
-                 data-bs-toggle="dropdown" aria-expanded="false">Clube de leitura</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item link-menu" href="/clube-de-leitura#o-que-e">O que é o clube</a></li>
-                <li><a class="dropdown-item link-menu" href="/clube-de-leitura#como-funciona">Como funciona</a></li>
-                <li><a class="dropdown-item link-menu" href="/clube-de-leitura#livros-lidos">Livros já lidos</a></li>
-                <li><a class="dropdown-item link-menu" href="/clube-de-leitura#como-participar">Como participar</a></li>
-              </ul>
-            </li>
-          </ul>
-
-          <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ladi.uff@gmail.com" target="_blank" class="btn btn-contato">
-            <i class="bi bi-envelope me-2"></i>Fale conosco
-          </a>
-        </div>
-      </div>
-    </nav>
-  </header>
+  {% include "partials/_navbar.html" %}
 
   <main>
 {% block conteudo %}{% endblock %}
   </main>
 
-  <footer class="rodape">
-    <div class="container">
-      <div class="row g-4 justify-content-center align-items-start">
-        <div class="col-md-auto coluna-rodape text-center text-md-start">
-          <img src="{{ url_for('static', filename='img/logo-ladi.png') }}" alt="Logo da LADI" class="logo-rodape">
-        </div>
-        <div class="col-md-auto coluna-rodape text-center text-md-start">
-          <h4>Endereço</h4>
-          <p>
-            Faculdade de Direito da UFF<br>
-            Rua Presidente Pedreira, 62 – Ingá<br>
-            Niterói – RJ<br>
-            CEP: 24210-470
-          </p>
-        </div>
-        <div class="col-md-auto coluna-rodape text-center text-md-start">
-          <h4>Contato</h4>
-          <p><a href="mailto:ladi.uff@gmail.com">ladi.uff@gmail.com</a></p>
-          <div class="redes">
-            <a href="https://www.instagram.com/ladi.uff/" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-            <a href="https://www.linkedin.com/company/liga-de-direito-internacional-ladi-uff/" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-            <a href="mailto:ladi.uff@gmail.com" aria-label="E-mail"><i class="bi bi-envelope"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  {% include "partials/_rodape.html" %}
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{{ url_for('static', filename='js/global.js') }}"></script>
