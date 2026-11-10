@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block conteudo %}
+  <section class="banner">
+    <div class="banner-fundo"></div>
+    <div class="banner-camada"></div>
+    <div class="container banner-conteudo">
+      <p class="banner-pre">Universidade Federal Fluminense</p>
+      <h1>Liga Acadêmica de<br><span>Direito Internacional</span></h1>
+      <p class="banner-sub">
+        Conectamos a produção de conhecimento em Direito Internacional com a comunidade,
+        promovendo o diálogo entre a universidade e a sociedade.
+      </p>
+      <a href="/quem-somos" class="btn btn-banner">Conheça a LADI</a>
+    </div>
+  </section>
+
+  <section class="secao" id="quem-somos">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <h2 class="titulo-secao">Quem <strong>somos</strong></h2>
+          <p class="texto">
+            A LADI-UFF é uma entidade civil de caráter acadêmico-científico que atua como
+            projeto de extensão da Faculdade de Direito da Universidade Federal Fluminense.
+            Formada por estudantes de Direito e Relações Internacionais, a Liga é apartidária
+            e sem fins lucrativos.
+          </p>
+          <p class="texto">
+            Por meio do ensino, da pesquisa e da extensão, traduzimos temas complexos do
+            Direito Internacional para o público e estimulamos a produção científica de
+            excelência.
+          </p>
+          <a href="/quem-somos" class="btn btn-principal">
+            Conheça nossa história <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <div class="foto-quem-somos">
+            <img src="{{ url_for('static', filename='img/quem-somos.jpg') }}" alt="Equipe organizadora da Simulação da ONU: A Questão Palestina"
+                 class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao-mapa" id="eventos">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5">
+          <h2 class="titulo-secao">Nossos <strong>eventos</strong></h2>
+          <p class="texto">
+            Palestras, minicursos, simulações da ONU e visitas institucionais que aproximam
+            os estudantes da prática do Direito Internacional.
+          </p>
+          <a href="/eventos" class="btn btn-saiba-mais">
+            Saiba mais <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="col-lg-7 mosaico">
+          <div class="row g-3">
+            <div class="col-6">
+              <a href="/eventos#simulacao-onu" class="card-evento">
+                <img src="{{ url_for('static', filename='img/eventos/simulacao-onu.jpg') }}" alt="Estudantes na Simulação da ONU">
+                <div class="card-evento-info">
+                  <span class="tag">Simulação</span>
+                  <h3>Simulação da ONU: A Questão Palestina</h3>
+                </div>
+              </a>
+            </div>
+            <div class="col-6">
+              <a href="/eventos#refugiados" class="card-evento">
+                <img src="{{ url_for('static', filename='img/eventos/refugiados.jpg') }}" alt="Participantes do Projeto Refugiados nas Escolas">
+                <div class="card-evento-info">
+                  <span class="tag">Extensão</span>
+                  <h3>Projeto Refugiados nas Escolas</h3>
+                </div>
+              </a>
+            </div>
+            <div class="col-6">
+              <a href="/eventos#eventos-realizados" class="card-evento">
+                <img src="{{ url_for('static', filename='img/eventos/education-usa.jpg') }}" alt="Membros da LADI na EducationUSA LL.M. Fair">
+                <div class="card-evento-info">
+                  <span class="tag">#LADIPorAí</span>
+                  <h3>EducationUSA LL.M. Fair</h3>
+                </div>
+              </a>
+            </div>
+            <div class="col-6">
+              <a href="/eventos#oratoria" class="card-evento">
+                <img src="{{ url_for('static', filename='img/eventos/oratoria.jpg') }}" alt="Membros da LADI no curso de oratória">
+                <div class="card-evento-info">
+                  <span class="tag">Curso</span>
+                  <h3>Curso de Oratória para Competições</h3>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao-clube" id="clube-de-leitura">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5">
+          <p class="clube-pre">O mundo em páginas</p>
+          <h2 class="titulo-secao">Clube de <strong>leitura</strong></h2>
+          <p class="texto">
+            Todo mês, uma obra literária de um país diferente reconhecido pela ONU.
+            Os encontros são online, em formato de roda de conversa, com a mediação
+            de um membro da LADI.
+          </p>
+          <p class="texto">
+            Aberto a toda a comunidade acadêmica, não só aos membros da Liga.
+          </p>
+          <a href="/clube-de-leitura" class="btn btn-banner">
+            Conheça o clube <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="row g-3 justify-content-center">
+            <div class="col-4">
+              <div class="livro">
+                <img src="{{ url_for('static', filename='img/livros/o-amor-nos-tempos-do-colera.jpg') }}" alt="Capa de O amor nos tempos do cólera">
+                <p class="livro-pais">Colômbia</p>
+                <p class="livro-titulo">O amor nos tempos do cólera</p>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="livro">
+                <img src="{{ url_for('static', filename='img/livros/antes-que-o-cafe-esfrie.jpg') }}" alt="Capa de Antes que o café esfrie">
+                <p class="livro-pais">Japão</p>
+                <p class="livro-titulo">Antes que o café esfrie</p>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="livro">
+                <img src="{{ url_for('static', filename='img/livros/pessoas-normais.jpg') }}" alt="Capa de Pessoas normais">
+                <p class="livro-pais">Irlanda</p>
+                <p class="livro-titulo">Pessoas normais</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao" id="professores">
+    <div class="container">
+      <h2 class="titulo-secao text-center">Professores <strong>orientadores</strong></h2>
+      <div class="linha-titulo mx-auto"></div>
+
+      <div class="row g-4 justify-content-center mt-2">
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card-professor">
+            <img src="{{ url_for('static', filename='img/professores/evandro.jpg') }}" alt="Prof. Dr. Evandro Menezes de Carvalho">
+            <div class="card-professor-info">
+              <h3>Prof. Dr. Evandro Menezes de Carvalho</h3>
+              <p class="area">Direito Internacional Público</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card-professor">
+            <img src="{{ url_for('static', filename='img/professores/sergio.jpg') }}" alt="Prof. Dr. Sérgio Gustavo Mattos Pauseiro">
+            <div class="card-professor-info">
+              <h3>Prof. Dr. Sérgio Gustavo Mattos Pauseiro</h3>
+              <p class="area">Direito Internacional Privado, Arbitragem e Inteligência Artificial</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card-professor">
+            <img src="{{ url_for('static', filename='img/professores/eduardo.jpg') }}" alt="Prof. Dr. Eduardo Manuel Val">
+            <div class="card-professor-info">
+              <h3>Prof. Dr. Eduardo Manuel Val</h3>
+              <p class="area">Direito Internacional Público e Relações Internacionais</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
