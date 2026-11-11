@@ -1,6 +1,15 @@
+import os
+
 from flask import Flask, render_template
 
+from config import config
+
 app = Flask(__name__)
+ambiente = os.environ.get("APP_ENV", "development")
+app.config.from_object(config[ambiente])
+
+if not app.config["SECRET_KEY"]:
+    raise RuntimeError("Defina a variável de ambiente SECRET_KEY.")
 
 
 @app.route("/")
@@ -24,4 +33,4 @@ def clube():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=app.config["DEBUG"])
