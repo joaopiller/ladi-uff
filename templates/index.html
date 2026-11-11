@@ -15,7 +15,7 @@
         Conectamos a produção de conhecimento em Direito Internacional com a comunidade,
         promovendo o diálogo entre a universidade e a sociedade.
       </p>
-      <a href="/quem-somos" class="btn btn-banner">Conheça a LADI</a>
+      <a href="{{ url_for('quem_somos') }}" class="btn btn-banner">Conheça a LADI</a>
     </div>
   </section>
 
@@ -35,7 +35,7 @@
             Direito Internacional para o público e estimulamos a produção científica de
             excelência.
           </p>
-          <a href="/quem-somos" class="btn btn-principal">
+          <a href="{{ url_for('quem_somos') }}" class="btn btn-principal">
             Conheça nossa história <i class="bi bi-arrow-right"></i>
           </a>
         </div>
@@ -58,7 +58,7 @@
             Palestras, minicursos, simulações da ONU e visitas institucionais que aproximam
             os estudantes da prática do Direito Internacional.
           </p>
-          <a href="/eventos" class="btn btn-saiba-mais">
+          <a href="{{ url_for('eventos') }}" class="btn btn-saiba-mais">
             Saiba mais <i class="bi bi-arrow-right"></i>
           </a>
         </div>
@@ -66,7 +66,7 @@
         <div class="col-lg-7 mosaico">
           <div class="row g-3">
             <div class="col-6">
-              <a href="/eventos#simulacao-onu" class="card-evento">
+              <a href="{{ url_for('eventos') }}#simulacao-onu" class="card-evento">
                 <img src="{{ url_for('static', filename='img/eventos/simulacao-onu.jpg') }}" alt="Estudantes na Simulação da ONU">
                 <div class="card-evento-info">
                   <span class="tag">Simulação</span>
@@ -75,7 +75,7 @@
               </a>
             </div>
             <div class="col-6">
-              <a href="/eventos#refugiados" class="card-evento">
+              <a href="{{ url_for('eventos') }}#refugiados" class="card-evento">
                 <img src="{{ url_for('static', filename='img/eventos/refugiados.jpg') }}" alt="Participantes do Projeto Refugiados nas Escolas">
                 <div class="card-evento-info">
                   <span class="tag">Extensão</span>
@@ -84,7 +84,7 @@
               </a>
             </div>
             <div class="col-6">
-              <a href="/eventos#eventos-realizados" class="card-evento">
+              <a href="{{ url_for('eventos') }}#eventos-realizados" class="card-evento">
                 <img src="{{ url_for('static', filename='img/eventos/education-usa.jpg') }}" alt="Membros da LADI na EducationUSA LL.M. Fair">
                 <div class="card-evento-info">
                   <span class="tag">#LADIPorAí</span>
@@ -93,7 +93,7 @@
               </a>
             </div>
             <div class="col-6">
-              <a href="/eventos#oratoria" class="card-evento">
+              <a href="{{ url_for('eventos') }}#oratoria" class="card-evento">
                 <img src="{{ url_for('static', filename='img/eventos/oratoria.jpg') }}" alt="Membros da LADI no curso de oratória">
                 <div class="card-evento-info">
                   <span class="tag">Curso</span>
@@ -121,7 +121,7 @@
           <p class="texto">
             Aberto a toda a comunidade acadêmica, não só aos membros da Liga.
           </p>
-          <a href="/clube-de-leitura" class="btn btn-banner">
+          <a href="{{ url_for('clube') }}" class="btn btn-banner">
             Conheça o clube <i class="bi bi-arrow-right"></i>
           </a>
         </div>

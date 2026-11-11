@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block titulo %}Eventos | LADI-UFF{% endblock %}
+{% block descricao %}Palestras, cursos, simulações da ONU e visitas promovidas pela Liga Acadêmica de Direito Internacional da UFF.{% endblock %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/eventos.css') }}">
+{% endblock %}
+
+{% block conteudo %}
+  <section class="banner banner-pagina">
+    <div class="banner-fundo fundo-eventos"></div>
+    <div class="banner-camada"></div>
+    <div class="container banner-conteudo">
+      <p class="banner-pre">Palestras, cursos e simulações</p>
+      <h1>Nossos <span>eventos</span></h1>
+      <p class="banner-sub">
+        Atividades que levam o Direito Internacional para fora da sala de aula e aproximam
+        os estudantes da prática.
+      </p>
+    </div>
+  </section>
+
+  <section class="secao" id="eventos-realizados">
+    <div class="container">
+      <h2 class="titulo-secao text-center">Eventos <strong>realizados</strong></h2>
+      <div class="linha-titulo mx-auto"></div>
+
+      <ul class="linha-tempo mt-5">
+        <li id="forum-china-brasil">
+          <span class="ponto"></span>
+          <p class="data">Novembro de 2024</p>
+          <div class="card-timeline">
+            <div class="row g-0 align-items-center">
+              <div class="col-md-5">
+                <img src="{{ url_for('static', filename='img/eventos/forum-china-brasil.jpg') }}" alt="Membros da LADI com os professores Evandro Carvalho e Sérgio Pauseiro no Fórum China-Brasil">
+              </div>
+              <div class="col-md-7">
+                <div class="texto-timeline">
+                  <span class="tag">Fórum</span>
+                  <h3>Fórum China-Brasil</h3>
+                  <p>A LADI teve a oportunidade de celebrar os 50 anos de relações bilaterais entre Brasil e China no Fórum China-Brasil. Foi uma tarde repleta de discussões importantes e inúmeros aprendizados.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li id="refugiados">
+          <span class="ponto"></span>
+          <p class="data">Agosto de 2025</p>
+          <div class="card-timeline">
+            <div class="row g-0 align-items-center">
+              <div class="col-md-5">
+                <img src="{{ url_for('static', filename='img/eventos/refugiados-feira.jpg') }}" alt="Organizadoras e convidados do Projeto Refugiados nas Escolas na feira cultural">
+              </div>
+              <div class="col-md-7">
+                <div class="texto-timeline">
+                  <span class="tag">Extensão</span>
+                  <h3>Projeto Refugiados nas Escolas</h3>
+                  <p>Em parceria com o programa Pares Cáritas, a Faculdade de Direito recebeu uma palestra da empreendedora e refugiada Rama e uma feira cultural com artesanato e culinária típica dos países de origem dos participantes.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li id="oratoria">
+          <span class="ponto"></span>
+          <p class="data">Setembro de 2025</p>
+          <div class="card-timeline">
+            <div class="row g-0 align-items-center">
+              <div class="col-md-5">
+                <img src="{{ url_for('static', filename='img/eventos/oratoria.jpg') }}" alt="Curso de Oratória">
+              </div>
+              <div class="col-md-7">
+                <div class="texto-timeline">
+                  <span class="tag">Curso</span>
+                  <h3>Curso de Oratória</h3>
+                  <p>Integrantes da LADI participaram de um curso com a fonoaudióloga Jane Celeste Guberfain, professora da UNIRIO, trabalhando voz, dicção e argumentação para simulações e competições de arbitragem.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li id="feira-das-ligas">
+          <span class="ponto"></span>
+          <p class="data">Setembro de 2025</p>
+          <div class="card-timeline">
+            <div class="row g-0 align-items-center">
+              <div class="col-md-5">
+                <img src="{{ url_for('static', filename='img/eventos/feira-das-ligas.jpg') }}" alt="Feira das Ligas">
+              </div>
+              <div class="col-md-7">
+                <div class="texto-timeline">
+                  <span class="tag">Extensão</span>
+                  <h3>Feira das Ligas</h3>
+                  <p>Na Semana Jurídica, a LADI montou seu estande na feira organizada pelo CAEV e apresentou aos estudantes seus projetos, grupos de estudo e processos seletivos.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li id="simulacao-onu">
+          <span class="ponto"></span>
+          <p class="data">Novembro de 2025</p>
+          <div class="card-timeline">
+            <div class="row g-0 align-items-center">
+              <div class="col-md-5">
+                <img src="{{ url_for('static', filename='img/eventos/simulacao-onu.jpg') }}" alt="Simulação da ONU: A Questão Palestina">
+              </div>
+              <div class="col-md-7">
+                <div class="texto-timeline">
+                  <span class="tag">Simulação</span>
+                  <h3>Simulação da ONU: A Questão Palestina</h3>
+                  <p>Em conjunto com a Liga de Direito Internacional da UNIRIO, a LADI organizou uma simulação da Assembleia Geral da ONU que reuniu estudantes de diversas instituições.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li id="consulados">
+          <span class="ponto"></span>
+          <p class="data">2026</p>
+          <div class="card-timeline">
+            <div class="row g-0 align-items-center">
+              <div class="col-md-5">
+                <img src="{{ url_for('static', filename='img/eventos/consulado-colombia.jpg') }}" alt="Visitas aos consulados">
+              </div>
+              <div class="col-md-7">
+                <div class="texto-timeline">
+                  <span class="tag">Visitas</span>
+                  <h3>Visitas aos consulados</h3>
+                  <p>Membros da LADI visitaram o Consulado da Colômbia e o Consulado do Reino dos Países Baixos para conhecer de perto a prática diplomática e consular.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li id="minimun">
+          <span class="ponto"></span>
+          <p class="data">1º e 2º semestres de 2026</p>
+          <div class="card-timeline">
+            <div class="row g-0 align-items-center">
+              <div class="col-md-5">
+                <img src="{{ url_for('static', filename='img/eventos/minimun.jpg') }}" alt="Participantes da MiniMUN 2026">
+              </div>
+              <div class="col-md-7">
+                <div class="texto-timeline">
+                  <span class="tag">Simulação</span>
+                  <h3>MiniMUN 2026</h3>
+                  <p>A MiniMUN é um projeto inédito na Faculdade de Direito da UFF que busca aproximar os estudantes ingressantes dos debates do Direito Internacional. Em 2026, foram realizadas duas edições: uma no primeiro e outra no segundo semestre.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="secao secao-gelo" id="simulacoes">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <h2 class="titulo-secao">Simulações da <strong>ONU</strong></h2>
+          <p class="texto">
+            Nas simulações, os participantes representam países e organismos internacionais e
+            debatem temas reais da agenda global, praticando pesquisa, negociação,
+            argumentação e oratória.
+          </p>
+          <p class="texto">
+            Todo ano a LADI organiza a MiniMUN, voltada aos calouros da Faculdade de Direito,
+            e a tradicional Simulação de final de ano, realizada em parceria com a Liga de
+            Direito Internacional da UNIRIO.
+          </p>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="caixa-inscricao">
+            <h3>Como participar</h3>
+            <ol class="passos">
+              <li><strong>Inscrição:</strong> quando as inscrições abrirem, preencha o formulário.</li>
+              <li><strong>Preparação:</strong> treinamentos e estudos dirigidos com a Diretoria de Simulações.</li>
+              <li><strong>Simulação:</strong> o dia do debate, com todas as delegações reunidas.</li>
+            </ol>
+            <button type="button" class="btn btn-principal w-100" disabled>
+              <i class="bi bi-clock me-1"></i> Inscrições em breve
+            </button>
+            <p class="text-center small mt-3 mb-0">
+              As inscrições ainda não foram abertas. Acompanhe as novidades no Instagram
+              <a href="https://www.instagram.com/ladi.uff/" target="_blank" class="fw-bold">@ladi.uff</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
