@@ -9,10 +9,13 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY")
     DEBUG = False
+    LOG_DIR = os.path.join(BASE_DIR, "logs")
+    LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
 
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    LOG_LEVEL = os.environ.get("LOG_LEVEL", "DEBUG")
 
 
 class ProductionConfig(Config):
