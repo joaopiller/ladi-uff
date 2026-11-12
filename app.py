@@ -42,5 +42,17 @@ def clube():
     return render_template("clube.html")
 
 
+@app.errorhandler(404)
+def nao_encontrado(erro):
+    app.logger.warning("404: %s %s", request.method, request.path)
+    return render_template("404.html"), 404
+
+
+@app.errorhandler(500)
+def erro_interno(erro):
+    app.logger.exception("Erro 500 em %s", request.path)
+    return render_template("500.html"), 500
+
+
 if __name__ == "__main__":
     app.run(debug=app.config["DEBUG"])

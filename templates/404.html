@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block titulo %}Página não encontrada | LADI-UFF{% endblock %}
+
+{% block conteudo %}
+  <section class="banner banner-pagina">
+    <div class="banner-fundo"></div>
+    <div class="banner-camada"></div>
+    <div class="container banner-conteudo">
+      <p class="banner-pre">Erro 404</p>
+      <h1>Página não <span>encontrada</span></h1>
+      <p class="banner-sub">
+        O endereço que você procurou não existe ou foi removido.
+      </p>
+      <a href="{{ url_for('index') }}" class="btn btn-banner">Voltar para o início</a>
+    </div>
+  </section>
+{% endblock %}
