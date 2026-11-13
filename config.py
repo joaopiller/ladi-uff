@@ -9,6 +9,7 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY")
     DEBUG = False
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL", "sqlite:///ladi.db")
     LOG_DIR = os.path.join(BASE_DIR, "logs")
     LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
 

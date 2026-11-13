@@ -3,7 +3,9 @@ import os
 from flask import Flask, render_template, request
 
 from config import config
+from dados_iniciais import popula_banco
 from logs import configura_logging
+from models import db
 
 app = Flask(__name__)
 ambiente = os.environ.get("APP_ENV", "development")
@@ -13,6 +15,13 @@ if not app.config["SECRET_KEY"]:
     raise RuntimeError("Defina a variável de ambiente SECRET_KEY.")
 
 configura_logging(app)
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
+    if popula_banco():
+        app.logger.info("Banco populado com os dados iniciais")
+
 app.logger.info("Aplicação iniciada (ambiente=%s, debug=%s)", ambiente, app.config["DEBUG"])
 
 
