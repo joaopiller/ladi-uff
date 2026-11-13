@@ -162,175 +162,37 @@
       <div class="linha-titulo mx-auto"></div>
 
       <ul class="nav nav-pills abas-diretoria justify-content-center" role="tablist">
+        {% for diretoria in diretorias %}
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#aba-executiva" type="button" role="tab" aria-selected="true">Direção executiva</button>
+          <button class="nav-link{% if loop.first %} active{% endif %}" data-bs-toggle="pill" data-bs-target="#aba-{{ diretoria.slug }}" type="button" role="tab" aria-selected="{{ 'true' if loop.first else 'false' }}">{{ diretoria.nome }}</button>
         </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" data-bs-toggle="pill" data-bs-target="#aba-ensino" type="button" role="tab" aria-selected="false">Ensino &amp; Pesquisa</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" data-bs-toggle="pill" data-bs-target="#aba-comunicacao" type="button" role="tab" aria-selected="false">Comunicação</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" data-bs-toggle="pill" data-bs-target="#aba-eventos" type="button" role="tab" aria-selected="false">Eventos</button>
-        </li>
+        {% endfor %}
       </ul>
 
       <div class="tab-content">
-        <div class="tab-pane fade show active" id="aba-executiva" role="tabpanel">
-          <div class="row g-4 justify-content-center">
-            <div class="col-6 col-md-3">
-              <div class="membro">
-                <img src="{{ url_for('static', filename='img/diretoria/victoria-lyra.jpg') }}" alt="Victória Lyra">
-                <h3>Victória Lyra</h3>
-                <p>Presidência</p>
-              </div>
-            </div>
-            <div class="col-6 col-md-3">
-              <div class="membro">
-                <img src="{{ url_for('static', filename='img/diretoria/nina-macedo.jpg') }}" alt="Nina Macedo">
-                <h3>Nina Macedo</h3>
-                <p>Vice-presidência</p>
-              </div>
-            </div>
-            <div class="col-6 col-md-3">
-              <div class="membro">
-                <img src="{{ url_for('static', filename='img/diretoria/pietra-moura.jpg') }}" alt="Pietra Moura">
-                <h3>Pietra Moura</h3>
-                <p>Coordenação</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="aba-ensino" role="tabpanel">
+        {% for diretoria in diretorias %}
+        <div class="tab-pane fade{% if loop.first %} show active{% endif %}" id="aba-{{ diretoria.slug }}" role="tabpanel">
+          {% if diretoria.membros|length > 4 %}
           <div class="carrossel-membros">
             <button type="button" class="seta-carrossel seta-anterior" aria-label="Membros anteriores" disabled><i class="bi bi-chevron-left"></i></button>
             <div class="janela-carrossel">
               <div class="row g-4 linha-rolagem">
-                <div class="col-6 col-md-3">
-                  <div class="membro">
-                    <img src="{{ url_for('static', filename='img/diretoria/felipe-coelho.jpg') }}" alt="Felipe Coelho">
-                    <h3>Felipe Coelho</h3>
-                    <p>Direção</p>
-                  </div>
-                </div>
-                <div class="col-6 col-md-3">
-                  <div class="membro">
-                    <img src="{{ url_for('static', filename='img/diretoria/brayan-alexander.jpg') }}" alt="Brayan Alexander de Mello">
-                    <h3>Brayan Alexander de Mello</h3>
-                    <p>Integrante</p>
-                  </div>
-                </div>
-                <div class="col-6 col-md-3">
-                  <div class="membro">
-                    <img src="{{ url_for('static', filename='img/diretoria/mariane-pio.jpg') }}" alt="Mariane Pio">
-                    <h3>Mariane Pio</h3>
-                    <p>Integrante</p>
-                  </div>
-                </div>
-                <div class="col-6 col-md-3">
-                  <div class="membro">
-                    <img src="{{ url_for('static', filename='img/diretoria/julia-valente.jpg') }}" alt="Júlia Valente">
-                    <h3>Júlia Valente</h3>
-                    <p>Integrante</p>
-                  </div>
-                </div>
-                <div class="col-6 col-md-3">
-                  <div class="membro">
-                    <img src="{{ url_for('static', filename='img/diretoria/lucas-presotto.jpg') }}" alt="Lucas Presotto Moreira">
-                    <h3>Lucas Presotto Moreira</h3>
-                    <p>Integrante</p>
-                  </div>
-                </div>
+                {% for membro in diretoria.membros %}
+                {% include "partials/_membro.html" %}
+                {% endfor %}
               </div>
             </div>
             <button type="button" class="seta-carrossel seta-proxima" aria-label="Próximos membros"><i class="bi bi-chevron-right"></i></button>
           </div>
-        </div>
-        <div class="tab-pane fade" id="aba-comunicacao" role="tabpanel">
+          {% else %}
           <div class="row g-4 justify-content-center">
-            <div class="col-6 col-md-3">
-              <div class="membro">
-                <img src="{{ url_for('static', filename='img/diretoria/andressa-farias.jpg') }}" alt="Andressa Farias">
-                <h3>Andressa Farias</h3>
-                <p>Integrante</p>
-              </div>
-            </div>
-            <div class="col-6 col-md-3">
-              <div class="membro">
-                <img src="{{ url_for('static', filename='img/diretoria/yasmin-trino.jpg') }}" alt="Yasmin Trino">
-                <h3>Yasmin Trino</h3>
-                <p>Integrante</p>
-              </div>
-            </div>
-            <div class="col-6 col-md-3">
-              <div class="membro">
-                <img src="{{ url_for('static', filename='img/diretoria/arthur-lebelein.jpg') }}" alt="Arthur Lebelein">
-                <h3>Arthur Lebelein</h3>
-                <p>Integrante</p>
-              </div>
-            </div>
-            <div class="col-6 col-md-3">
-              <div class="membro">
-                <img src="{{ url_for('static', filename='img/diretoria/clarissa-lemos.jpg') }}" alt="Clarissa Lemos">
-                <h3>Clarissa Lemos</h3>
-                <p>Integrante</p>
-              </div>
-            </div>
+            {% for membro in diretoria.membros %}
+            {% include "partials/_membro.html" %}
+            {% endfor %}
           </div>
+          {% endif %}
         </div>
-        <div class="tab-pane fade" id="aba-eventos" role="tabpanel">
-          <div class="carrossel-membros">
-            <button type="button" class="seta-carrossel seta-anterior" aria-label="Membros anteriores" disabled><i class="bi bi-chevron-left"></i></button>
-            <div class="janela-carrossel">
-              <div class="row g-4 linha-rolagem">
-                <div class="col-6 col-md-3">
-                  <div class="membro">
-                    <img src="{{ url_for('static', filename='img/diretoria/ian-abicalil.jpg') }}" alt="Ian Abicalil">
-                    <h3>Ian Abicalil</h3>
-                    <p>Direção</p>
-                  </div>
-                </div>
-                <div class="col-6 col-md-3">
-                  <div class="membro">
-                    <img src="{{ url_for('static', filename='img/diretoria/luiza-lody.jpg') }}" alt="Luiza Lody">
-                    <h3>Luiza Lody</h3>
-                    <p>Integrante</p>
-                  </div>
-                </div>
-                <div class="col-6 col-md-3">
-                  <div class="membro">
-                    <img src="{{ url_for('static', filename='img/diretoria/joao-bonjardim.jpg') }}" alt="João Bonjardim">
-                    <h3>João Bonjardim</h3>
-                    <p>Integrante</p>
-                  </div>
-                </div>
-                <div class="col-6 col-md-3">
-                  <div class="membro">
-                    <img src="{{ url_for('static', filename='img/diretoria/beatriz-coutinho.jpg') }}" alt="Beatriz Coutinho">
-                    <h3>Beatriz Coutinho</h3>
-                    <p>Integrante</p>
-                  </div>
-                </div>
-                <div class="col-6 col-md-3">
-                  <div class="membro">
-                    <img src="{{ url_for('static', filename='img/diretoria/maria-clara-sana.jpg') }}" alt="Maria Clara Capua Sana">
-                    <h3>Maria Clara Capua Sana</h3>
-                    <p>Integrante</p>
-                  </div>
-                </div>
-                <div class="col-6 col-md-3">
-                  <div class="membro">
-                    <img src="{{ url_for('static', filename='img/diretoria/luiza-valentina.jpg') }}" alt="Luísa Valentina Costa">
-                    <h3>Luísa Valentina Costa</h3>
-                    <p>Integrante</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button type="button" class="seta-carrossel seta-proxima" aria-label="Próximos membros"><i class="bi bi-chevron-right"></i></button>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>

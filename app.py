@@ -5,7 +5,7 @@ from flask import Flask, render_template, request
 from config import config
 from dados_iniciais import popula_banco
 from logs import configura_logging
-from models import db
+from models import Diretoria, db
 
 app = Flask(__name__)
 ambiente = os.environ.get("APP_ENV", "development")
@@ -38,7 +38,9 @@ def index():
 
 @app.route("/quem-somos")
 def quem_somos():
-    return render_template("quem_somos.html")
+    diretorias = Diretoria.query.order_by(Diretoria.ordem).all()
+    diretorias = [d for d in diretorias if d.membros]
+    return render_template("quem_somos.html", diretorias=diretorias)
 
 
 @app.route("/eventos")
