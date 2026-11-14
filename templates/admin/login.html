@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block titulo %}Área restrita | LADI-UFF{% endblock %}
+
+{% block conteudo %}
+  <section class="banner banner-login">
+    <div class="banner-fundo"></div>
+    <div class="banner-camada"></div>
+    <div class="container banner-conteudo">
+      <div class="caixa-login">
+        <img src="{{ url_for('static', filename='img/logo-ladi.png') }}" alt="Logo da LADI" class="logo-login">
+        <h1>Área restrita</h1>
+        <p class="caixa-login-sub">Acesso exclusivo da diretoria da LADI.</p>
+
+        {% include "partials/_mensagens.html" %}
+
+        <form method="POST" novalidate>
+          {{ form.hidden_tag() }}
+          {% with campo = form.usuario %}{% include "partials/_campo.html" %}{% endwith %}
+          {% with campo = form.senha %}{% include "partials/_campo.html" %}{% endwith %}
+          {{ form.entrar(class="btn btn-principal w-100") }}
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}
