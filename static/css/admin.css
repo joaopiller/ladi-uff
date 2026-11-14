@@ -1,0 +1,90 @@
+.banner-login {
+  height: auto;
+  min-height: 100vh;
+  padding: 120px 0 60px;
+}
+
+.caixa-login {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #fff;
+  color: var(--texto);
+  border-radius: 8px;
+  padding: 36px 32px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.logo-login {
+  width: 72px;
+  border-radius: 50%;
+  margin-bottom: 14px;
+}
+
+.caixa-login h1 {
+  color: var(--azul-escuro);
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+.caixa-login-sub {
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+.caixa-login form {
+  text-align: left;
+}
+
+.form-label {
+  font-weight: 700;
+  color: var(--azul-escuro);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--azul-claro);
+  box-shadow: 0 0 0 0.2rem rgba(76, 145, 212, 0.25);
+}
+
+.cabecalho-admin {
+  background-color: var(--azul-escuro);
+  color: #fff;
+  padding: 130px 0 40px;
+}
+
+.cabecalho-admin h1 {
+  font-size: 2.2rem;
+  margin: 0;
+}
+
+.cabecalho-admin h1 span {
+  color: var(--azul-ceu);
+}
+
+.cabecalho-admin .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.secao-admin {
+  padding: 50px 0 80px;
+  min-height: 50vh;
+}
+
+@media (max-width: 575px) {
+  .caixa-login {
+    padding: 28px 20px;
+  }
+
+  .cabecalho-admin {
+    padding-top: 110px;
+  }
+
+  .cabecalho-admin h1 {
+    font-size: 1.7rem;
+  }
+}

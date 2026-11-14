@@ -2,6 +2,10 @@
 
 {% block titulo %}Área restrita | LADI-UFF{% endblock %}
 
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
 {% block conteudo %}
   <section class="banner banner-login">
     <div class="banner-fundo"></div>
