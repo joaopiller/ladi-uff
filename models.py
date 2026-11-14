@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import check_password_hash, generate_password_hash
 
 db = SQLAlchemy()
 
@@ -28,3 +29,19 @@ class Membro(db.Model):
 
     def __repr__(self):
         return f"<Membro {self.id}: {self.nome}>"
+
+
+class Administrador(db.Model):
+    __tablename__ = "administrador"
+    id = db.Column(db.Integer, primary_key=True)
+    usuario = db.Column(db.String(40), nullable=False, unique=True)
+    senha_hash = db.Column(db.String(256), nullable=False)
+
+    def define_senha(self, senha):
+        self.senha_hash = generate_password_hash(senha)
+
+    def confere_senha(self, senha):
+        return check_password_hash(self.senha_hash, senha)
+
+    def __repr__(self):
+        return f"<Administrador {self.id}: {self.usuario}>"

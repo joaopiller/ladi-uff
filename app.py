@@ -3,7 +3,7 @@ import os
 from flask import Flask, render_template, request
 
 from config import config
-from dados_iniciais import popula_banco
+from dados_iniciais import cria_administrador, popula_banco
 from logs import configura_logging
 from models import Diretoria, db
 
@@ -21,6 +21,9 @@ with app.app_context():
     db.create_all()
     if popula_banco():
         app.logger.info("Banco populado com os dados iniciais")
+    admin = cria_administrador()
+    if admin:
+        app.logger.info("Administrador criado: %s", admin.usuario)
 
 app.logger.info("Aplicação iniciada (ambiente=%s, debug=%s)", ambiente, app.config["DEBUG"])
 

@@ -1,4 +1,6 @@
-from models import Diretoria, Membro, db
+import os
+
+from models import Administrador, Diretoria, Membro, db
 
 DIRETORIAS = [
     ("Direção executiva", "executiva", [
@@ -42,3 +44,19 @@ def popula_banco():
                                   foto="img/diretoria/" + foto, diretoria=diretoria))
     db.session.commit()
     return True
+
+
+def cria_administrador():
+    if Administrador.query.count() > 0:
+        return None
+
+    usuario = os.environ.get("ADMIN_USUARIO")
+    senha = os.environ.get("ADMIN_SENHA")
+    if not usuario or not senha:
+        return None
+
+    admin = Administrador(usuario=usuario)
+    admin.define_senha(senha)
+    db.session.add(admin)
+    db.session.commit()
+    return admin
