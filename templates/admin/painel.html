@@ -7,23 +7,23 @@
 {% endblock %}
 
 {% block conteudo %}
-  <section class="cabecalho-admin">
-    <div class="container">
-      <div>
-        <p class="banner-pre">Painel administrativo</p>
-        <h1>Olá, <span>{{ admin.usuario }}</span></h1>
-      </div>
-      <form method="POST" action="{{ url_for('sair') }}">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button type="submit" class="btn btn-banner btn-sm"><i class="bi bi-box-arrow-right me-1"></i>Sair</button>
-      </form>
-    </div>
-  </section>
+  {% with titulo_pagina = "Olá,", destaque = admin_logado.usuario %}
+  {% include "admin/_cabecalho.html" %}
+  {% endwith %}
 
-  <section class="secao secao-admin">
+  <section class="secao-admin">
     <div class="container">
       {% include "partials/_mensagens.html" %}
-      <p class="texto">Use o menu do painel para gerenciar o conteúdo do site.</p>
+
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-4">
+          <a href="{{ url_for('admin_membros') }}" class="card-painel">
+            <i class="bi bi-people"></i>
+            <span class="card-painel-numero">{{ total_membros }}</span>
+            <span class="card-painel-nome">Membros</span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 {% endblock %}

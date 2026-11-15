@@ -8,7 +8,7 @@ from config import config
 from dados_iniciais import cria_administrador, popula_banco
 from logs import configura_logging
 from forms import LoginForm
-from models import Administrador, Diretoria, db
+from models import Administrador, Diretoria, Membro, db
 
 app = Flask(__name__)
 ambiente = os.environ.get("APP_ENV", "development")
@@ -110,7 +110,14 @@ def sair():
 @app.route("/admin")
 @login_obrigatorio
 def painel():
-    return render_template("admin/painel.html", admin=admin_logado())
+    return render_template("admin/painel.html", total_membros=Membro.query.count())
+
+
+@app.route("/admin/membros")
+@login_obrigatorio
+def admin_membros():
+    diretorias = Diretoria.query.order_by(Diretoria.ordem).all()
+    return render_template("admin/membros.html", diretorias=diretorias)
 
 
 @app.errorhandler(404)

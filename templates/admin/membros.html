@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block titulo %}Membros | Painel LADI-UFF{% endblock %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block conteudo %}
+  {% with titulo_pagina = "Membros" %}
+  {% include "admin/_cabecalho.html" %}
+  {% endwith %}
+
+  <section class="secao-admin">
+    <div class="container">
+      {% include "partials/_mensagens.html" %}
+
+      {% for diretoria in diretorias %}
+      <h2 class="titulo-admin">{{ diretoria.nome }} <small>({{ diretoria.membros|length }})</small></h2>
+      {% if diretoria.membros %}
+      <div class="table-responsive mb-5">
+        <table class="table align-middle tabela-admin">
+          <thead>
+            <tr>
+              <th>Foto</th>
+              <th>Nome</th>
+              <th>Cargo</th>
+              <th>Posição</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for membro in diretoria.membros %}
+            <tr>
+              <td><img src="{{ url_for('static', filename=membro.foto) }}" alt="{{ membro.nome }}" class="miniatura"></td>
+              <td>{{ membro.nome }}</td>
+              <td>{{ membro.cargo }}</td>
+              <td>{{ membro.ordem }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="texto mb-5">Nenhum membro nesta diretoria.</p>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}
