@@ -15,6 +15,11 @@
     <div class="container">
       {% include "partials/_mensagens.html" %}
 
+      <div class="barra-admin">
+        <p class="texto mb-0">Os membros aparecem na seção "Alguns de nossos membros" da página Quem somos.</p>
+        <a href="{{ url_for('novo_membro') }}" class="btn btn-principal"><i class="bi bi-plus-lg me-1"></i>Novo membro</a>
+      </div>
+
       {% for diretoria in diretorias %}
       <h2 class="titulo-admin">{{ diretoria.nome }} <small>({{ diretoria.membros|length }})</small></h2>
       {% if diretoria.membros %}

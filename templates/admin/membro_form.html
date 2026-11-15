@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{ titulo }} | Painel LADI-UFF{% endblock %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block conteudo %}
+  {% with titulo_pagina = titulo %}
+  {% include "admin/_cabecalho.html" %}
+  {% endwith %}
+
+  <section class="secao-admin">
+    <div class="container">
+      <a href="{{ url_for('admin_membros') }}" class="link-voltar"><i class="bi bi-arrow-left me-1"></i>Voltar para membros</a>
+
+      <form method="POST" enctype="multipart/form-data" class="caixa-form" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="row g-4">
+          <div class="col-md-4 text-center">
+            {% if membro and membro.foto %}
+            <img src="{{ url_for('static', filename=membro.foto) }}" alt="{{ membro.nome }}" class="foto-atual">
+            <p class="form-text">Foto atual. Envie outra para substituir.</p>
+            {% else %}
+            <div class="foto-vazia"><i class="bi bi-person"></i></div>
+            {% endif %}
+          </div>
+          <div class="col-md-8">
+            {% with campo = form.nome %}{% include "partials/_campo.html" %}{% endwith %}
+            {% with campo = form.cargo %}{% include "partials/_campo.html" %}{% endwith %}
+            {% with campo = form.diretoria_id %}{% include "partials/_campo.html" %}{% endwith %}
+            {% with campo = form.ordem %}{% include "partials/_campo.html" %}{% endwith %}
+            {% with campo = form.foto %}{% include "partials/_campo.html" %}{% endwith %}
+            <p class="form-text mt-n2">Prefira fotos verticais (3:4), com o rosto centralizado. Tamanho máximo: 5 MB.</p>
+            {{ form.salvar(class="btn btn-principal") }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}
