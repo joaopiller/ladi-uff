@@ -31,7 +31,7 @@
             {% with campo = form.cargo %}{% include "partials/_campo.html" %}{% endwith %}
             {% with campo = form.diretoria_id %}{% include "partials/_campo.html" %}{% endwith %}
             {% with campo = form.ordem %}{% include "partials/_campo.html" %}{% endwith %}
-            {% with campo = form.foto %}{% include "partials/_campo.html" %}{% endwith %}
+            {% with campo = form.arquivo %}{% include "partials/_campo.html" %}{% endwith %}
             <p class="form-text mt-n2">Prefira fotos verticais (3:4), com o rosto centralizado. Tamanho máximo: 5 MB.</p>
             {{ form.salvar(class="btn btn-principal") }}
           </div>

@@ -18,6 +18,6 @@ class MembroForm(FlaskForm):
     diretoria_id = SelectField("Diretoria", coerce=int)
     ordem = IntegerField("Posição na aba", default=0,
                          validators=[Optional(), NumberRange(min=0, max=99)])
-    foto = FileField("Foto", validators=[
+    arquivo = FileField("Foto", validators=[
         FileAllowed(FORMATOS_IMAGEM, "Envie uma imagem JPG, PNG ou WEBP.")])
     salvar = SubmitField("Salvar")

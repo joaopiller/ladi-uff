@@ -131,15 +131,15 @@ def novo_membro():
     form = MembroForm()
     form.diretoria_id.choices = opcoes_diretorias()
     if form.validate_on_submit():
-        if not form.foto.data:
-            form.foto.errors.append("Envie uma foto do membro.")
+        if not form.arquivo.data:
+            form.arquivo.errors.append("Envie uma foto do membro.")
         else:
             membro = Membro(
                 nome=form.nome.data,
                 cargo=form.cargo.data,
                 diretoria_id=form.diretoria_id.data,
                 ordem=form.ordem.data or 0,
-                foto=salvar_imagem(form.foto.data, "membros"),
+                foto=salvar_imagem(form.arquivo.data, "membros"),
             )
             db.session.add(membro)
             db.session.commit()
@@ -148,6 +148,40 @@ def novo_membro():
             return redirect(url_for("admin_membros"))
     return render_template("admin/membro_form.html", form=form, membro=None,
                            titulo="Novo membro")
+
+
+@app.route("/admin/membros/<int:id>/editar", methods=["GET", "POST"])
+@login_obrigatorio
+def editar_membro(id):
+    membro = db.get_or_404(Membro, id)
+    form = MembroForm(obj=membro)
+    form.diretoria_id.choices = opcoes_diretorias()
+    if form.validate_on_submit():
+        membro.nome = form.nome.data
+        membro.cargo = form.cargo.data
+        membro.diretoria_id = form.diretoria_id.data
+        membro.ordem = form.ordem.data or 0
+        if form.arquivo.data:
+            remover_imagem(membro.foto)
+            membro.foto = salvar_imagem(form.arquivo.data, "membros")
+        db.session.commit()
+        app.logger.info("Membro atualizado: id=%s nome=%r", membro.id, membro.nome)
+        flash(f"Dados de {membro.nome} atualizados.", "success")
+        return redirect(url_for("admin_membros"))
+    return render_template("admin/membro_form.html", form=form, membro=membro,
+                           titulo="Editar membro")
+
+
+@app.route("/admin/membros/<int:id>/excluir", methods=["POST"])
+@login_obrigatorio
+def excluir_membro(id):
+    membro = db.get_or_404(Membro, id)
+    remover_imagem(membro.foto)
+    db.session.delete(membro)
+    db.session.commit()
+    app.logger.warning("Membro removido: id=%s nome=%r", id, membro.nome)
+    flash(f"{membro.nome} foi removido(a).", "warning")
+    return redirect(url_for("admin_membros"))
 
 
 @app.errorhandler(404)
