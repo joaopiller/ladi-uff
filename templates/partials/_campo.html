@@ -2,6 +2,9 @@
   {{ campo.label(class="form-label") }}
   {% set classe = "form-select" if campo.type == "SelectField" else "form-control" %}
   {{ campo(class=classe + (" is-invalid" if campo.errors else "")) }}
+  {% if campo.description %}
+  <div class="form-text">{{ campo.description }}</div>
+  {% endif %}
   {% for erro in campo.errors %}
   <div class="invalid-feedback">{{ erro }}</div>
   {% endfor %}

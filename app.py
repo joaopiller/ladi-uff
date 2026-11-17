@@ -125,6 +125,12 @@ def opcoes_diretorias():
     return [(d.id, d.nome) for d in Diretoria.query.order_by(Diretoria.ordem).all()]
 
 
+def proxima_posicao(diretoria_id):
+    ultimo = (Membro.query.filter_by(diretoria_id=diretoria_id)
+              .order_by(Membro.ordem.desc()).first())
+    return ultimo.ordem + 1 if ultimo else 1
+
+
 @app.route("/admin/membros/novo", methods=["GET", "POST"])
 @login_obrigatorio
 def novo_membro():
@@ -138,7 +144,7 @@ def novo_membro():
                 nome=form.nome.data,
                 cargo=form.cargo.data,
                 diretoria_id=form.diretoria_id.data,
-                ordem=form.ordem.data or 0,
+                ordem=form.ordem.data or proxima_posicao(form.diretoria_id.data),
                 foto=salvar_imagem(form.arquivo.data, "membros"),
             )
             db.session.add(membro)
@@ -159,8 +165,11 @@ def editar_membro(id):
     if form.validate_on_submit():
         membro.nome = form.nome.data
         membro.cargo = form.cargo.data
+        if form.ordem.data:
+            membro.ordem = form.ordem.data
+        elif form.diretoria_id.data != membro.diretoria_id:
+            membro.ordem = proxima_posicao(form.diretoria_id.data)
         membro.diretoria_id = form.diretoria_id.data
-        membro.ordem = form.ordem.data or 0
         if form.arquivo.data:
             remover_imagem(membro.foto)
             membro.foto = salvar_imagem(form.arquivo.data, "membros")

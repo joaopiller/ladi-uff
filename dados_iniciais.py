@@ -39,7 +39,7 @@ def popula_banco():
     for ordem, (nome, slug, membros) in enumerate(DIRETORIAS):
         diretoria = Diretoria(nome=nome, slug=slug, ordem=ordem)
         db.session.add(diretoria)
-        for posicao, (nome_membro, cargo, foto) in enumerate(membros):
+        for posicao, (nome_membro, cargo, foto) in enumerate(membros, start=1):
             db.session.add(Membro(nome=nome_membro, cargo=cargo, ordem=posicao,
                                   foto="img/diretoria/" + foto, diretoria=diretoria))
     db.session.commit()

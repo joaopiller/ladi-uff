@@ -16,8 +16,8 @@ class MembroForm(FlaskForm):
     nome = StringField("Nome", validators=[DataRequired(), Length(max=80)])
     cargo = StringField("Cargo", validators=[DataRequired(), Length(max=60)])
     diretoria_id = SelectField("Diretoria", coerce=int)
-    ordem = IntegerField("Posição na aba", default=0,
-                         validators=[Optional(), NumberRange(min=0, max=99)])
+    ordem = IntegerField("Posição na aba", validators=[Optional(), NumberRange(min=1, max=99)],
+                         description="Deixe em branco para colocar no fim da aba.")
     arquivo = FileField("Foto", validators=[
         FileAllowed(FORMATOS_IMAGEM, "Envie uma imagem JPG, PNG ou WEBP.")])
     salvar = SubmitField("Salvar")
