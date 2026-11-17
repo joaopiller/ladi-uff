@@ -1,3 +1,6 @@
+import re
+from datetime import date, datetime
+
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -45,3 +48,33 @@ class Administrador(db.Model):
 
     def __repr__(self):
         return f"<Administrador {self.id}: {self.usuario}>"
+
+
+class Artigo(db.Model):
+    __tablename__ = "artigo"
+    id = db.Column(db.Integer, primary_key=True)
+    titulo = db.Column(db.String(150), nullable=False)
+    autor = db.Column(db.String(80), nullable=False)
+    data_publicacao = db.Column(db.Date, nullable=False, default=date.today)
+    imagem = db.Column(db.String(200), nullable=False)
+    conteudo = db.Column(db.Text, nullable=False)
+    criado_em = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+    @property
+    def paragrafos(self):
+        blocos = re.split(r"\n\s*\n", self.conteudo.replace("\r\n", "\n").strip())
+        return [" ".join(b.split()) for b in blocos if b.strip()]
+
+    @property
+    def resumo(self):
+        primeiro = self.paragrafos[0].replace("**", "") if self.paragrafos else ""
+        if len(primeiro) <= 160:
+            return primeiro
+        return primeiro[:160].rsplit(" ", 1)[0] + "..."
+
+    @classmethod
+    def recentes(cls):
+        return cls.query.order_by(cls.data_publicacao.desc(), cls.id.desc())
+
+    def __repr__(self):
+        return f"<Artigo {self.id}: {self.titulo}>"
