@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{ artigo.titulo }} | LADI-UFF{% endblock %}
+{% block descricao %}{{ artigo.resumo }}{% endblock %}
+
+{% block conteudo %}
+  <section class="secao">
+    <div class="container">
+      <h1>{{ artigo.titulo }}</h1>
+    </div>
+  </section>
+{% endblock %}

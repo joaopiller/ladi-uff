@@ -42,6 +42,9 @@
               <li><a class="dropdown-item link-menu" href="{{ url_for('clube') }}#como-participar">Como participar</a></li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a class="nav-link{% if request.endpoint in ['artigos', 'artigo'] %} active{% endif %}" href="{{ url_for('artigos') }}">Artigos</a>
+          </li>
           {% if admin_logado %}
           <li class="nav-item">
             <a class="nav-link{% if request.path.startswith('/admin') %} active{% endif %}" href="{{ url_for('painel') }}">Painel</a>

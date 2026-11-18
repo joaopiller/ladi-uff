@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block titulo %}Artigos | LADI-UFF{% endblock %}
+{% block descricao %}Artigos e textos da Liga Acadêmica de Direito Internacional da UFF sobre temas de Direito Internacional.{% endblock %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/artigos.css') }}">
+{% endblock %}
+
+{% block conteudo %}
+  <section class="banner banner-pagina">
+    <div class="banner-fundo fundo-artigos"></div>
+    <div class="banner-camada"></div>
+    <div class="container banner-conteudo">
+      <p class="banner-pre">Produção acadêmica</p>
+      <h1>Nossos <span>artigos</span></h1>
+      <p class="banner-sub">
+        Textos dos membros da LADI sobre temas atuais do Direito Internacional.
+      </p>
+    </div>
+  </section>
+
+  <section class="secao" id="lista-artigos">
+    <div class="container">
+      <form method="GET" action="{{ url_for('artigos') }}" class="busca-artigos" role="search">
+        <input type="search" name="q" value="{{ busca }}" class="form-control" placeholder="Pesquisar artigos..." aria-label="Pesquisar artigos">
+        <button type="submit" class="btn btn-principal" aria-label="Pesquisar"><i class="bi bi-search"></i></button>
+      </form>
+
+      {% if busca %}
+      <p class="resultado-busca">
+        {{ artigos|length }} resultado{{ "s" if artigos|length != 1 }} para "{{ busca }}".
+        <a href="{{ url_for('artigos') }}">Ver todos</a>
+      </p>
+      {% endif %}
+
+      <div class="row g-4 mt-2">
+        {% for artigo in artigos %}
+        <div class="col-md-6 col-lg-4">
+          <a href="{{ url_for('artigo', id=artigo.id) }}" class="card-artigo">
+            <img src="{{ url_for('static', filename=artigo.imagem) }}" alt="{{ artigo.titulo }}">
+            <div class="card-artigo-info">
+              <p class="card-artigo-data">{{ artigo.data_publicacao.strftime("%d/%m/%Y") }} · {{ artigo.autor }}</p>
+              <h3>{{ artigo.titulo }}</h3>
+              <p class="card-artigo-resumo">{{ artigo.resumo }}</p>
+              <span class="leia-mais">Leia mais <i class="bi bi-arrow-right"></i></span>
+            </div>
+          </a>
+        </div>
+        {% else %}
+        <div class="col-12">
+          <p class="sem-artigos">
+            {% if busca %}Nenhum artigo encontrado. Tente outra palavra.{% else %}Ainda não há artigos publicados.{% endif %}
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

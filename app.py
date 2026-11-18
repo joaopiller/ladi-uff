@@ -3,13 +3,14 @@ from functools import wraps
 
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_wtf.csrf import CSRFProtect
+from sqlalchemy import or_
 
 from config import config
 from dados_iniciais import cria_administrador, popula_banco
-from logs import configura_logging
 from forms import LoginForm, MembroForm
 from imagens import remover_imagem, salvar_imagem
-from models import Administrador, Diretoria, Membro, db
+from logs import configura_logging
+from models import Administrador, Artigo, Diretoria, Membro, db
 
 app = Flask(__name__)
 ambiente = os.environ.get("APP_ENV", "development")
@@ -81,6 +82,26 @@ def eventos():
 @app.route("/clube-de-leitura")
 def clube():
     return render_template("clube.html")
+
+
+@app.route("/artigos")
+def artigos():
+    busca = request.args.get("q", "").strip()
+    consulta = Artigo.recentes()
+    if busca:
+        app.logger.debug("Busca de artigos: %r", busca)
+        consulta = consulta.filter(or_(
+            Artigo.titulo.contains(busca),
+            Artigo.autor.contains(busca),
+            Artigo.conteudo.contains(busca),
+        ))
+    return render_template("artigos/lista.html", artigos=consulta.all(), busca=busca)
+
+
+@app.route("/artigos/<int:id>")
+def artigo(id):
+    artigo = db.get_or_404(Artigo, id)
+    return render_template("artigos/artigo.html", artigo=artigo)
 
 
 @app.route("/admin/login", methods=["GET", "POST"])
