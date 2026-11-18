@@ -1,0 +1,116 @@
+.fundo-artigos {
+  background-image: url("../img/eventos/feira-das-ligas.jpg");
+}
+
+.busca-artigos {
+  display: flex;
+  gap: 10px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.busca-artigos .form-control {
+  border-radius: 30px;
+  padding: 10px 20px;
+  border-color: var(--azul-gelo);
+}
+
+.busca-artigos .form-control:focus {
+  border-color: var(--azul-claro);
+  box-shadow: 0 0 0 0.2rem rgba(76, 145, 212, 0.25);
+}
+
+.busca-artigos .btn {
+  padding: 10px 20px;
+}
+
+.resultado-busca {
+  text-align: center;
+  margin: 20px 0 0;
+}
+
+.resultado-busca a {
+  color: var(--azul);
+  font-weight: 700;
+}
+
+.card-artigo {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(39, 67, 89, 0.1);
+  color: var(--texto);
+  text-decoration: none;
+  transition: box-shadow 0.3s;
+}
+
+.card-artigo:hover {
+  box-shadow: 0 12px 28px rgba(39, 67, 89, 0.2);
+  color: var(--texto);
+}
+
+.card-artigo img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.card-artigo-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 22px;
+}
+
+.card-artigo-data {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--azul-medio);
+  margin-bottom: 8px;
+}
+
+.card-artigo h3 {
+  color: var(--azul-escuro);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.card-artigo-resumo {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.leia-mais {
+  color: var(--azul);
+  font-weight: 700;
+}
+
+.leia-mais i {
+  transition: margin-left 0.3s;
+}
+
+.card-artigo:hover .leia-mais i {
+  margin-left: 6px;
+}
+
+.sem-artigos {
+  text-align: center;
+  color: var(--azul-medio);
+  margin: 30px 0;
+}
+
+@media (max-width: 575px) {
+  .card-artigo-info {
+    padding: 18px;
+  }
+
+  .card-artigo h3 {
+    font-size: 1.15rem;
+  }
+}
