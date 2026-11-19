@@ -105,6 +105,97 @@
   margin: 30px 0;
 }
 
+.banner-artigo {
+  height: 40vh;
+  min-height: 300px;
+}
+
+.banner-titulo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.banner-titulo span {
+  color: var(--azul-ceu);
+}
+
+.link-voltar {
+  display: inline-block;
+  color: var(--azul);
+  font-weight: 700;
+  text-decoration: none;
+  margin-bottom: 24px;
+}
+
+.artigo-cabecalho {
+  max-width: 820px;
+  margin: 0 auto 36px;
+  text-align: center;
+}
+
+.artigo-cabecalho h1 {
+  color: var(--azul-escuro);
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  overflow-wrap: break-word;
+}
+
+.artigo-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 28px;
+  color: var(--azul-medio);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.artigo-imagem {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto 50px;
+}
+
+.artigo-imagem::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: -16px;
+  bottom: -16px;
+  background-color: var(--azul-escuro);
+  border-radius: 6px;
+}
+
+.artigo-imagem img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.artigo-texto {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 1.08rem;
+  line-height: 1.85;
+}
+
+.artigo-texto p {
+  margin-bottom: 1.4rem;
+}
+
+.artigo-texto strong {
+  color: var(--azul-escuro);
+}
+
 @media (max-width: 575px) {
   .card-artigo-info {
     padding: 18px;
@@ -112,5 +203,29 @@
 
   .card-artigo h3 {
     font-size: 1.15rem;
+  }
+
+  .banner-artigo {
+    height: 34vh;
+    min-height: 260px;
+  }
+
+  .banner-titulo {
+    font-size: 2.2rem;
+  }
+
+  .artigo-cabecalho h1 {
+    font-size: 1.8rem;
+  }
+
+  .artigo-imagem::after {
+    top: 10px;
+    left: 10px;
+    right: -10px;
+    bottom: -10px;
+  }
+
+  .artigo-texto {
+    font-size: 1rem;
   }
 }
