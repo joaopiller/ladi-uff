@@ -37,15 +37,7 @@
       <div class="row g-4 mt-2">
         {% for artigo in artigos %}
         <div class="col-md-6 col-lg-4">
-          <a href="{{ url_for('artigo', id=artigo.id) }}" class="card-artigo">
-            <img src="{{ url_for('static', filename=artigo.imagem) }}" alt="{{ artigo.titulo }}">
-            <div class="card-artigo-info">
-              <p class="card-artigo-data">{{ artigo.data_publicacao.strftime("%d/%m/%Y") }} · {{ artigo.autor }}</p>
-              <h3>{{ artigo.titulo }}</h3>
-              <p class="card-artigo-resumo">{{ artigo.resumo }}</p>
-              <span class="leia-mais">Leia mais <i class="bi bi-arrow-right"></i></span>
-            </div>
-          </a>
+          {% include "artigos/_card.html" %}
         </div>
         {% else %}
         <div class="col-12">

@@ -3,10 +3,57 @@
 {% block titulo %}{{ artigo.titulo }} | LADI-UFF{% endblock %}
 {% block descricao %}{{ artigo.resumo }}{% endblock %}
 
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/artigos.css') }}">
+{% endblock %}
+
 {% block conteudo %}
-  <section class="secao">
-    <div class="container">
-      <h1>{{ artigo.titulo }}</h1>
+  <section class="banner banner-pagina banner-artigo">
+    <div class="banner-fundo fundo-artigos"></div>
+    <div class="banner-camada"></div>
+    <div class="container banner-conteudo">
+      <p class="banner-pre">Produção acadêmica</p>
+      <p class="banner-titulo">Nossos <span>artigos</span></p>
     </div>
   </section>
+
+  <article class="secao artigo">
+    <div class="container">
+      <a href="{{ url_for('artigos') }}" class="link-voltar"><i class="bi bi-arrow-left me-1"></i>Todos os artigos</a>
+
+      <header class="artigo-cabecalho">
+        <h1>{{ artigo.titulo }}</h1>
+        <p class="artigo-meta">
+          <span><i class="bi bi-person me-1"></i>Por {{ artigo.autor }}</span>
+          <span><i class="bi bi-calendar3 me-1"></i>{{ artigo.data_publicacao.strftime("%d/%m/%Y") }}</span>
+        </p>
+      </header>
+
+      <div class="artigo-imagem">
+        <img src="{{ url_for('static', filename=artigo.imagem) }}" alt="{{ artigo.titulo }}">
+      </div>
+
+      <div class="artigo-texto">
+        {% for paragrafo in artigo.paragrafos %}
+        <p>{{ paragrafo|negrito }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </article>
+
+  {% if outros %}
+  <section class="secao secao-gelo">
+    <div class="container">
+      <h2 class="titulo-secao text-center">Leia <strong>também</strong></h2>
+      <div class="linha-titulo mx-auto"></div>
+      <div class="row g-4 mt-2 justify-content-center">
+        {% for artigo in outros %}
+        <div class="col-md-6 col-lg-4">
+          {% include "artigos/_card.html" %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
 {% endblock %}

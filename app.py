@@ -1,8 +1,10 @@
 import os
+import re
 from functools import wraps
 
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_wtf.csrf import CSRFProtect
+from markupsafe import Markup, escape
 from sqlalchemy import or_
 
 from config import config
@@ -57,6 +59,12 @@ def login_obrigatorio(view):
     return protegida
 
 
+@app.template_filter("negrito")
+def negrito(texto):
+    texto = str(escape(texto))
+    return Markup(re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", texto))
+
+
 @app.context_processor
 def variaveis_globais():
     return {"admin_logado": admin_logado()}
@@ -101,7 +109,8 @@ def artigos():
 @app.route("/artigos/<int:id>")
 def artigo(id):
     artigo = db.get_or_404(Artigo, id)
-    return render_template("artigos/artigo.html", artigo=artigo)
+    outros = Artigo.recentes().filter(Artigo.id != id).limit(3).all()
+    return render_template("artigos/artigo.html", artigo=artigo, outros=outros)
 
 
 @app.route("/admin/login", methods=["GET", "POST"])
