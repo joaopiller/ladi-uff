@@ -278,6 +278,36 @@
   margin-bottom: 8px;
 }
 
+.barra-editor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--azul-gelo);
+  border: 1px solid #dee2e6;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+.barra-editor .btn {
+  background-color: #fff;
+  color: var(--azul-escuro);
+  font-weight: 700;
+  border: 1px solid #cfd8e0;
+}
+
+.barra-editor .btn:hover {
+  border-color: var(--azul-claro);
+  color: var(--azul);
+}
+
+.campo-editor {
+  border-radius: 0 0 6px 6px;
+  line-height: 1.7;
+}
+
 @media (max-width: 575px) {
   .caixa-login {
     padding: 28px 20px;
