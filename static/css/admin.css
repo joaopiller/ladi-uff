@@ -255,6 +255,29 @@
   font-size: 4rem;
 }
 
+.miniatura-larga {
+  width: 80px;
+  aspect-ratio: 16 / 10;
+}
+
+.link-tabela {
+  color: var(--azul-escuro);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.link-tabela:hover {
+  color: var(--azul);
+}
+
+.capa-atual {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
 @media (max-width: 575px) {
   .caixa-login {
     padding: 28px 20px;

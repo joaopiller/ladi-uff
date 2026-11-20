@@ -9,7 +9,7 @@ from sqlalchemy import or_
 
 from config import config
 from dados_iniciais import cria_administrador, popula_banco
-from forms import LoginForm, MembroForm
+from forms import ArtigoForm, LoginForm, MembroForm
 from imagens import remover_imagem, salvar_imagem
 from logs import configura_logging
 from models import Administrador, Artigo, Diretoria, Membro, db
@@ -141,7 +141,8 @@ def sair():
 @app.route("/admin")
 @login_obrigatorio
 def painel():
-    return render_template("admin/painel.html", total_membros=Membro.query.count())
+    return render_template("admin/painel.html", total_membros=Membro.query.count(),
+                           total_artigos=Artigo.query.count())
 
 
 @app.route("/admin/membros")
@@ -221,6 +222,58 @@ def excluir_membro(id):
     app.logger.warning("Membro removido: id=%s nome=%r", id, membro.nome)
     flash(f"{membro.nome} foi removido(a).", "warning")
     return redirect(url_for("admin_membros"))
+
+
+@app.route("/admin/artigos")
+@login_obrigatorio
+def admin_artigos():
+    return render_template("admin/artigos.html", artigos=Artigo.recentes().all())
+
+
+@app.route("/admin/artigos/novo", methods=["GET", "POST"])
+@login_obrigatorio
+def novo_artigo():
+    form = ArtigoForm()
+    if form.validate_on_submit():
+        if not form.arquivo.data:
+            form.arquivo.errors.append("Envie uma imagem de capa.")
+        else:
+            artigo = Artigo(
+                titulo=form.titulo.data,
+                autor=form.autor.data,
+                data_publicacao=form.data_publicacao.data,
+                conteudo=form.conteudo.data,
+                imagem=salvar_imagem(form.arquivo.data, "artigos"),
+            )
+            db.session.add(artigo)
+            db.session.commit()
+            app.logger.info("Artigo publicado: id=%s titulo=%r", artigo.id, artigo.titulo)
+            flash("Artigo publicado.", "success")
+            return redirect(url_for("admin_artigos"))
+    return render_template("admin/artigo_form.html", form=form, artigo=None,
+                           titulo="Novo artigo")
+
+
+@app.route("/admin/artigos/<int:id>/editar", methods=["GET", "POST"])
+@login_obrigatorio
+def editar_artigo(id):
+    artigo = db.get_or_404(Artigo, id)
+    form = ArtigoForm(obj=artigo)
+    form.salvar.label.text = "Salvar alterações"
+    if form.validate_on_submit():
+        artigo.titulo = form.titulo.data
+        artigo.autor = form.autor.data
+        artigo.data_publicacao = form.data_publicacao.data
+        artigo.conteudo = form.conteudo.data
+        if form.arquivo.data:
+            remover_imagem(artigo.imagem)
+            artigo.imagem = salvar_imagem(form.arquivo.data, "artigos")
+        db.session.commit()
+        app.logger.info("Artigo atualizado: id=%s titulo=%r", artigo.id, artigo.titulo)
+        flash("Artigo atualizado.", "success")
+        return redirect(url_for("admin_artigos"))
+    return render_template("admin/artigo_form.html", form=form, artigo=artigo,
+                           titulo="Editar artigo")
 
 
 @app.errorhandler(404)

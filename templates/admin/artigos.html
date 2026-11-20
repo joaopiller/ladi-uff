@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block titulo %}Artigos | Painel LADI-UFF{% endblock %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block conteudo %}
+  {% with titulo_pagina = "Artigos" %}
+  {% include "admin/_cabecalho.html" %}
+  {% endwith %}
+
+  <section class="secao-admin">
+    <div class="container">
+      {% include "partials/_mensagens.html" %}
+
+      <div class="barra-admin">
+        <p class="texto mb-0">Os artigos aparecem na página Artigos, do mais recente para o mais antigo.</p>
+        <a href="{{ url_for('novo_artigo') }}" class="btn btn-principal"><i class="bi bi-plus-lg me-1"></i>Novo artigo</a>
+      </div>
+
+      {% if artigos %}
+      <div class="table-responsive">
+        <table class="table align-middle tabela-admin">
+          <thead>
+            <tr>
+              <th>Capa</th>
+              <th>Título</th>
+              <th>Autor</th>
+              <th>Data</th>
+              <th class="text-end">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for artigo in artigos %}
+            <tr>
+              <td><img src="{{ url_for('static', filename=artigo.imagem) }}" alt="{{ artigo.titulo }}" class="miniatura miniatura-larga"></td>
+              <td><a href="{{ url_for('artigo', id=artigo.id) }}" target="_blank" class="link-tabela">{{ artigo.titulo }}</a></td>
+              <td>{{ artigo.autor }}</td>
+              <td>{{ artigo.data_publicacao.strftime("%d/%m/%Y") }}</td>
+              <td class="text-end">
+                <div class="acoes">
+                  <a href="{{ url_for('editar_artigo', id=artigo.id) }}" class="btn btn-sm btn-contorno"><i class="bi bi-pencil me-1"></i>Editar</a>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="texto">Nenhum artigo publicado ainda.</p>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

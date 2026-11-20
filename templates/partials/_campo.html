@@ -1,7 +1,8 @@
 <div class="mb-3">
   {{ campo.label(class="form-label") }}
   {% set classe = "form-select" if campo.type == "SelectField" else "form-control" %}
-  {{ campo(class=classe + (" is-invalid" if campo.errors else "")) }}
+  {% set extras = {"rows": 16} if campo.type == "TextAreaField" else {} %}
+  {{ campo(class=classe + (" is-invalid" if campo.errors else ""), **extras) }}
   {% if campo.description %}
   <div class="form-text">{{ campo.description }}</div>
   {% endif %}
