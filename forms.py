@@ -9,13 +9,18 @@ from wtforms.validators import DataRequired, Length, NumberRange, Optional
 FORMATOS_IMAGEM = ["jpg", "jpeg", "png", "webp"]
 
 
-class LoginForm(FlaskForm):
+class FormularioBase(FlaskForm):
+    class Meta:
+        locales = ["pt"]
+
+
+class LoginForm(FormularioBase):
     usuario = StringField("Usuário", validators=[DataRequired(), Length(max=40)])
     senha = PasswordField("Senha", validators=[DataRequired(), Length(max=128)])
     entrar = SubmitField("Entrar")
 
 
-class MembroForm(FlaskForm):
+class MembroForm(FormularioBase):
     nome = StringField("Nome", validators=[DataRequired(), Length(max=80)])
     cargo = StringField("Cargo", validators=[DataRequired(), Length(max=60)])
     diretoria_id = SelectField("Diretoria", coerce=int)
@@ -26,7 +31,7 @@ class MembroForm(FlaskForm):
     salvar = SubmitField("Salvar")
 
 
-class ArtigoForm(FlaskForm):
+class ArtigoForm(FormularioBase):
     titulo = StringField("Título", validators=[DataRequired(), Length(max=150)])
     autor = StringField("Autor", validators=[DataRequired(), Length(max=80)])
     data_publicacao = DateField("Data de publicação", default=date.today,
