@@ -42,6 +42,11 @@
               <td class="text-end">
                 <div class="acoes">
                   <a href="{{ url_for('editar_artigo', id=artigo.id) }}" class="btn btn-sm btn-contorno"><i class="bi bi-pencil me-1"></i>Editar</a>
+                  <form method="POST" action="{{ url_for('excluir_artigo', id=artigo.id) }}"
+                        data-confirmar="Excluir o artigo &quot;{{ artigo.titulo }}&quot;? Essa ação não pode ser desfeita.">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-sm btn-excluir"><i class="bi bi-trash me-1"></i>Excluir</button>
+                  </form>
                 </div>
               </td>
             </tr>
@@ -54,4 +59,8 @@
       {% endif %}
     </div>
   </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/confirmar.js') }}"></script>
 {% endblock %}

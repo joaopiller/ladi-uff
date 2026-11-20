@@ -276,6 +276,18 @@ def editar_artigo(id):
                            titulo="Editar artigo")
 
 
+@app.route("/admin/artigos/<int:id>/excluir", methods=["POST"])
+@login_obrigatorio
+def excluir_artigo(id):
+    artigo = db.get_or_404(Artigo, id)
+    remover_imagem(artigo.imagem)
+    db.session.delete(artigo)
+    db.session.commit()
+    app.logger.warning("Artigo removido: id=%s titulo=%r", id, artigo.titulo)
+    flash(f"O artigo \"{artigo.titulo}\" foi removido.", "warning")
+    return redirect(url_for("admin_artigos"))
+
+
 @app.errorhandler(404)
 def nao_encontrado(erro):
     app.logger.warning("404: %s %s", request.method, request.path)
