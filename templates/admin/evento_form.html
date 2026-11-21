@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block titulo %}{{ titulo }} | Painel LADI-UFF{% endblock %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block conteudo %}
+  {% with titulo_pagina = titulo %}
+  {% include "admin/_cabecalho.html" %}
+  {% endwith %}
+
+  <section class="secao-admin">
+    <div class="container">
+      <a href="{{ url_for('admin_eventos') }}" class="link-voltar"><i class="bi bi-arrow-left me-1"></i>Voltar para eventos</a>
+
+      <form method="POST" enctype="multipart/form-data" class="caixa-form" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="row g-4">
+          <div class="col-lg-8">
+            {% with campo = form.titulo %}{% include "partials/_campo.html" %}{% endwith %}
+            {% with campo = form.categoria %}{% include "partials/_campo.html" %}{% endwith %}
+            <div class="row">
+              <div class="col-sm-5">
+                {% with campo = form.data %}{% include "partials/_campo.html" %}{% endwith %}
+              </div>
+              <div class="col-sm-7">
+                {% with campo = form.periodo %}{% include "partials/_campo.html" %}{% endwith %}
+              </div>
+            </div>
+            <div class="mb-3">
+              {{ form.descricao.label(class="form-label") }}
+              {{ form.descricao(class="form-control" + (" is-invalid" if form.descricao.errors else ""), rows=5) }}
+              {% for erro in form.descricao.errors %}
+              <div class="invalid-feedback">{{ erro }}</div>
+              {% endfor %}
+            </div>
+            <div class="form-check mb-2">
+              {{ form.destaque(class="form-check-input") }}
+              {{ form.destaque.label(class="form-check-label") }}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            {% if evento %}
+            <img src="{{ url_for('static', filename=evento.imagem) }}" alt="{{ evento.titulo }}" class="capa-atual">
+            <p class="form-text">Foto atual. Envie outra para substituir.</p>
+            {% endif %}
+            {% with campo = form.arquivo %}{% include "partials/_campo.html" %}{% endwith %}
+            <p class="form-text mt-n2">Prefira imagens horizontais. Tamanho máximo: 5 MB.</p>
+            {{ form.salvar(class="btn btn-principal w-100 mt-2") }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}

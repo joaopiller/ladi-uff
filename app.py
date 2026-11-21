@@ -9,7 +9,7 @@ from sqlalchemy import or_
 
 from config import config
 from dados_iniciais import cria_administrador, popula_banco
-from forms import ArtigoForm, LoginForm, MembroForm
+from forms import ArtigoForm, EventoForm, LoginForm, MembroForm
 from imagens import remover_imagem, salvar_imagem
 from logs import configura_logging
 from models import Administrador, Artigo, Diretoria, Evento, Membro, db
@@ -143,7 +143,8 @@ def sair():
 @login_obrigatorio
 def painel():
     return render_template("admin/painel.html", total_membros=Membro.query.count(),
-                           total_artigos=Artigo.query.count())
+                           total_artigos=Artigo.query.count(),
+                           total_eventos=Evento.query.count())
 
 
 @app.route("/admin/membros")
@@ -287,6 +288,71 @@ def excluir_artigo(id):
     app.logger.warning("Artigo removido: id=%s titulo=%r", id, artigo.titulo)
     flash(f"O artigo \"{artigo.titulo}\" foi removido.", "warning")
     return redirect(url_for("admin_artigos"))
+
+
+@app.route("/admin/eventos")
+@login_obrigatorio
+def admin_eventos():
+    return render_template("admin/eventos.html", eventos=Evento.linha_do_tempo())
+
+
+def preenche_evento(evento, form):
+    evento.titulo = form.titulo.data
+    evento.categoria = form.categoria.data
+    evento.data = form.data.data
+    evento.periodo = form.periodo.data or None
+    evento.descricao = form.descricao.data
+    evento.destaque = form.destaque.data
+
+
+@app.route("/admin/eventos/novo", methods=["GET", "POST"])
+@login_obrigatorio
+def novo_evento():
+    form = EventoForm()
+    if form.validate_on_submit():
+        if not form.arquivo.data:
+            form.arquivo.errors.append("Envie uma foto do evento.")
+        else:
+            evento = Evento()
+            preenche_evento(evento, form)
+            evento.imagem = salvar_imagem(form.arquivo.data, "eventos")
+            db.session.add(evento)
+            db.session.commit()
+            app.logger.info("Evento criado: id=%s titulo=%r", evento.id, evento.titulo)
+            flash("Evento adicionado à linha do tempo.", "success")
+            return redirect(url_for("admin_eventos"))
+    return render_template("admin/evento_form.html", form=form, evento=None,
+                           titulo="Novo evento")
+
+
+@app.route("/admin/eventos/<int:id>/editar", methods=["GET", "POST"])
+@login_obrigatorio
+def editar_evento(id):
+    evento = db.get_or_404(Evento, id)
+    form = EventoForm(obj=evento)
+    if form.validate_on_submit():
+        preenche_evento(evento, form)
+        if form.arquivo.data:
+            remover_imagem(evento.imagem)
+            evento.imagem = salvar_imagem(form.arquivo.data, "eventos")
+        db.session.commit()
+        app.logger.info("Evento atualizado: id=%s titulo=%r", evento.id, evento.titulo)
+        flash("Evento atualizado.", "success")
+        return redirect(url_for("admin_eventos"))
+    return render_template("admin/evento_form.html", form=form, evento=evento,
+                           titulo="Editar evento")
+
+
+@app.route("/admin/eventos/<int:id>/excluir", methods=["POST"])
+@login_obrigatorio
+def excluir_evento(id):
+    evento = db.get_or_404(Evento, id)
+    remover_imagem(evento.imagem)
+    db.session.delete(evento)
+    db.session.commit()
+    app.logger.warning("Evento removido: id=%s titulo=%r", id, evento.titulo)
+    flash(f"O evento \"{evento.titulo}\" foi removido.", "warning")
+    return redirect(url_for("admin_eventos"))
 
 
 @app.errorhandler(404)

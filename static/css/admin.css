@@ -308,6 +308,27 @@
   line-height: 1.7;
 }
 
+.tag-tabela {
+  display: inline-block;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.destaque-sim {
+  color: #e0a526;
+  font-size: 1.1rem;
+}
+
+.destaque-nao {
+  color: #c5cfd8;
+  font-size: 1.1rem;
+}
+
+.form-check-input:checked {
+  background-color: var(--azul);
+  border-color: var(--azul);
+}
+
 @media (max-width: 575px) {
   .caixa-login {
     padding: 28px 20px;

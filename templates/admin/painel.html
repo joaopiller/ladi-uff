@@ -30,6 +30,13 @@
             <span class="card-painel-nome">Artigos</span>
           </a>
         </div>
+        <div class="col-sm-6 col-lg-4">
+          <a href="{{ url_for('admin_eventos') }}" class="card-painel">
+            <i class="bi bi-calendar-event"></i>
+            <span class="card-painel-numero">{{ total_eventos }}</span>
+            <span class="card-painel-nome">Eventos</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
