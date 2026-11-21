@@ -2,6 +2,7 @@
 
 {% block estilos %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/artigos.css') }}">
 {% endblock %}
 
 {% block conteudo %}
@@ -154,6 +155,29 @@
       </div>
     </div>
   </section>
+
+  {% if artigos %}
+  <section class="secao secao-gelo" id="artigos">
+    <div class="container">
+      <h2 class="titulo-secao text-center">Artigos <strong>recentes</strong></h2>
+      <div class="linha-titulo mx-auto"></div>
+
+      <div class="row g-4 mt-2 justify-content-center">
+        {% for artigo in artigos %}
+        <div class="col-md-6 col-lg-4">
+          {% include "artigos/_card.html" %}
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="{{ url_for('artigos') }}" class="btn btn-principal">
+          Ver todos os artigos <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+  {% endif %}
 
   <section class="secao" id="professores">
     <div class="container">

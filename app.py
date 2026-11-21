@@ -72,7 +72,8 @@ def variaveis_globais():
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    artigos = Artigo.recentes().limit(3).all()
+    return render_template("index.html", artigos=artigos)
 
 
 @app.route("/quem-somos")
