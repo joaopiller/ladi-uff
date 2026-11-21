@@ -66,42 +66,17 @@
 
         <div class="col-lg-7 mosaico">
           <div class="row g-3">
+            {% for evento in destaques %}
             <div class="col-6">
-              <a href="{{ url_for('eventos') }}#simulacao-onu" class="card-evento">
-                <img src="{{ url_for('static', filename='img/eventos/simulacao-onu.jpg') }}" alt="Estudantes na Simulação da ONU">
+              <a href="{{ url_for('eventos') }}#evento-{{ evento.id }}" class="card-evento">
+                <img src="{{ url_for('static', filename=evento.imagem) }}" alt="{{ evento.titulo }}">
                 <div class="card-evento-info">
-                  <span class="tag">Simulação</span>
-                  <h3>Simulação da ONU: A Questão Palestina</h3>
+                  <span class="tag">{{ evento.categoria }}</span>
+                  <h3>{{ evento.titulo }}</h3>
                 </div>
               </a>
             </div>
-            <div class="col-6">
-              <a href="{{ url_for('eventos') }}#refugiados" class="card-evento">
-                <img src="{{ url_for('static', filename='img/eventos/refugiados.jpg') }}" alt="Participantes do Projeto Refugiados nas Escolas">
-                <div class="card-evento-info">
-                  <span class="tag">Extensão</span>
-                  <h3>Projeto Refugiados nas Escolas</h3>
-                </div>
-              </a>
-            </div>
-            <div class="col-6">
-              <a href="{{ url_for('eventos') }}#eventos-realizados" class="card-evento">
-                <img src="{{ url_for('static', filename='img/eventos/education-usa.jpg') }}" alt="Membros da LADI na EducationUSA LL.M. Fair">
-                <div class="card-evento-info">
-                  <span class="tag">#LADIPorAí</span>
-                  <h3>EducationUSA LL.M. Fair</h3>
-                </div>
-              </a>
-            </div>
-            <div class="col-6">
-              <a href="{{ url_for('eventos') }}#oratoria" class="card-evento">
-                <img src="{{ url_for('static', filename='img/eventos/oratoria.jpg') }}" alt="Membros da LADI no curso de oratória">
-                <div class="card-evento-info">
-                  <span class="tag">Curso</span>
-                  <h3>Curso de Oratória para Competições</h3>
-                </div>
-              </a>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
