@@ -1,7 +1,7 @@
 import os
 from datetime import date
 
-from models import Administrador, Artigo, Diretoria, Membro, db
+from models import Administrador, Artigo, Diretoria, Evento, Membro, db
 
 DIRETORIAS = [
     ("Direção executiva", "executiva", [
@@ -78,6 +78,64 @@ As inscrições são divulgadas no nosso Instagram, @ladi.uff.""",
     },
 ]
 
+EVENTOS = [
+    {
+        "titulo": "Fórum China-Brasil",
+        "categoria": "Fórum",
+        "data": date(2024, 11, 1),
+        "imagem": "img/eventos/forum-china-brasil.jpg",
+        "descricao": "A LADI teve a oportunidade de celebrar os 50 anos de relações bilaterais entre Brasil e China no Fórum China-Brasil. Foi uma tarde repleta de discussões importantes e inúmeros aprendizados.",
+    },
+    {
+        "titulo": "Projeto Refugiados nas Escolas",
+        "categoria": "Extensão",
+        "data": date(2025, 8, 1),
+        "imagem": "img/eventos/refugiados-feira.jpg",
+        "destaque": True,
+        "descricao": "Em parceria com o programa Pares Cáritas, a Faculdade de Direito recebeu uma palestra da empreendedora e refugiada Rama e uma feira cultural com artesanato e culinária típica dos países de origem dos participantes.",
+    },
+    {
+        "titulo": "Curso de Oratória",
+        "categoria": "Curso",
+        "data": date(2025, 9, 1),
+        "imagem": "img/eventos/oratoria.jpg",
+        "destaque": True,
+        "descricao": "Integrantes da LADI participaram de um curso com a fonoaudióloga Jane Celeste Guberfain, professora da UNIRIO, trabalhando voz, dicção e argumentação para simulações e competições de arbitragem.",
+    },
+    {
+        "titulo": "Feira das Ligas",
+        "categoria": "Extensão",
+        "data": date(2025, 9, 15),
+        "imagem": "img/eventos/feira-das-ligas.jpg",
+        "descricao": "Na Semana Jurídica, a LADI montou seu estande na feira organizada pelo CAEV e apresentou aos estudantes seus projetos, grupos de estudo e processos seletivos.",
+    },
+    {
+        "titulo": "Simulação da ONU: A Questão Palestina",
+        "categoria": "Simulação",
+        "data": date(2025, 11, 1),
+        "imagem": "img/eventos/simulacao-onu.jpg",
+        "destaque": True,
+        "descricao": "Em conjunto com a Liga de Direito Internacional da UNIRIO, a LADI organizou uma simulação da Assembleia Geral da ONU que reuniu estudantes de diversas instituições.",
+    },
+    {
+        "titulo": "Visitas aos consulados",
+        "categoria": "Visitas",
+        "data": date(2026, 2, 1),
+        "periodo": "2026",
+        "imagem": "img/eventos/consulado-colombia.jpg",
+        "descricao": "Membros da LADI visitaram o Consulado da Colômbia e o Consulado do Reino dos Países Baixos para conhecer de perto a prática diplomática e consular.",
+    },
+    {
+        "titulo": "MiniMUN 2026",
+        "categoria": "Simulação",
+        "data": date(2026, 5, 1),
+        "periodo": "1º e 2º semestres de 2026",
+        "imagem": "img/eventos/minimun.jpg",
+        "destaque": True,
+        "descricao": "A MiniMUN é um projeto inédito na Faculdade de Direito da UFF que busca aproximar os estudantes ingressantes dos debates do Direito Internacional. Em 2026, foram realizadas duas edições: uma no primeiro e outra no segundo semestre.",
+    },
+]
+
 
 def popula_banco():
     if Diretoria.query.count() > 0:
@@ -91,6 +149,8 @@ def popula_banco():
                                   foto="img/diretoria/" + foto, diretoria=diretoria))
     for artigo in ARTIGOS:
         db.session.add(Artigo(**artigo))
+    for evento in EVENTOS:
+        db.session.add(Evento(**evento))
     db.session.commit()
     return True
 

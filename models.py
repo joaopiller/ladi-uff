@@ -6,6 +6,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 db = SQLAlchemy()
 
+MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
+         "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+
 
 class Diretoria(db.Model):
     __tablename__ = "diretoria"
@@ -78,3 +81,32 @@ class Artigo(db.Model):
 
     def __repr__(self):
         return f"<Artigo {self.id}: {self.titulo}>"
+
+
+class Evento(db.Model):
+    __tablename__ = "evento"
+    id = db.Column(db.Integer, primary_key=True)
+    titulo = db.Column(db.String(120), nullable=False)
+    categoria = db.Column(db.String(40), nullable=False)
+    descricao = db.Column(db.Text, nullable=False)
+    imagem = db.Column(db.String(200), nullable=False)
+    data = db.Column(db.Date, nullable=False)
+    periodo = db.Column(db.String(60))
+    destaque = db.Column(db.Boolean, nullable=False, default=False)
+
+    @property
+    def quando(self):
+        if self.periodo:
+            return self.periodo
+        return f"{MESES[self.data.month - 1]} de {self.data.year}"
+
+    @classmethod
+    def linha_do_tempo(cls):
+        return cls.query.order_by(cls.data, cls.id).all()
+
+    @classmethod
+    def destaques(cls):
+        return cls.query.filter_by(destaque=True).order_by(cls.data.desc()).limit(4).all()
+
+    def __repr__(self):
+        return f"<Evento {self.id}: {self.titulo}>"
