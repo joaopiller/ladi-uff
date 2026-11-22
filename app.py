@@ -12,7 +12,7 @@ from dados_iniciais import cria_administrador, popula_banco
 from forms import ArtigoForm, EventoForm, LoginForm, MembroForm
 from imagens import remover_imagem, salvar_imagem
 from logs import configura_logging
-from models import Administrador, Artigo, Diretoria, Evento, Membro, db
+from models import Administrador, Artigo, Diretoria, Evento, Inscricao, Membro, db
 
 app = Flask(__name__)
 ambiente = os.environ.get("APP_ENV", "development")
@@ -85,12 +85,13 @@ def quem_somos():
 
 @app.route("/eventos")
 def eventos():
-    return render_template("eventos.html", eventos=Evento.linha_do_tempo())
+    return render_template("eventos.html", eventos=Evento.linha_do_tempo(),
+                           inscricao=Inscricao.da_pagina("simulacoes"))
 
 
 @app.route("/clube-de-leitura")
 def clube():
-    return render_template("clube.html")
+    return render_template("clube.html", inscricao=Inscricao.da_pagina("clube"))
 
 
 @app.route("/artigos")

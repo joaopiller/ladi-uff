@@ -1,7 +1,7 @@
 import os
 from datetime import date
 
-from models import Administrador, Artigo, Diretoria, Evento, Membro, db
+from models import Administrador, Artigo, Diretoria, Evento, Inscricao, Membro, db
 
 DIRETORIAS = [
     ("Direção executiva", "executiva", [
@@ -136,6 +136,12 @@ EVENTOS = [
     },
 ]
 
+INSCRICOES = [
+    {"chave": "clube", "nome": "Clube de leitura", "aberta": True,
+     "link": "https://forms.gle/Qduk1hexQ9m3KnxZ8"},
+    {"chave": "simulacoes", "nome": "Simulações da ONU", "aberta": False, "link": None},
+]
+
 
 def popula_banco():
     if Diretoria.query.count() > 0:
@@ -151,6 +157,8 @@ def popula_banco():
         db.session.add(Artigo(**artigo))
     for evento in EVENTOS:
         db.session.add(Evento(**evento))
+    for inscricao in INSCRICOES:
+        db.session.add(Inscricao(**inscricao))
     db.session.commit()
     return True
 

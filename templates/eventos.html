@@ -80,11 +80,9 @@
               <li><strong>Preparação:</strong> treinamentos e estudos dirigidos com a Diretoria de Simulações.</li>
               <li><strong>Simulação:</strong> o dia do debate, com todas as delegações reunidas.</li>
             </ol>
-            <button type="button" class="btn btn-principal w-100" disabled>
-              <i class="bi bi-clock me-1"></i> Inscrições em breve
-            </button>
+            {% include "partials/_botao_inscricao.html" %}
             <p class="text-center small mt-3 mb-0">
-              As inscrições ainda não foram abertas. Acompanhe as novidades no Instagram
+              {% if not (inscricao and inscricao.disponivel) %}As inscrições ainda não foram abertas. {% endif %}Acompanhe as novidades no Instagram
               <a href="https://www.instagram.com/ladi.uff/" target="_blank" class="fw-bold">@ladi.uff</a>.
             </p>
           </div>

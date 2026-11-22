@@ -110,3 +110,23 @@ class Evento(db.Model):
 
     def __repr__(self):
         return f"<Evento {self.id}: {self.titulo}>"
+
+
+class Inscricao(db.Model):
+    __tablename__ = "inscricao"
+    id = db.Column(db.Integer, primary_key=True)
+    chave = db.Column(db.String(30), nullable=False, unique=True)
+    nome = db.Column(db.String(60), nullable=False)
+    aberta = db.Column(db.Boolean, nullable=False, default=False)
+    link = db.Column(db.String(300))
+
+    @property
+    def disponivel(self):
+        return self.aberta and bool(self.link)
+
+    @classmethod
+    def da_pagina(cls, chave):
+        return cls.query.filter_by(chave=chave).first()
+
+    def __repr__(self):
+        return f"<Inscricao {self.chave}: {'aberta' if self.aberta else 'fechada'}>"
