@@ -4,7 +4,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from wtforms import (BooleanField, DateField, IntegerField, PasswordField, SelectField, StringField,
                      SubmitField, TextAreaField)
-from wtforms.validators import DataRequired, Length, NumberRange, Optional
+from wtforms.validators import DataRequired, Length, NumberRange, Optional, Regexp, URL
 
 FORMATOS_IMAGEM = ["jpg", "jpeg", "png", "webp"]
 
@@ -57,3 +57,19 @@ class EventoForm(FormularioBase):
         FileAllowed(FORMATOS_IMAGEM, "Envie uma imagem JPG, PNG ou WEBP.")])
     destaque = BooleanField("Destacar na página inicial")
     salvar = SubmitField("Salvar")
+
+
+class InscricaoForm(FormularioBase):
+    aberta = BooleanField("Inscrições abertas")
+    link = StringField("Link do formulário", validators=[
+        Optional(), Length(max=300), URL(message="Informe um endereço válido."),
+        Regexp(r"^https?://", message="O link deve começar com http:// ou https://.")])
+    salvar = SubmitField("Salvar")
+
+    def validate(self, extra_validators=None):
+        if not super().validate(extra_validators):
+            return False
+        if self.aberta.data and not self.link.data:
+            self.link.errors.append("Para abrir as inscrições, informe o link do formulário.")
+            return False
+        return True

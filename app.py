@@ -9,7 +9,7 @@ from sqlalchemy import or_
 
 from config import config
 from dados_iniciais import cria_administrador, popula_banco
-from forms import ArtigoForm, EventoForm, LoginForm, MembroForm
+from forms import ArtigoForm, EventoForm, InscricaoForm, LoginForm, MembroForm
 from imagens import remover_imagem, salvar_imagem
 from logs import configura_logging
 from models import Administrador, Artigo, Diretoria, Evento, Inscricao, Membro, db
@@ -145,7 +145,8 @@ def sair():
 def painel():
     return render_template("admin/painel.html", total_membros=Membro.query.count(),
                            total_artigos=Artigo.query.count(),
-                           total_eventos=Evento.query.count())
+                           total_eventos=Evento.query.count(),
+                           inscricoes=Inscricao.query.order_by(Inscricao.id).all())
 
 
 @app.route("/admin/membros")
@@ -354,6 +355,40 @@ def excluir_evento(id):
     app.logger.warning("Evento removido: id=%s titulo=%r", id, evento.titulo)
     flash(f"O evento \"{evento.titulo}\" foi removido.", "warning")
     return redirect(url_for("admin_eventos"))
+
+
+def formularios_inscricao(com_erro=None):
+    formularios = []
+    for inscricao in Inscricao.query.order_by(Inscricao.id).all():
+        if com_erro is not None and com_erro[0].id == inscricao.id:
+            form = com_erro[1]
+        else:
+            form = InscricaoForm(obj=inscricao, prefix=f"inscricao{inscricao.id}")
+        formularios.append((inscricao, form))
+    return formularios
+
+
+@app.route("/admin/inscricoes")
+@login_obrigatorio
+def admin_inscricoes():
+    return render_template("admin/inscricoes.html", formularios=formularios_inscricao())
+
+
+@app.route("/admin/inscricoes/<int:id>", methods=["POST"])
+@login_obrigatorio
+def salvar_inscricao(id):
+    inscricao = db.get_or_404(Inscricao, id)
+    form = InscricaoForm(prefix=f"inscricao{inscricao.id}")
+    if form.validate_on_submit():
+        inscricao.aberta = form.aberta.data
+        inscricao.link = form.link.data or None
+        db.session.commit()
+        situacao = "abertas" if inscricao.aberta else "fechadas"
+        app.logger.info("Inscrições de %s %s (link=%s)", inscricao.chave, situacao, inscricao.link)
+        flash(f"Inscrições de {inscricao.nome}: {situacao}.", "success")
+        return redirect(url_for("admin_inscricoes"))
+    return render_template("admin/inscricoes.html",
+                           formularios=formularios_inscricao((inscricao, form)))
 
 
 @app.errorhandler(404)

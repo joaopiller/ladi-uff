@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block titulo %}Inscrições | Painel LADI-UFF{% endblock %}
+
+{% block estilos %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block conteudo %}
+  {% with titulo_pagina = "Inscrições" %}
+  {% include "admin/_cabecalho.html" %}
+  {% endwith %}
+
+  <section class="secao-admin">
+    <div class="container">
+      {% include "partials/_mensagens.html" %}
+
+      <p class="texto mb-4">Com as inscrições abertas, o botão da página leva ao formulário. Fechadas, ele aparece como "Inscrições em breve".</p>
+
+      <div class="row g-4">
+        {% for inscricao, form in formularios %}
+        <div class="col-lg-6">
+          <form method="POST" action="{{ url_for('salvar_inscricao', id=inscricao.id) }}" class="caixa-form h-100" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="cabecalho-inscricao">
+              <h2 class="titulo-admin mb-0">{{ inscricao.nome }}</h2>
+              {% if inscricao.disponivel %}
+              <span class="status status-aberta">Abertas</span>
+              {% else %}
+              <span class="status status-fechada">Fechadas</span>
+              {% endif %}
+            </div>
+            <div class="form-check form-switch mb-3">
+              {{ form.aberta(class="form-check-input", role="switch") }}
+              {{ form.aberta.label(class="form-check-label") }}
+            </div>
+            {% with campo = form.link %}{% include "partials/_campo.html" %}{% endwith %}
+            {% if inscricao.link %}
+            <p class="form-text mt-n2"><a href="{{ inscricao.link }}" target="_blank" rel="noopener">Testar o link atual <i class="bi bi-box-arrow-up-right"></i></a></p>
+            {% endif %}
+            {{ form.salvar(class="btn btn-principal") }}
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

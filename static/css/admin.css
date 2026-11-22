@@ -329,6 +329,60 @@
   border-color: var(--azul);
 }
 
+.cabecalho-inscricao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.status,
+.card-painel-status {
+  font-weight: 700;
+}
+
+.status {
+  font-size: 0.8rem;
+  padding: 3px 12px;
+  border-radius: 20px;
+}
+
+.status.status-aberta {
+  background-color: #d8f0e0;
+  color: #1e7a3c;
+}
+
+.status.status-fechada {
+  background-color: #e9eef3;
+  color: #5b6b78;
+}
+
+.card-painel-status {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 12px 0 6px;
+}
+
+.card-painel-status.status-aberta {
+  color: #1e7a3c;
+}
+
+.card-painel-status.status-fechada {
+  color: #5b6b78;
+}
+
+.form-switch .form-check-input {
+  width: 2.6em;
+}
+
+.form-switch .form-check-label {
+  font-weight: 700;
+  color: var(--azul-escuro);
+  margin-left: 6px;
+}
+
 @media (max-width: 575px) {
   .caixa-login {
     padding: 28px 20px;

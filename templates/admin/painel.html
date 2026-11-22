@@ -37,6 +37,17 @@
             <span class="card-painel-nome">Eventos</span>
           </a>
         </div>
+        {% for inscricao in inscricoes %}
+        <div class="col-sm-6 col-lg-4">
+          <a href="{{ url_for('admin_inscricoes') }}" class="card-painel">
+            <i class="bi bi-clipboard-check"></i>
+            <span class="card-painel-status {{ 'status-aberta' if inscricao.disponivel else 'status-fechada' }}">
+              {{ "Abertas" if inscricao.disponivel else "Fechadas" }}
+            </span>
+            <span class="card-painel-nome">Inscrições · {{ inscricao.nome }}</span>
+          </a>
+        </div>
+        {% endfor %}
       </div>
     </div>
   </section>
