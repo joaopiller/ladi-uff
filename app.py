@@ -89,7 +89,6 @@ def login_obrigatorio(view):
     @wraps(view)
     def protegida(*args, **kwargs):
         if admin_logado() is None:
-            flash("Faça login para acessar o painel.", "warning")
             return redirect(url_for("entrar"))
         return view(*args, **kwargs)
     return protegida
