@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block titulo %}Formulário expirado | LADI-UFF{% endblock %}
+
+{% block conteudo %}
+  <section class="banner banner-pagina">
+    <div class="banner-fundo"></div>
+    <div class="banner-camada"></div>
+    <div class="container banner-conteudo">
+      <p class="banner-pre">Erro 400</p>
+      <h1>Formulário <span>expirado</span></h1>
+      <p class="banner-sub">
+        Por segurança, este formulário não pode mais ser enviado. Volte, recarregue a página e tente de novo.
+      </p>
+      <a href="{{ url_for('index') }}" class="btn btn-banner">Voltar para o início</a>
+    </div>
+  </section>
+{% endblock %}

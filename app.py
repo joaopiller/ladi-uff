@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from functools import wraps
 
 from flask import Flask, flash, redirect, render_template, request, session, url_for
-from flask_wtf.csrf import CSRFProtect
+from flask_wtf.csrf import CSRFError, CSRFProtect
 from markupsafe import Markup, escape
 from sqlalchemy import or_
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -168,6 +168,7 @@ def entrar():
         if admin and admin.confere_senha(form.senha.data):
             tentativas_login.pop(ip, None)
             session.clear()
+            session.permanent = True
             session["admin_id"] = admin.id
             app.logger.info("Login do administrador: %s", admin.usuario)
             return redirect(url_for("painel"))
@@ -440,6 +441,12 @@ def salvar_inscricao(id):
 def nao_encontrado(erro):
     app.logger.warning("404: %s %s", request.method, request.path)
     return render_template("404.html"), 404
+
+
+@app.errorhandler(CSRFError)
+def formulario_expirado(erro):
+    app.logger.warning("CSRF inválido em %s %s: %s", request.method, request.path, erro.description)
+    return render_template("400.html"), 400
 
 
 @app.errorhandler(413)
