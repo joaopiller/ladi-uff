@@ -102,30 +102,17 @@
 }
 
 .leia-mais {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
   margin-top: auto;
   color: var(--azul);
   font-weight: 700;
-  font-size: 0.95rem;
 }
 
-.leia-mais-icone {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background-color: var(--azul-gelo);
-  color: var(--azul);
-  transition: background-color 0.3s, color 0.3s;
+.leia-mais i {
+  transition: margin-left 0.3s;
 }
 
-.card-artigo:hover .leia-mais-icone {
-  background-color: var(--azul);
-  color: #fff;
+.card-artigo:hover .leia-mais i {
+  margin-left: 6px;
 }
 
 .sem-artigos {
