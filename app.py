@@ -1,11 +1,13 @@
 import os
 import re
+from datetime import datetime, timedelta
 from functools import wraps
 
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_wtf.csrf import CSRFProtect
 from markupsafe import Markup, escape
 from sqlalchemy import or_
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from config import config
 from dados_iniciais import cria_administrador, popula_banco
@@ -25,6 +27,9 @@ configura_logging(app)
 db.init_app(app)
 CSRFProtect(app)
 
+if not app.config["DEBUG"]:
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
+
 with app.app_context():
     db.create_all()
     if popula_banco():
@@ -32,14 +37,45 @@ with app.app_context():
     admin = cria_administrador()
     if admin:
         app.logger.info("Administrador criado: %s", admin.usuario)
+    elif Administrador.query.count() == 0:
+        app.logger.warning("Nenhum administrador cadastrado: defina ADMIN_USUARIO e ADMIN_SENHA no .env")
 
 app.logger.info("Aplicação iniciada (ambiente=%s, debug=%s)", ambiente, app.config["DEBUG"])
+
+
+@app.after_request
+def cabecalhos_seguranca(resposta):
+    resposta.headers["X-Frame-Options"] = "SAMEORIGIN"
+    resposta.headers["X-Content-Type-Options"] = "nosniff"
+    resposta.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    return resposta
 
 
 @app.before_request
 def registra_requisicao():
     if not request.path.startswith("/static/"):
         app.logger.debug("%s %s", request.method, request.path)
+
+
+TENTATIVAS_MAXIMAS = 5
+TEMPO_BLOQUEIO = timedelta(minutes=15)
+tentativas_login = {}
+
+
+def login_bloqueado(ip):
+    registro = tentativas_login.get(ip)
+    if registro is None:
+        return False
+    quantidade, inicio = registro
+    if datetime.now() - inicio > TEMPO_BLOQUEIO:
+        del tentativas_login[ip]
+        return False
+    return quantidade >= TENTATIVAS_MAXIMAS
+
+
+def registra_falha_login(ip):
+    quantidade, inicio = tentativas_login.get(ip, (0, datetime.now()))
+    tentativas_login[ip] = (quantidade + 1, inicio)
 
 
 def admin_logado():
@@ -121,14 +157,23 @@ def entrar():
         return redirect(url_for("painel"))
 
     form = LoginForm()
+    ip = request.remote_addr
     if form.validate_on_submit():
+        if login_bloqueado(ip):
+            app.logger.warning("Login bloqueado por excesso de tentativas: ip=%s", ip)
+            flash("Muitas tentativas seguidas. Aguarde alguns minutos e tente de novo.", "danger")
+            return render_template("admin/login.html", form=form), 429
+
         admin = Administrador.query.filter_by(usuario=form.usuario.data).first()
         if admin and admin.confere_senha(form.senha.data):
+            tentativas_login.pop(ip, None)
             session.clear()
             session["admin_id"] = admin.id
             app.logger.info("Login do administrador: %s", admin.usuario)
             return redirect(url_for("painel"))
-        app.logger.warning("Tentativa de login inválida para o usuário %r", form.usuario.data)
+
+        registra_falha_login(ip)
+        app.logger.warning("Tentativa de login inválida para o usuário %r (ip=%s)", form.usuario.data, ip)
         flash("Usuário ou senha inválidos.", "danger")
     return render_template("admin/login.html", form=form)
 
