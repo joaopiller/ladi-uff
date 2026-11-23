@@ -232,9 +232,9 @@ e acesse http://127.0.0.1:5000. O banco é criado e populado na primeira execuç
 
 **Acesso**
 
-1. Clique em **Área restrita**, no rodapé de qualquer página, ou acesse `/admin`.
+1. Clique no botão **Área restrita**, no rodapé de qualquer página (abaixo dos ícones das redes sociais), ou acesse `/admin`.
 2. Entre com o usuário e a senha. Depois de 5 tentativas erradas, o login fica bloqueado por 15 minutos.
-3. Logado, o menu ganha o item **Painel**. A sessão dura até 8 horas; para sair antes, use o botão **Sair** no topo do painel.
+3. Logado, o menu ganha o item **Painel** e o botão do rodapé passa a se chamar **Painel**. A sessão dura até 8 horas; para sair antes, use o botão **Sair** no topo do painel.
 
 **Painel:** a página inicial mostra o total de membros, artigos e eventos e se as inscrições estão abertas. O menu do painel leva a cada área.
 

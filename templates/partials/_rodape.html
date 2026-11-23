@@ -21,8 +21,14 @@
           <a href="https://www.linkedin.com/company/liga-de-direito-internacional-ladi-uff/" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
           <a href="mailto:ladi.uff@gmail.com" aria-label="E-mail"><i class="bi bi-envelope"></i></a>
         </div>
+        <a href="{{ url_for('entrar') }}" class="btn-area-restrita">
+          {% if admin_logado %}
+          <i class="bi bi-unlock me-1"></i>Painel
+          {% else %}
+          <i class="bi bi-lock me-1"></i>Área restrita
+          {% endif %}
+        </a>
       </div>
     </div>
-    <p class="acesso-restrito"><a href="{{ url_for('entrar') }}">Área restrita</a></p>
   </div>
 </footer>

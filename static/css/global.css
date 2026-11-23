@@ -396,18 +396,24 @@ h1, h2, h3, h4 {
   margin-right: 15px;
 }
 
-.acesso-restrito {
-  text-align: center;
-  margin: 28px 0 0;
-  font-size: 0.8rem;
+.rodape .btn-area-restrita {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 7px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 30px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
-.rodape .acesso-restrito a {
-  color: rgba(255, 255, 255, 0.45);
-}
-
-.rodape .acesso-restrito a:hover {
-  color: var(--azul-ceu);
+.rodape .btn-area-restrita:hover {
+  background-color: var(--azul-ceu);
+  border-color: var(--azul-ceu);
+  color: var(--azul-escuro);
 }
 
 .banner-pagina {
