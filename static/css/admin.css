@@ -193,6 +193,10 @@
   gap: 8px;
 }
 
+.acoes .btn {
+  white-space: nowrap;
+}
+
 .btn-contorno {
   border: 2px solid var(--azul);
   color: var(--azul);
@@ -381,6 +385,12 @@
   font-weight: 700;
   color: var(--azul-escuro);
   margin-left: 6px;
+}
+
+.info-celular {
+  font-size: 0.8rem;
+  color: var(--azul-medio);
+  margin-top: 2px;
 }
 
 @media (max-width: 575px) {

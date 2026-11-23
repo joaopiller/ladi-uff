@@ -27,8 +27,8 @@
             <tr>
               <th>Foto</th>
               <th>Evento</th>
-              <th>Quando</th>
-              <th>Destaque</th>
+              <th class="d-none d-md-table-cell">Quando</th>
+              <th class="d-none d-md-table-cell">Destaque</th>
               <th class="text-end">Ações</th>
             </tr>
           </thead>
@@ -39,9 +39,10 @@
               <td>
                 <span class="tag tag-tabela">{{ evento.categoria }}</span>
                 <span class="d-block fw-bold">{{ evento.titulo }}</span>
+                <span class="d-block d-md-none info-celular">{{ evento.quando }}{% if evento.destaque %} · destaque{% endif %}</span>
               </td>
-              <td>{{ evento.quando }}</td>
-              <td>{% if evento.destaque %}<i class="bi bi-star-fill destaque-sim" title="Na página inicial"></i>{% else %}<i class="bi bi-star destaque-nao"></i>{% endif %}</td>
+              <td class="d-none d-md-table-cell">{{ evento.quando }}</td>
+              <td class="d-none d-md-table-cell">{% if evento.destaque %}<i class="bi bi-star-fill destaque-sim" title="Na página inicial"></i>{% else %}<i class="bi bi-star destaque-nao"></i>{% endif %}</td>
               <td class="text-end">
                 <div class="acoes">
                   <a href="{{ url_for('editar_evento', id=evento.id) }}" class="btn btn-sm btn-contorno"><i class="bi bi-pencil me-1"></i>Editar</a>

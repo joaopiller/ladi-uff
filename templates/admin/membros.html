@@ -29,8 +29,8 @@
             <tr>
               <th>Foto</th>
               <th>Nome</th>
-              <th>Cargo</th>
-              <th>Posição</th>
+              <th class="d-none d-md-table-cell">Cargo</th>
+              <th class="d-none d-md-table-cell">Posição</th>
               <th class="text-end">Ações</th>
             </tr>
           </thead>
@@ -38,9 +38,12 @@
             {% for membro in diretoria.membros %}
             <tr>
               <td><img src="{{ url_for('static', filename=membro.foto) }}" alt="{{ membro.nome }}" class="miniatura"></td>
-              <td>{{ membro.nome }}</td>
-              <td>{{ membro.cargo }}</td>
-              <td>{{ membro.ordem }}</td>
+              <td>
+                {{ membro.nome }}
+                <span class="d-block d-md-none info-celular">{{ membro.cargo }} · posição {{ membro.ordem }}</span>
+              </td>
+              <td class="d-none d-md-table-cell">{{ membro.cargo }}</td>
+              <td class="d-none d-md-table-cell">{{ membro.ordem }}</td>
               <td class="text-end">
                 <div class="acoes">
                   <a href="{{ url_for('editar_membro', id=membro.id) }}" class="btn btn-sm btn-contorno"><i class="bi bi-pencil me-1"></i>Editar</a>

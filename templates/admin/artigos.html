@@ -27,8 +27,8 @@
             <tr>
               <th>Capa</th>
               <th>Título</th>
-              <th>Autor</th>
-              <th>Data</th>
+              <th class="d-none d-md-table-cell">Autor</th>
+              <th class="d-none d-md-table-cell">Data</th>
               <th class="text-end">Ações</th>
             </tr>
           </thead>
@@ -36,9 +36,11 @@
             {% for artigo in artigos %}
             <tr>
               <td><img src="{{ url_for('static', filename=artigo.imagem) }}" alt="{{ artigo.titulo }}" class="miniatura miniatura-larga"></td>
-              <td><a href="{{ url_for('artigo', id=artigo.id) }}" target="_blank" class="link-tabela">{{ artigo.titulo }}</a></td>
-              <td>{{ artigo.autor }}</td>
-              <td>{{ artigo.data_publicacao.strftime("%d/%m/%Y") }}</td>
+              <td><a href="{{ url_for('artigo', id=artigo.id) }}" target="_blank" class="link-tabela">{{ artigo.titulo }}</a>
+                <span class="d-block d-md-none info-celular">{{ artigo.data_publicacao.strftime("%d/%m/%Y") }} · {{ artigo.autor }}</span>
+              </td>
+              <td class="d-none d-md-table-cell">{{ artigo.autor }}</td>
+              <td class="d-none d-md-table-cell">{{ artigo.data_publicacao.strftime("%d/%m/%Y") }}</td>
               <td class="text-end">
                 <div class="acoes">
                   <a href="{{ url_for('editar_artigo', id=artigo.id) }}" class="btn btn-sm btn-contorno"><i class="bi bi-pencil me-1"></i>Editar</a>
