@@ -42,7 +42,7 @@
         </div>
         <div class="col-lg-6">
           <div class="foto-quem-somos">
-            <img src="{{ url_for('static', filename='img/quem-somos.jpg') }}" alt="Equipe organizadora da Simulação da ONU: A Questão Palestina"
+            <img loading="lazy" src="{{ url_for('static', filename='img/quem-somos.jpg') }}" alt="Equipe organizadora da Simulação da ONU: A Questão Palestina"
                  class="img-fluid">
           </div>
         </div>
@@ -69,7 +69,7 @@
             {% for evento in destaques %}
             <div class="col-6">
               <a href="{{ url_for('eventos') }}#evento-{{ evento.id }}" class="card-evento">
-                <img src="{{ url_for('static', filename=evento.imagem) }}" alt="{{ evento.titulo }}">
+                <img loading="lazy" src="{{ url_for('static', filename=evento.imagem) }}" alt="{{ evento.titulo }}">
                 <div class="card-evento-info">
                   <span class="tag">{{ evento.categoria }}</span>
                   <h3>{{ evento.titulo }}</h3>
@@ -106,21 +106,21 @@
           <div class="row g-3 justify-content-center">
             <div class="col-4">
               <div class="livro">
-                <img src="{{ url_for('static', filename='img/livros/o-amor-nos-tempos-do-colera.jpg') }}" alt="Capa de O amor nos tempos do cólera">
+                <img loading="lazy" src="{{ url_for('static', filename='img/livros/o-amor-nos-tempos-do-colera.jpg') }}" alt="Capa de O amor nos tempos do cólera">
                 <p class="livro-pais">Colômbia</p>
                 <p class="livro-titulo">O amor nos tempos do cólera</p>
               </div>
             </div>
             <div class="col-4">
               <div class="livro">
-                <img src="{{ url_for('static', filename='img/livros/antes-que-o-cafe-esfrie.jpg') }}" alt="Capa de Antes que o café esfrie">
+                <img loading="lazy" src="{{ url_for('static', filename='img/livros/antes-que-o-cafe-esfrie.jpg') }}" alt="Capa de Antes que o café esfrie">
                 <p class="livro-pais">Japão</p>
                 <p class="livro-titulo">Antes que o café esfrie</p>
               </div>
             </div>
             <div class="col-4">
               <div class="livro">
-                <img src="{{ url_for('static', filename='img/livros/pessoas-normais.jpg') }}" alt="Capa de Pessoas normais">
+                <img loading="lazy" src="{{ url_for('static', filename='img/livros/pessoas-normais.jpg') }}" alt="Capa de Pessoas normais">
                 <p class="livro-pais">Irlanda</p>
                 <p class="livro-titulo">Pessoas normais</p>
               </div>
@@ -162,7 +162,7 @@
       <div class="row g-4 justify-content-center mt-2">
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="card-professor">
-            <img src="{{ url_for('static', filename='img/professores/evandro.jpg') }}" alt="Prof. Dr. Evandro Menezes de Carvalho">
+            <img loading="lazy" src="{{ url_for('static', filename='img/professores/evandro.jpg') }}" alt="Prof. Dr. Evandro Menezes de Carvalho">
             <div class="card-professor-info">
               <h3>Prof. Dr. Evandro Menezes de Carvalho</h3>
               <p class="area">Direito Internacional Público</p>
@@ -171,7 +171,7 @@
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="card-professor">
-            <img src="{{ url_for('static', filename='img/professores/sergio.jpg') }}" alt="Prof. Dr. Sérgio Gustavo Mattos Pauseiro">
+            <img loading="lazy" src="{{ url_for('static', filename='img/professores/sergio.jpg') }}" alt="Prof. Dr. Sérgio Gustavo Mattos Pauseiro">
             <div class="card-professor-info">
               <h3>Prof. Dr. Sérgio Gustavo Mattos Pauseiro</h3>
               <p class="area">Direito Internacional Privado, Arbitragem e Inteligência Artificial</p>
@@ -180,7 +180,7 @@
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3">
           <div class="card-professor">
-            <img src="{{ url_for('static', filename='img/professores/eduardo.jpg') }}" alt="Prof. Dr. Eduardo Manuel Val">
+            <img loading="lazy" src="{{ url_for('static', filename='img/professores/eduardo.jpg') }}" alt="Prof. Dr. Eduardo Manuel Val">
             <div class="card-professor-info">
               <h3>Prof. Dr. Eduardo Manuel Val</h3>
               <p class="area">Direito Internacional Público e Relações Internacionais</p>

@@ -1,5 +1,5 @@
 <a href="{{ url_for('artigo', id=artigo.id) }}" class="card-artigo">
-  <img src="{{ url_for('static', filename=artigo.imagem) }}" alt="{{ artigo.titulo }}">
+  <img loading="lazy" src="{{ url_for('static', filename=artigo.imagem) }}" alt="{{ artigo.titulo }}">
   <div class="card-artigo-info">
     <p class="card-artigo-data">{{ artigo.data_publicacao.strftime("%d/%m/%Y") }} · {{ artigo.autor }}</p>
     <h3>{{ artigo.titulo }}</h3>
