@@ -393,6 +393,21 @@
   margin-top: 2px;
 }
 
+@media (max-width: 767px) {
+  .menu-admin .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    overflow: visible;
+  }
+
+  .menu-admin a {
+    padding: 12px 4px;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+}
+
 @media (max-width: 575px) {
   .caixa-login {
     padding: 28px 20px;
@@ -412,5 +427,9 @@
 
   .acoes {
     flex-direction: column;
+  }
+
+  .miniatura-larga {
+    width: 52px;
   }
 }
