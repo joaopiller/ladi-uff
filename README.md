@@ -22,7 +22,11 @@ Na etapa 1, o grupo construiu o site institucional com HTML, CSS, JavaScript e B
 | 1 | Lucas Silveira | Página Quem somos (história, missão e visão, diretorias, membros e perguntas frequentes) |
 | 1 | Ana Laura Neuhaus | Página Eventos (linha do tempo e simulações da ONU) |
 | 1 | Isabella Motta | Página do Clube de leitura |
-| 2 | João Vicente Piller | Conversão para Flask, banco de dados, painel administrativo, página de artigos, logging e implantação |
+| 2 | João Vicente Piller | Estrutura inicial em Flask, login do administrador (back-end), front-end do painel e implantação |
+| 2 | Lucas Silveira | Templates das páginas, models e back-end de membros e telas de membros no painel |
+| 2 | Gabriela Bittencourt | Configuração por ambiente, back-end de eventos e inscrições, telas de eventos e inscrições no painel e botão da área restrita |
+| 2 | Ana Laura Neuhaus | Logging, model e back-end de artigos, páginas de artigos e formulários |
+| 2 | Isabella Motta | Páginas de erro, estilo das páginas de artigos, editor com negrito, artigos na página inicial e desempenho |
 
 ## Requisitos do trabalho
 
