@@ -132,15 +132,26 @@ def clube():
 @app.route("/artigos")
 def artigos():
     busca = request.args.get("q", "").strip()
+    tag_ativa = None
     consulta = Artigo.recentes()
+
+    slug = request.args.get("tag", "").strip()
+    if slug:
+        tag_ativa = Tag.query.filter_by(slug=slug).first_or_404()
+        consulta = consulta.filter(Artigo.tags.any(Tag.id == tag_ativa.id))
+
     if busca:
         app.logger.debug("Busca de artigos: %r", busca)
         consulta = consulta.filter(or_(
             Artigo.titulo.contains(busca),
             Artigo.autor.contains(busca),
             Artigo.conteudo.contains(busca),
+            Artigo.tags.any(Tag.nome.contains(busca)),
         ))
-    return render_template("artigos/lista.html", artigos=consulta.all(), busca=busca)
+
+    tags = Tag.query.filter(Tag.artigos.any()).order_by(Tag.nome).all()
+    return render_template("artigos/lista.html", artigos=consulta.all(), busca=busca,
+                           tags=tags, tag_ativa=tag_ativa)
 
 
 @app.route("/artigos/<int:id>")

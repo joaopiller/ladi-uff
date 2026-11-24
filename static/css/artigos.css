@@ -24,6 +24,38 @@
   padding: 10px 20px;
 }
 
+.filtro-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 760px;
+  margin: 22px auto 0;
+}
+
+.filtro-tags a {
+  padding: 5px 16px;
+  border: 1px solid #cfd8e0;
+  border-radius: 20px;
+  background-color: #fff;
+  color: var(--azul-escuro);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.filtro-tags a:hover {
+  border-color: var(--azul-claro);
+  color: var(--azul);
+}
+
+.filtro-tags a.ativa {
+  background-color: var(--azul);
+  border-color: var(--azul);
+  color: #fff;
+}
+
 .resultado-busca {
   display: flex;
   flex-wrap: wrap;

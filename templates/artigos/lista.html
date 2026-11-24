@@ -23,17 +23,28 @@
   <section class="secao" id="lista-artigos">
     <div class="container">
       <form method="GET" action="{{ url_for('artigos') }}" class="busca-artigos" role="search">
+        {% if tag_ativa %}<input type="hidden" name="tag" value="{{ tag_ativa.slug }}">{% endif %}
         <input type="search" name="q" value="{{ busca }}" class="form-control" placeholder="Pesquisar artigos..." aria-label="Pesquisar artigos">
         <button type="submit" class="btn btn-principal" aria-label="Pesquisar"><i class="bi bi-search"></i></button>
       </form>
 
-      {% if busca and artigos %}
+      {% if tags %}
+      <nav class="filtro-tags" aria-label="Filtrar por tag">
+        <a href="{{ url_for('artigos', q=busca or None) }}" class="{{ 'ativa' if not tag_ativa }}">Todos</a>
+        {% for tag in tags %}
+        <a href="{{ url_for('artigos', tag=tag.slug, q=busca or None) }}" class="{{ 'ativa' if tag_ativa and tag_ativa.id == tag.id }}">{{ tag.nome }}</a>
+        {% endfor %}
+      </nav>
+      {% endif %}
+
+      {% if (busca or tag_ativa) and artigos %}
       <div class="resultado-busca">
         <span>
           <strong>{{ artigos|length }}</strong> {{ "artigo encontrado" if artigos|length == 1 else "artigos encontrados" }}
-          para <strong>“{{ busca }}”</strong>
+          {% if busca %}para <strong>“{{ busca }}”</strong>{% endif %}
+          {% if tag_ativa %}na tag <strong>{{ tag_ativa.nome }}</strong>{% endif %}
         </span>
-        <a href="{{ url_for('artigos') }}" class="limpar-busca"><i class="bi bi-x-lg"></i> Limpar busca</a>
+        <a href="{{ url_for('artigos') }}" class="limpar-busca"><i class="bi bi-x-lg"></i> Limpar {{ "filtros" if busca and tag_ativa else ("busca" if busca else "filtro") }}</a>
       </div>
       {% endif %}
 
@@ -45,7 +56,7 @@
         {% else %}
         <div class="col-12">
           {% if busca %}
-          {% with icone="bi-search", titulo="Nenhum artigo encontrado", texto="Não achamos nada para “" ~ busca ~ "”. Tente outra palavra ou veja todos os artigos.", link=url_for('artigos'), rotulo="Ver todos os artigos" %}
+          {% with icone="bi-search", titulo="Nenhum artigo encontrado", texto="Não achamos nada para “" ~ busca ~ "”" ~ (" na tag " ~ tag_ativa.nome if tag_ativa else "") ~ ". Tente outra palavra ou veja todos os artigos.", link=url_for('artigos'), rotulo="Ver todos os artigos" %}
           {% include "partials/_estado_vazio.html" %}
           {% endwith %}
           {% else %}
