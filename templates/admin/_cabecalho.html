@@ -16,6 +16,7 @@
     <a href="{{ url_for('painel') }}" class="{% if request.endpoint == 'painel' %}ativo{% endif %}"><i class="bi bi-grid me-1"></i>Início</a>
     <a href="{{ url_for('admin_membros') }}" class="{% if 'membro' in request.endpoint %}ativo{% endif %}"><i class="bi bi-people me-1"></i>Membros</a>
     <a href="{{ url_for('admin_artigos') }}" class="{% if 'artigo' in request.endpoint %}ativo{% endif %}"><i class="bi bi-journal-text me-1"></i>Artigos</a>
+    <a href="{{ url_for('admin_tags') }}" class="{% if 'tag' in request.endpoint %}ativo{% endif %}"><i class="bi bi-tags me-1"></i>Tags</a>
     <a href="{{ url_for('admin_eventos') }}" class="{% if 'evento' in request.endpoint %}ativo{% endif %}"><i class="bi bi-calendar-event me-1"></i>Eventos</a>
     <a href="{{ url_for('admin_inscricoes') }}" class="{% if 'inscric' in request.endpoint %}ativo{% endif %}"><i class="bi bi-clipboard-check me-1"></i>Inscrições</a>
   </div>

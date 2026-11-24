@@ -409,6 +409,30 @@
   font-weight: 700;
 }
 
+.form-tag {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0 16px;
+  max-width: 620px;
+}
+
+.form-tag .btn {
+  margin-top: 31px;
+}
+
+.tag-artigo {
+  display: inline-block;
+  background-color: var(--azul-gelo);
+  color: var(--azul);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
 @media (max-width: 767px) {
   .menu-admin .container {
     display: grid;
@@ -447,5 +471,10 @@
 
   .miniatura-larga {
     width: 52px;
+  }
+
+  .form-tag .btn {
+    margin-top: 0;
+    width: 100%;
   }
 }

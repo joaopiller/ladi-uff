@@ -73,3 +73,8 @@ class InscricaoForm(FormularioBase):
             self.link.errors.append("Para abrir as inscrições, informe o link do formulário.")
             return False
         return True
+
+
+class TagForm(FormularioBase):
+    nome = StringField("Nome da tag", validators=[DataRequired(), Length(max=40)])
+    salvar = SubmitField("Criar tag")

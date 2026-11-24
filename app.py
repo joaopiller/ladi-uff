@@ -11,10 +11,10 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 from config import config
 from dados_iniciais import cria_administrador, popula_banco
-from forms import ArtigoForm, EventoForm, InscricaoForm, LoginForm, MembroForm
+from forms import ArtigoForm, EventoForm, InscricaoForm, LoginForm, MembroForm, TagForm
 from imagens import remover_imagem, salvar_imagem
 from logs import configura_logging
-from models import Administrador, Artigo, Diretoria, Evento, Inscricao, Membro, db
+from models import Administrador, Artigo, Diretoria, Evento, Inscricao, Membro, Tag, db
 
 app = Flask(__name__)
 ambiente = os.environ.get("APP_ENV", "development")
@@ -189,6 +189,7 @@ def sair():
 def painel():
     return render_template("admin/painel.html", total_membros=Membro.query.count(),
                            total_artigos=Artigo.query.count(),
+                           total_tags=Tag.query.count(),
                            total_eventos=Evento.query.count(),
                            inscricoes=Inscricao.query.order_by(Inscricao.id).all())
 
@@ -336,6 +337,69 @@ def excluir_artigo(id):
     app.logger.warning("Artigo removido: id=%s titulo=%r", id, artigo.titulo)
     flash(f"O artigo \"{artigo.titulo}\" foi removido.", "warning")
     return redirect(url_for("admin_artigos"))
+
+
+def tag_repetida(nome, ignorar_id=None):
+    slug = Tag.gera_slug(nome)
+    consulta = Tag.query.filter(or_(Tag.nome == nome, Tag.slug == slug))
+    if ignorar_id is not None:
+        consulta = consulta.filter(Tag.id != ignorar_id)
+    return consulta.first() is not None
+
+
+@app.route("/admin/tags", methods=["GET", "POST"])
+@login_obrigatorio
+def admin_tags():
+    form = TagForm()
+    if form.validate_on_submit():
+        nome = form.nome.data.strip()
+        if not Tag.gera_slug(nome):
+            form.nome.errors.append("Use pelo menos uma letra ou número.")
+        elif tag_repetida(nome):
+            form.nome.errors.append("Já existe uma tag com esse nome.")
+        else:
+            tag = Tag(nome=nome, slug=Tag.gera_slug(nome))
+            db.session.add(tag)
+            db.session.commit()
+            app.logger.info("Tag criada: id=%s nome=%r", tag.id, tag.nome)
+            flash(f"Tag \"{tag.nome}\" criada.", "success")
+            return redirect(url_for("admin_tags"))
+    tags = Tag.query.order_by(Tag.nome).all()
+    return render_template("admin/tags.html", form=form, tags=tags)
+
+
+@app.route("/admin/tags/<int:id>/editar", methods=["GET", "POST"])
+@login_obrigatorio
+def editar_tag(id):
+    tag = db.get_or_404(Tag, id)
+    form = TagForm(obj=tag)
+    form.salvar.label.text = "Salvar"
+    if form.validate_on_submit():
+        nome = form.nome.data.strip()
+        if not Tag.gera_slug(nome):
+            form.nome.errors.append("Use pelo menos uma letra ou número.")
+        elif tag_repetida(nome, ignorar_id=tag.id):
+            form.nome.errors.append("Já existe uma tag com esse nome.")
+        else:
+            tag.nome = nome
+            tag.slug = Tag.gera_slug(nome)
+            db.session.commit()
+            app.logger.info("Tag atualizada: id=%s nome=%r", tag.id, tag.nome)
+            flash("Tag atualizada.", "success")
+            return redirect(url_for("admin_tags"))
+    return render_template("admin/tag_form.html", form=form, tag=tag)
+
+
+@app.route("/admin/tags/<int:id>/excluir", methods=["POST"])
+@login_obrigatorio
+def excluir_tag(id):
+    tag = db.get_or_404(Tag, id)
+    tag.artigos = []
+    db.session.delete(tag)
+    db.session.commit()
+    app.logger.warning("Tag removida: id=%s nome=%r", id, tag.nome)
+    flash(f"A tag \"{tag.nome}\" foi removida dos artigos e excluída.", "warning")
+    return redirect(url_for("admin_tags"))
 
 
 @app.route("/admin/eventos")
