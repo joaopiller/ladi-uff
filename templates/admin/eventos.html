@@ -59,7 +59,9 @@
         </table>
       </div>
       {% else %}
-      <p class="texto">Nenhum evento cadastrado ainda.</p>
+      {% with icone="bi-calendar-event", titulo="Nenhum evento cadastrado", texto="Os eventos cadastrados formam a linha do tempo da página Eventos.", link=url_for('novo_evento'), rotulo="Cadastrar o primeiro evento" %}
+      {% include "partials/_estado_vazio.html" %}
+      {% endwith %}
       {% endif %}
     </div>
   </section>

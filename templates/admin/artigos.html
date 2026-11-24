@@ -57,7 +57,9 @@
         </table>
       </div>
       {% else %}
-      <p class="texto">Nenhum artigo publicado ainda.</p>
+      {% with icone="bi-journal-text", titulo="Nenhum artigo publicado", texto="Os artigos publicados aparecem aqui e na página Artigos do site.", link=url_for('novo_artigo'), rotulo="Publicar o primeiro artigo" %}
+      {% include "partials/_estado_vazio.html" %}
+      {% endwith %}
       {% endif %}
     </div>
   </section>

@@ -393,6 +393,22 @@
   margin-top: 2px;
 }
 
+.invalid-feedback {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.vazio-compacto {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px dashed #c9d6e0;
+  border-radius: 8px;
+  padding: 16px 20px;
+  color: var(--azul-medio);
+  font-weight: 700;
+}
+
 @media (max-width: 767px) {
   .menu-admin .container {
     display: grid;

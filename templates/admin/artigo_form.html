@@ -39,7 +39,7 @@
               {{ form.conteudo(class="form-control campo-editor" + (" is-invalid" if form.conteudo.errors else ""), rows=16) }}
               <div class="form-text">{{ form.conteudo.description }}</div>
               {% for erro in form.conteudo.errors %}
-              <div class="invalid-feedback">{{ erro }}</div>
+              <div class="invalid-feedback"><i class="bi bi-exclamation-circle me-1"></i>{{ erro }}</div>
               {% endfor %}
             </div>
           </div>

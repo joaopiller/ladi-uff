@@ -1,7 +1,9 @@
+{% set icones = {"success": "bi-check-circle-fill", "danger": "bi-exclamation-circle-fill", "warning": "bi-exclamation-triangle-fill", "info": "bi-info-circle-fill"} %}
 {% with mensagens = get_flashed_messages(with_categories=true) %}
   {% for categoria, mensagem in mensagens %}
   <div class="alert alert-{{ categoria }} alert-dismissible fade show" role="alert">
-    {{ mensagem }}
+    <i class="bi {{ icones.get(categoria, 'bi-info-circle-fill') }} alert-icone"></i>
+    <span>{{ mensagem }}</span>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
   </div>
   {% endfor %}

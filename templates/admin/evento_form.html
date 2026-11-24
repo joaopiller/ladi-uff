@@ -33,7 +33,7 @@
               {{ form.descricao.label(class="form-label") }}
               {{ form.descricao(class="form-control" + (" is-invalid" if form.descricao.errors else ""), rows=5) }}
               {% for erro in form.descricao.errors %}
-              <div class="invalid-feedback">{{ erro }}</div>
+              <div class="invalid-feedback"><i class="bi bi-exclamation-circle me-1"></i>{{ erro }}</div>
               {% endfor %}
             </div>
             <div class="form-check mb-2">
