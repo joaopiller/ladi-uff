@@ -129,6 +129,9 @@ def clube():
     return render_template("clube.html", inscricao=Inscricao.da_pagina("clube"))
 
 
+ARTIGOS_POR_PAGINA = 12
+
+
 @app.route("/artigos")
 def artigos():
     busca = request.args.get("q", "").strip()
@@ -149,9 +152,14 @@ def artigos():
             Artigo.tags.any(Tag.nome.contains(busca)),
         ))
 
+    pagina = request.args.get("pagina", 1, type=int)
+    paginacao = consulta.paginate(page=pagina, per_page=ARTIGOS_POR_PAGINA, error_out=False)
+    if paginacao.pages and pagina > paginacao.pages:
+        return redirect(url_for("artigos", pagina=paginacao.pages, q=busca or None,
+                                tag=tag_ativa.slug if tag_ativa else None))
     tags = Tag.query.filter(Tag.artigos.any()).order_by(Tag.nome).all()
-    return render_template("artigos/lista.html", artigos=consulta.all(), busca=busca,
-                           tags=tags, tag_ativa=tag_ativa)
+    return render_template("artigos/lista.html", artigos=paginacao.items, paginacao=paginacao,
+                           busca=busca, tags=tags, tag_ativa=tag_ativa)
 
 
 @app.route("/artigos/<int:id>")

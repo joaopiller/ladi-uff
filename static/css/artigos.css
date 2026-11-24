@@ -257,6 +257,57 @@
   color: var(--azul-escuro);
 }
 
+.paginacao {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 50px;
+}
+
+.paginacao a,
+.paginacao span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 8px;
+  border-radius: 50%;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+
+.paginacao a {
+  background-color: #fff;
+  color: var(--azul-escuro);
+  box-shadow: 0 4px 12px rgba(39, 67, 89, 0.1);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.paginacao a:hover {
+  background-color: var(--azul-gelo);
+  color: var(--azul);
+}
+
+.paginacao .atual {
+  background-color: var(--azul);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 74, 173, 0.3);
+}
+
+.paginacao .desativada {
+  color: #b8c4ce;
+}
+
+.paginacao .reticencias {
+  color: var(--azul-medio);
+  min-width: 24px;
+  padding: 0;
+}
+
 @media (max-width: 575px) {
   .card-artigo-info {
     padding: 18px;
