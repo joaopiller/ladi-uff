@@ -27,6 +27,13 @@
           <span><i class="bi bi-person me-1"></i>Por {{ artigo.autor }}</span>
           <span><i class="bi bi-calendar3 me-1"></i>{{ artigo.data_publicacao.strftime("%d/%m/%Y") }}</span>
         </p>
+        {% if artigo.tags %}
+        <div class="artigo-tags">
+          {% for tag in artigo.tags %}
+          <a href="{{ url_for('artigos', tag=tag.slug) }}" class="tag-artigo">{{ tag.nome }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
       </header>
 
       <div class="artigo-imagem">

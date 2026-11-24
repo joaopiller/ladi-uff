@@ -1,6 +1,11 @@
 <a href="{{ url_for('artigo', id=artigo.id) }}" class="card-artigo">
   <img loading="lazy" src="{{ url_for('static', filename=artigo.imagem) }}" alt="{{ artigo.titulo }}">
   <div class="card-artigo-info">
+    {% if artigo.tags %}
+    <div class="card-artigo-tags">
+      {% for tag in artigo.tags[:3] %}<span class="tag-artigo">{{ tag.nome }}</span>{% endfor %}
+    </div>
+    {% endif %}
     <p class="card-artigo-data">{{ artigo.data_publicacao.strftime("%d/%m/%Y") }} · {{ artigo.autor }}</p>
     <h3>{{ artigo.titulo }}</h3>
     <p class="card-artigo-resumo">{{ artigo.resumo }}</p>

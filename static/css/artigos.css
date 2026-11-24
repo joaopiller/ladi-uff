@@ -122,6 +122,44 @@
   padding: 20px;
 }
 
+.card-artigo-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.tag-artigo {
+  display: inline-block;
+  background-color: var(--azul-gelo);
+  color: var(--azul);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-decoration: none;
+}
+
+a.tag-artigo:hover {
+  background-color: var(--azul);
+  color: #fff;
+}
+
+.artigo-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.artigo-tags .tag-artigo {
+  font-size: 0.75rem;
+  padding: 5px 14px;
+}
+
 .card-artigo-data {
   font-size: 0.75rem;
   font-weight: 700;
