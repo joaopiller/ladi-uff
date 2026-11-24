@@ -50,7 +50,9 @@
         {% endfor %}
       </ul>
       {% else %}
-      <p class="texto text-center mt-4">Em breve, novos eventos por aqui.</p>
+      {% with icone="bi-calendar-event", titulo="Em breve, novos eventos", texto="Acompanhe as novidades da LADI no Instagram @ladi.uff." %}
+      {% include "partials/_estado_vazio.html" %}
+      {% endwith %}
       {% endif %}
     </div>
   </section>
