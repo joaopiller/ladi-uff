@@ -32,9 +32,9 @@ Na etapa 1, o grupo construiu o site institucional com HTML, CSS, JavaScript e B
 
 | Requisito | Mínimo | No projeto |
 |---|---|---|
-| Rotas | 5 | 23 rotas (6 públicas e 17 do painel), listadas em [Rotas](#rotas) |
-| Models | 3 | 6 models: `Diretoria`, `Membro`, `Administrador`, `Artigo`, `Evento` e `Inscricao` |
-| Forms | 2 | 5 formulários Flask-WTF: `LoginForm`, `MembroForm`, `ArtigoForm`, `EventoForm` e `InscricaoForm` |
+| Rotas | 5 | 26 rotas (6 públicas e 20 do painel), listadas em [Rotas](#rotas) |
+| Models | 3 | 7 models: `Diretoria`, `Membro`, `Administrador`, `Artigo`, `Tag`, `Evento` e `Inscricao` |
+| Forms | 2 | 6 formulários Flask-WTF: `LoginForm`, `MembroForm`, `ArtigoForm`, `TagForm`, `EventoForm` e `InscricaoForm` |
 | Log | sim | `logs.py` grava `logs/app.log` com rotação; as rotas registram acessos, logins, criações, edições, exclusões e erros |
 
 ## Tecnologias
@@ -65,13 +65,14 @@ ladi/
 │   │   ├── _membro.html           card de um membro
 │   │   ├── _campo.html            campo de formulário com rótulo e mensagens de erro
 │   │   ├── _mensagens.html        mensagens do flash()
-│   │   └── _botao_inscricao.html  botão de inscrição (aberta ou "em breve")
+│   │   ├── _botao_inscricao.html  botão de inscrição (aberta ou "em breve")
+│   │   └── _estado_vazio.html     aviso de lista vazia ou busca sem resultado
 │   ├── index.html         página inicial
 │   ├── quem_somos.html    Quem somos, com os membros vindos do banco
 │   ├── eventos.html       linha do tempo e simulações da ONU
 │   ├── clube.html         Clube de leitura
 │   ├── artigos/
-│   │   ├── lista.html     listagem de artigos com busca
+│   │   ├── lista.html     listagem de artigos com busca, filtro por tag e paginação
 │   │   ├── artigo.html    página de um artigo
 │   │   └── _card.html     card de artigo (usado na listagem e na página inicial)
 │   ├── admin/
@@ -81,7 +82,9 @@ ladi/
 │   │   ├── membros.html           membros por diretoria
 │   │   ├── membro_form.html       cadastro e edição de membro
 │   │   ├── artigos.html           lista de artigos
-│   │   ├── artigo_form.html       editor de artigo, com o botão de negrito
+│   │   ├── artigo_form.html       editor de artigo, com o botão de negrito e a escolha de tags
+│   │   ├── tags.html              criação e lista de tags
+│   │   ├── tag_form.html          edição de tag
 │   │   ├── eventos.html           lista de eventos
 │   │   ├── evento_form.html       cadastro e edição de evento
 │   │   └── inscricoes.html        abrir e fechar inscrições e trocar os links
@@ -113,10 +116,11 @@ Seguindo a separação de responsabilidades vista em aula, `app.py` importa `mod
 | `Membro` | `membro` | nome, cargo, foto, ordem, diretoria_id | Cards de membros (relacionamento N:1 com `Diretoria`) |
 | `Administrador` | `administrador` | usuario, senha_hash | Login do painel (a senha é guardada só como hash) |
 | `Artigo` | `artigo` | titulo, autor, data_publicacao, imagem, conteudo | Página de artigos e home |
+| `Tag` | `tag` | nome, slug | Temas dos artigos (relacionamento N:N com `Artigo`, pela tabela `artigo_tag`) |
 | `Evento` | `evento` | titulo, categoria, descricao, imagem, data, periodo, destaque | Linha do tempo e mosaico da home |
 | `Inscricao` | `inscricao` | chave, nome, aberta, link | Botões de inscrição do clube e das simulações |
 
-Na primeira execução, `db.create_all()` cria as tabelas e `popula_banco()` cadastra as diretorias, os membros, os eventos, os artigos iniciais e as inscrições. O primeiro administrador é criado com o usuário e a senha definidos no `.env`.
+Na primeira execução, `db.create_all()` cria as tabelas e `popula_banco()` cadastra as diretorias, os membros, os eventos, os artigos iniciais com suas tags e as inscrições. O primeiro administrador é criado com o usuário e a senha definidos no `.env`.
 
 ### Rotas
 
@@ -126,7 +130,7 @@ Na primeira execução, `db.create_all()` cria as tabelas e `popula_banco()` cad
 | `/quem-somos` | GET | `quem_somos` | História, missão, diretorias, membros e perguntas frequentes |
 | `/eventos` | GET | `eventos` | Linha do tempo e inscrição nas simulações |
 | `/clube-de-leitura` | GET | `clube` | Clube de leitura e inscrição |
-| `/artigos` | GET | `artigos` | Lista de artigos; aceita busca com `?q=` |
+| `/artigos` | GET | `artigos` | Lista de artigos, 12 por página; aceita `?q=` (busca), `?tag=` (filtro) e `?pagina=` |
 | `/artigos/<id>` | GET | `artigo` | Página de um artigo |
 | `/admin/login` | GET, POST | `entrar` | Login do administrador |
 | `/admin/sair` | POST | `sair` | Logout |
@@ -139,6 +143,9 @@ Na primeira execução, `db.create_all()` cria as tabelas e `popula_banco()` cad
 | `/admin/artigos/novo` | GET, POST | `novo_artigo` | Publicação de artigo |
 | `/admin/artigos/<id>/editar` | GET, POST | `editar_artigo` | Edição de artigo |
 | `/admin/artigos/<id>/excluir` | POST | `excluir_artigo` | Exclusão de artigo |
+| `/admin/tags` | GET, POST | `admin_tags` | Lista e criação de tags |
+| `/admin/tags/<id>/editar` | GET, POST | `editar_tag` | Edição de tag |
+| `/admin/tags/<id>/excluir` | POST | `excluir_tag` | Exclusão de tag (ela sai dos artigos) |
 | `/admin/eventos` | GET | `admin_eventos` | Lista de eventos |
 | `/admin/eventos/novo` | GET, POST | `novo_evento` | Cadastro de evento |
 | `/admin/eventos/<id>/editar` | GET, POST | `editar_evento` | Edição de evento |
@@ -228,7 +235,7 @@ e acesse http://127.0.0.1:5000. O banco é criado e populado na primeira execuç
 - **Menu:** no computador, passe o mouse sobre Quem somos, Eventos ou Clube de leitura para ver as seções de cada página, ou clique no nome para abrir a página. No celular, o menu fica no botão ☰.
 - **Membros:** em Quem somos, escolha uma diretoria nas abas. Quando a diretoria tem mais de 4 membros, use as setas para ver os demais.
 - **Eventos:** a linha do tempo mostra os eventos do mais antigo para o mais recente. Os cards da página inicial levam direto ao evento na linha do tempo.
-- **Artigos:** a página Artigos lista os textos do mais recente para o mais antigo. Use a busca para procurar por título, autor ou trecho do texto, e clique em um card para ler o artigo completo.
+- **Artigos:** a página Artigos lista os textos do mais recente para o mais antigo, 12 por página. Use a busca para procurar por título, autor, tag ou trecho do texto, ou clique em uma tag para ver só os artigos daquele tema. Clique em um card para ler o artigo completo; as tags no topo do artigo também levam à lista filtrada.
 - **Inscrições:** no Clube de leitura e na seção Simulações da ONU, o botão **Fazer inscrição** abre o formulário. Quando as inscrições estão fechadas, ele aparece como **Inscrições em breve**.
 - **Contato:** o botão **Fale conosco** abre um e-mail para a LADI no Gmail. O rodapé tem o endereço, o e-mail, o Instagram e o LinkedIn.
 
@@ -254,7 +261,15 @@ e acesse http://127.0.0.1:5000. O banco é criado e populado na primeira execuç
 - **Novo artigo:** informe título, autor, data de publicação, imagem de capa (de preferência horizontal) e o texto.
 - **Parágrafos:** separe os parágrafos com uma linha em branco.
 - **Negrito:** selecione um trecho e clique em **Negrito**, ou escreva o trecho entre dois asteriscos, `**assim**`.
+- **Tags:** escolha uma ou mais tags na coluna da direita do editor. Quem estiver selecionada fica azul.
 - **Editar e excluir:** funcionam como nos membros. O título na lista abre o artigo publicado em outra aba.
+
+**Tags**
+
+- Na área **Tags**, digite o nome e clique em **Criar tag**. Não é possível criar duas tags com o mesmo nome.
+- **Editar** muda o nome da tag em todos os artigos que a usam.
+- **Excluir** pede confirmação, tira a tag dos artigos e apaga a tag. Os artigos continuam publicados.
+- Só as tags usadas em pelo menos um artigo aparecem como filtro na página Artigos.
 
 **Eventos**
 
