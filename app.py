@@ -146,8 +146,7 @@ def artigos():
 @app.route("/artigos/<int:id>")
 def artigo(id):
     artigo = db.get_or_404(Artigo, id)
-    outros = Artigo.recentes().filter(Artigo.id != id).limit(3).all()
-    return render_template("artigos/artigo.html", artigo=artigo, outros=outros)
+    return render_template("artigos/artigo.html", artigo=artigo)
 
 
 @app.route("/admin/login", methods=["GET", "POST"])

@@ -73,7 +73,7 @@ ladi/
 │   ├── artigos/
 │   │   ├── lista.html     listagem de artigos com busca
 │   │   ├── artigo.html    página de um artigo
-│   │   └── _card.html     card de artigo (usado na listagem, na home e no "Leia também")
+│   │   └── _card.html     card de artigo (usado na listagem e na página inicial)
 │   ├── admin/
 │   │   ├── login.html             login do administrador
 │   │   ├── _cabecalho.html        cabeçalho e menu do painel
