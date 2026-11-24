@@ -27,11 +27,14 @@
         <button type="submit" class="btn btn-principal" aria-label="Pesquisar"><i class="bi bi-search"></i></button>
       </form>
 
-      {% if busca %}
-      <p class="resultado-busca">
-        {{ artigos|length }} resultado{{ "s" if artigos|length != 1 }} para "{{ busca }}".
-        <a href="{{ url_for('artigos') }}">Ver todos</a>
-      </p>
+      {% if busca and artigos %}
+      <div class="resultado-busca">
+        <span>
+          <strong>{{ artigos|length }}</strong> {{ "artigo encontrado" if artigos|length == 1 else "artigos encontrados" }}
+          para <strong>“{{ busca }}”</strong>
+        </span>
+        <a href="{{ url_for('artigos') }}" class="limpar-busca"><i class="bi bi-x-lg"></i> Limpar busca</a>
+      </div>
       {% endif %}
 
       <div class="row g-4 mt-2 grade-artigos">
@@ -41,9 +44,15 @@
         </div>
         {% else %}
         <div class="col-12">
-          <p class="sem-artigos">
-            {% if busca %}Nenhum artigo encontrado. Tente outra palavra.{% else %}Ainda não há artigos publicados.{% endif %}
-          </p>
+          {% if busca %}
+          {% with icone="bi-search", titulo="Nenhum artigo encontrado", texto="Não achamos nada para “" ~ busca ~ "”. Tente outra palavra ou veja todos os artigos.", link=url_for('artigos'), rotulo="Ver todos os artigos" %}
+          {% include "partials/_estado_vazio.html" %}
+          {% endwith %}
+          {% else %}
+          {% with icone="bi-journal-text", titulo="Nenhum artigo publicado ainda", texto="Em breve, novos textos da LADI por aqui." %}
+          {% include "partials/_estado_vazio.html" %}
+          {% endwith %}
+          {% endif %}
         </div>
         {% endfor %}
       </div>

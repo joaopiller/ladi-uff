@@ -25,13 +25,32 @@
 }
 
 .resultado-busca {
-  text-align: center;
-  margin: 20px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px 16px;
+  margin: 24px auto 0;
+  color: var(--azul-escuro);
 }
 
-.resultado-busca a {
+.limpar-busca {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 30px;
+  background-color: var(--azul-gelo);
   color: var(--azul);
+  font-size: 0.85rem;
   font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.limpar-busca:hover {
+  background-color: var(--azul);
+  color: #fff;
 }
 
 .grade-artigos {
@@ -113,12 +132,6 @@
 
 .card-artigo:hover .leia-mais i {
   margin-left: 6px;
-}
-
-.sem-artigos {
-  text-align: center;
-  color: var(--azul-medio);
-  margin: 30px 0;
 }
 
 .banner-artigo {
