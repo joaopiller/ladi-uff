@@ -216,22 +216,23 @@ def proxima_posicao(diretoria_id):
 def novo_membro():
     form = MembroForm()
     form.diretoria_id.choices = opcoes_diretorias()
-    if form.validate_on_submit():
-        if not form.arquivo.data:
-            form.arquivo.errors.append("Envie uma foto do membro.")
-        else:
-            membro = Membro(
-                nome=form.nome.data,
-                cargo=form.cargo.data,
-                diretoria_id=form.diretoria_id.data,
-                ordem=form.ordem.data or proxima_posicao(form.diretoria_id.data),
-                foto=salvar_imagem(form.arquivo.data, "membros"),
-            )
-            db.session.add(membro)
-            db.session.commit()
-            app.logger.info("Membro criado: id=%s nome=%r", membro.id, membro.nome)
-            flash(f"{membro.nome} foi adicionado(a).", "success")
-            return redirect(url_for("admin_membros"))
+    valido = form.validate_on_submit()
+    if request.method == "POST" and not form.arquivo.data:
+        form.arquivo.errors.append("Envie uma foto do membro.")
+        valido = False
+    if valido:
+        membro = Membro(
+            nome=form.nome.data,
+            cargo=form.cargo.data,
+            diretoria_id=form.diretoria_id.data,
+            ordem=form.ordem.data or proxima_posicao(form.diretoria_id.data),
+            foto=salvar_imagem(form.arquivo.data, "membros"),
+        )
+        db.session.add(membro)
+        db.session.commit()
+        app.logger.info("Membro criado: id=%s nome=%r", membro.id, membro.nome)
+        flash(f"{membro.nome} foi adicionado(a).", "success")
+        return redirect(url_for("admin_membros"))
     return render_template("admin/membro_form.html", form=form, membro=None,
                            titulo="Novo membro")
 
@@ -283,22 +284,23 @@ def admin_artigos():
 @login_obrigatorio
 def novo_artigo():
     form = ArtigoForm()
-    if form.validate_on_submit():
-        if not form.arquivo.data:
-            form.arquivo.errors.append("Envie uma imagem de capa.")
-        else:
-            artigo = Artigo(
-                titulo=form.titulo.data,
-                autor=form.autor.data,
-                data_publicacao=form.data_publicacao.data,
-                conteudo=form.conteudo.data,
-                imagem=salvar_imagem(form.arquivo.data, "artigos"),
-            )
-            db.session.add(artigo)
-            db.session.commit()
-            app.logger.info("Artigo publicado: id=%s titulo=%r", artigo.id, artigo.titulo)
-            flash("Artigo publicado.", "success")
-            return redirect(url_for("admin_artigos"))
+    valido = form.validate_on_submit()
+    if request.method == "POST" and not form.arquivo.data:
+        form.arquivo.errors.append("Envie uma imagem de capa.")
+        valido = False
+    if valido:
+        artigo = Artigo(
+            titulo=form.titulo.data,
+            autor=form.autor.data,
+            data_publicacao=form.data_publicacao.data,
+            conteudo=form.conteudo.data,
+            imagem=salvar_imagem(form.arquivo.data, "artigos"),
+        )
+        db.session.add(artigo)
+        db.session.commit()
+        app.logger.info("Artigo publicado: id=%s titulo=%r", artigo.id, artigo.titulo)
+        flash("Artigo publicado.", "success")
+        return redirect(url_for("admin_artigos"))
     return render_template("admin/artigo_form.html", form=form, artigo=None,
                            titulo="Novo artigo")
 
@@ -356,18 +358,19 @@ def preenche_evento(evento, form):
 @login_obrigatorio
 def novo_evento():
     form = EventoForm()
-    if form.validate_on_submit():
-        if not form.arquivo.data:
-            form.arquivo.errors.append("Envie uma foto do evento.")
-        else:
-            evento = Evento()
-            preenche_evento(evento, form)
-            evento.imagem = salvar_imagem(form.arquivo.data, "eventos")
-            db.session.add(evento)
-            db.session.commit()
-            app.logger.info("Evento criado: id=%s titulo=%r", evento.id, evento.titulo)
-            flash("Evento adicionado à linha do tempo.", "success")
-            return redirect(url_for("admin_eventos"))
+    valido = form.validate_on_submit()
+    if request.method == "POST" and not form.arquivo.data:
+        form.arquivo.errors.append("Envie uma foto do evento.")
+        valido = False
+    if valido:
+        evento = Evento()
+        preenche_evento(evento, form)
+        evento.imagem = salvar_imagem(form.arquivo.data, "eventos")
+        db.session.add(evento)
+        db.session.commit()
+        app.logger.info("Evento criado: id=%s titulo=%r", evento.id, evento.titulo)
+        flash("Evento adicionado à linha do tempo.", "success")
+        return redirect(url_for("admin_eventos"))
     return render_template("admin/evento_form.html", form=form, evento=None,
                            titulo="Novo evento")
 
