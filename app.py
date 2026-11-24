@@ -280,10 +280,21 @@ def admin_artigos():
     return render_template("admin/artigos.html", artigos=Artigo.recentes().all())
 
 
+def opcoes_tags():
+    return [(t.id, t.nome) for t in Tag.query.order_by(Tag.nome).all()]
+
+
+def tags_escolhidas(form):
+    if not form.tags_ids.data:
+        return []
+    return Tag.query.filter(Tag.id.in_(form.tags_ids.data)).all()
+
+
 @app.route("/admin/artigos/novo", methods=["GET", "POST"])
 @login_obrigatorio
 def novo_artigo():
     form = ArtigoForm()
+    form.tags_ids.choices = opcoes_tags()
     valido = form.validate_on_submit()
     if request.method == "POST" and not form.arquivo.data:
         form.arquivo.errors.append("Envie uma imagem de capa.")
@@ -295,6 +306,7 @@ def novo_artigo():
             data_publicacao=form.data_publicacao.data,
             conteudo=form.conteudo.data,
             imagem=salvar_imagem(form.arquivo.data, "artigos"),
+            tags=tags_escolhidas(form),
         )
         db.session.add(artigo)
         db.session.commit()
@@ -310,12 +322,16 @@ def novo_artigo():
 def editar_artigo(id):
     artigo = db.get_or_404(Artigo, id)
     form = ArtigoForm(obj=artigo)
+    form.tags_ids.choices = opcoes_tags()
+    if request.method == "GET":
+        form.tags_ids.data = [t.id for t in artigo.tags]
     form.salvar.label.text = "Salvar alterações"
     if form.validate_on_submit():
         artigo.titulo = form.titulo.data
         artigo.autor = form.autor.data
         artigo.data_publicacao = form.data_publicacao.data
         artigo.conteudo = form.conteudo.data
+        artigo.tags = tags_escolhidas(form)
         if form.arquivo.data:
             remover_imagem(artigo.imagem)
             artigo.imagem = salvar_imagem(form.arquivo.data, "artigos")

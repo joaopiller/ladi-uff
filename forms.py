@@ -2,8 +2,9 @@ from datetime import date
 
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
-from wtforms import (BooleanField, DateField, IntegerField, PasswordField, SelectField, StringField,
-                     SubmitField, TextAreaField)
+from wtforms import (BooleanField, DateField, IntegerField, PasswordField, SelectField,
+                     SelectMultipleField, StringField, SubmitField, TextAreaField)
+from wtforms.widgets import CheckboxInput, ListWidget
 from wtforms.validators import DataRequired, Length, NumberRange, Optional, Regexp, URL
 
 FORMATOS_IMAGEM = ["jpg", "jpeg", "png", "webp"]
@@ -12,6 +13,11 @@ FORMATOS_IMAGEM = ["jpg", "jpeg", "png", "webp"]
 class FormularioBase(FlaskForm):
     class Meta:
         locales = ["pt"]
+
+
+class CaixasDeSelecao(SelectMultipleField):
+    widget = ListWidget(prefix_label=False)
+    option_widget = CheckboxInput()
 
 
 class LoginForm(FormularioBase):
@@ -41,6 +47,7 @@ class ArtigoForm(FormularioBase):
     conteudo = TextAreaField("Texto", validators=[DataRequired()],
                              description="Separe os parágrafos com uma linha em branco. "
                                          "Para deixar um trecho em negrito, escreva **assim**.")
+    tags_ids = CaixasDeSelecao("Tags", coerce=int)
     salvar = SubmitField("Publicar")
 
 
