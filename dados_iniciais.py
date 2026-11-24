@@ -1,7 +1,7 @@
 import os
 from datetime import date
 
-from models import Administrador, Artigo, Diretoria, Evento, Inscricao, Membro, db
+from models import Administrador, Artigo, Diretoria, Evento, Inscricao, Membro, Tag, db
 
 DIRETORIAS = [
     ("Direção executiva", "executiva", [
@@ -35,6 +35,7 @@ DIRETORIAS = [
 ARTIGOS = [
     {
         "titulo": "50 anos de relações diplomáticas entre Brasil e China",
+        "tags": ["Relações Internacionais", "Diplomacia"],
         "autor": "Equipe LADI-UFF",
         "data_publicacao": date(2026, 11, 3),
         "imagem": "img/eventos/forum-china-brasil.jpg",
@@ -48,6 +49,7 @@ Para quem estuda Direito Internacional, a relação sino-brasileira é um ótimo
     },
     {
         "titulo": "Refúgio no Brasil: o que diz a Lei 9.474/1997",
+        "tags": ["Direitos Humanos", "Refúgio"],
         "autor": "Equipe LADI-UFF",
         "data_publicacao": date(2026, 11, 10),
         "imagem": "img/eventos/refugiados.jpg",
@@ -63,6 +65,7 @@ Foi com esse tema em mente que a LADI desenvolveu o **Projeto Refugiados nas Esc
     },
     {
         "titulo": "O que é uma simulação da ONU e por que participar",
+        "tags": ["ONU", "Simulações"],
         "autor": "Equipe LADI-UFF",
         "data_publicacao": date(2026, 11, 17),
         "imagem": "img/eventos/simulacao-onu.jpg",
@@ -153,8 +156,16 @@ def popula_banco():
         for posicao, (nome_membro, cargo, foto) in enumerate(membros, start=1):
             db.session.add(Membro(nome=nome_membro, cargo=cargo, ordem=posicao,
                                   foto="img/diretoria/" + foto, diretoria=diretoria))
-    for artigo in ARTIGOS:
-        db.session.add(Artigo(**artigo))
+    tags = {}
+    for dados in ARTIGOS:
+        dados = dict(dados)
+        nomes = dados.pop("tags")
+        artigo = Artigo(**dados)
+        for nome in nomes:
+            if nome not in tags:
+                tags[nome] = Tag(nome=nome, slug=Tag.gera_slug(nome))
+            artigo.tags.append(tags[nome])
+        db.session.add(artigo)
     for evento in EVENTOS:
         db.session.add(Evento(**evento))
     for inscricao in INSCRICOES:

@@ -1,4 +1,5 @@
 import re
+import unicodedata
 from datetime import date, datetime
 
 from flask_sqlalchemy import SQLAlchemy
@@ -53,6 +54,29 @@ class Administrador(db.Model):
         return f"<Administrador {self.id}: {self.usuario}>"
 
 
+artigo_tag = db.Table(
+    "artigo_tag",
+    db.Column("artigo_id", db.ForeignKey("artigo.id"), primary_key=True),
+    db.Column("tag_id", db.ForeignKey("tag.id"), primary_key=True),
+)
+
+
+class Tag(db.Model):
+    __tablename__ = "tag"
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(40), nullable=False, unique=True)
+    slug = db.Column(db.String(50), nullable=False, unique=True)
+    artigos = db.relationship("Artigo", secondary=artigo_tag, back_populates="tags")
+
+    @staticmethod
+    def gera_slug(nome):
+        texto = unicodedata.normalize("NFKD", nome).encode("ascii", "ignore").decode()
+        return re.sub(r"[^a-z0-9]+", "-", texto.lower()).strip("-")
+
+    def __repr__(self):
+        return f"<Tag {self.id}: {self.nome}>"
+
+
 class Artigo(db.Model):
     __tablename__ = "artigo"
     id = db.Column(db.Integer, primary_key=True)
@@ -62,6 +86,8 @@ class Artigo(db.Model):
     imagem = db.Column(db.String(200), nullable=False)
     conteudo = db.Column(db.Text, nullable=False)
     criado_em = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    tags = db.relationship("Tag", secondary=artigo_tag, back_populates="artigos",
+                           order_by="Tag.nome")
 
     @property
     def paragrafos(self):
