@@ -5,9 +5,22 @@ from flask_wtf.file import FileAllowed, FileField
 from wtforms import (BooleanField, DateField, IntegerField, PasswordField, SelectField,
                      SelectMultipleField, StringField, SubmitField, TextAreaField)
 from wtforms.widgets import CheckboxInput, ListWidget
-from wtforms.validators import DataRequired, Length, NumberRange, Optional, Regexp, URL
+from wtforms.validators import DataRequired, Length, NumberRange, Optional, Regexp, URL, ValidationError
 
 FORMATOS_IMAGEM = ["jpg", "jpeg", "png", "webp"]
+
+
+def imagem_valida(form, campo):
+    arquivo = campo.data
+    if not arquivo:
+        return
+    inicio = arquivo.stream.read(12)
+    arquivo.stream.seek(0)
+    jpg = inicio.startswith(b"\xff\xd8\xff")
+    png = inicio.startswith(b"\x89PNG")
+    webp = inicio[:4] == b"RIFF" and inicio[8:12] == b"WEBP"
+    if not (jpg or png or webp):
+        raise ValidationError("O arquivo não é uma imagem válida.")
 
 
 class FormularioBase(FlaskForm):
@@ -33,7 +46,7 @@ class MembroForm(FormularioBase):
     ordem = IntegerField("Posição na aba", validators=[Optional(), NumberRange(min=1, max=99)],
                          description="Deixe em branco para colocar no fim da aba.")
     arquivo = FileField("Foto", validators=[
-        FileAllowed(FORMATOS_IMAGEM, "Envie uma imagem JPG, PNG ou WEBP.")])
+        FileAllowed(FORMATOS_IMAGEM, "Envie uma imagem JPG, PNG ou WEBP."), imagem_valida])
     salvar = SubmitField("Salvar")
 
 
@@ -43,7 +56,7 @@ class ArtigoForm(FormularioBase):
     data_publicacao = DateField("Data de publicação", default=date.today,
                                 validators=[DataRequired()])
     arquivo = FileField("Imagem de capa", validators=[
-        FileAllowed(FORMATOS_IMAGEM, "Envie uma imagem JPG, PNG ou WEBP.")])
+        FileAllowed(FORMATOS_IMAGEM, "Envie uma imagem JPG, PNG ou WEBP."), imagem_valida])
     conteudo = TextAreaField("Texto", validators=[DataRequired()],
                              description="Separe os parágrafos com uma linha em branco. "
                                          "Para deixar um trecho em negrito, escreva **assim**.")
@@ -61,7 +74,7 @@ class EventoForm(FormularioBase):
                           description="Opcional. Ex.: 1º semestre de 2026. Em branco, aparece o mês e o ano.")
     descricao = TextAreaField("Descrição", validators=[DataRequired(), Length(max=600)])
     arquivo = FileField("Foto", validators=[
-        FileAllowed(FORMATOS_IMAGEM, "Envie uma imagem JPG, PNG ou WEBP.")])
+        FileAllowed(FORMATOS_IMAGEM, "Envie uma imagem JPG, PNG ou WEBP."), imagem_valida])
     destaque = BooleanField("Destacar na página inicial")
     salvar = SubmitField("Salvar")
 
