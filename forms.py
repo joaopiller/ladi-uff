@@ -73,14 +73,6 @@ class InscricaoForm(FormularioBase):
         Regexp(r"^https?://", message="O link deve começar com http:// ou https://.")])
     salvar = SubmitField("Salvar")
 
-    def validate(self, extra_validators=None):
-        if not super().validate(extra_validators):
-            return False
-        if self.aberta.data and not self.link.data:
-            self.link.errors.append("Para abrir as inscrições, informe o link do formulário.")
-            return False
-        return True
-
 
 class TagForm(FormularioBase):
     nome = StringField("Nome da tag", validators=[DataRequired(), Length(max=40)])

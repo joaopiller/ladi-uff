@@ -466,11 +466,11 @@ def excluir_evento(id):
     return redirect(url_for("admin_eventos"))
 
 
-def formularios_inscricao(com_erro=None):
+def formularios_inscricao(inscricao_com_erro=None, form_com_erro=None):
     formularios = []
     for inscricao in Inscricao.query.order_by(Inscricao.id).all():
-        if com_erro is not None and com_erro[0].id == inscricao.id:
-            form = com_erro[1]
+        if inscricao_com_erro is not None and inscricao.id == inscricao_com_erro.id:
+            form = form_com_erro
         else:
             form = InscricaoForm(obj=inscricao, prefix=f"inscricao{inscricao.id}")
         formularios.append((inscricao, form))
@@ -488,7 +488,11 @@ def admin_inscricoes():
 def salvar_inscricao(id):
     inscricao = db.get_or_404(Inscricao, id)
     form = InscricaoForm(prefix=f"inscricao{inscricao.id}")
-    if form.validate_on_submit():
+    valido = form.validate_on_submit()
+    if form.aberta.data and not form.link.data:
+        form.link.errors.append("Para abrir as inscrições, informe o link do formulário.")
+        valido = False
+    if valido:
         inscricao.aberta = form.aberta.data
         inscricao.link = form.link.data or None
         db.session.commit()
@@ -497,7 +501,7 @@ def salvar_inscricao(id):
         flash(f"Inscrições de {inscricao.nome}: {situacao}.", "success")
         return redirect(url_for("admin_inscricoes"))
     return render_template("admin/inscricoes.html",
-                           formularios=formularios_inscricao((inscricao, form)))
+                           formularios=formularios_inscricao(inscricao, form))
 
 
 @app.errorhandler(404)
