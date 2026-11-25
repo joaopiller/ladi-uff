@@ -48,7 +48,8 @@ Na etapa 1, o grupo construiu o site institucional com HTML, CSS, JavaScript e B
 
 ```
 ladi/
-├── app.py                 cria a aplicação, define as rotas, os tratadores de erro e a segurança do login
+├── app.py                 cria a aplicação e define as rotas e os tratadores de erro
+├── autenticacao.py        login do painel: proteção das rotas e bloqueio após tentativas erradas
 ├── config.py              configurações por ambiente (desenvolvimento e produção), lidas do .env
 ├── logs.py                configuração do logging em arquivo com rotação
 ├── models.py              objeto db e os models (tabelas) do banco
@@ -108,7 +109,7 @@ ladi/
 └── logs/app.log           registro de execução (criado automaticamente, fora do Git)
 ```
 
-Seguindo a separação de responsabilidades vista em aula, `app.py` importa `models.py`, `forms.py`, `config.py` e `logs.py`, mas nenhum deles importa o `app.py`. O objeto `db` é criado em `models.py` e ligado à aplicação com `db.init_app(app)`, evitando importações circulares.
+Seguindo a separação de responsabilidades vista em aula, `app.py` importa `models.py`, `forms.py`, `config.py`, `logs.py`, `autenticacao.py` e `imagens.py`, mas nenhum deles importa o `app.py`. O objeto `db` é criado em `models.py` e ligado à aplicação com `db.init_app(app)`, evitando importações circulares.
 
 ### Banco de dados
 

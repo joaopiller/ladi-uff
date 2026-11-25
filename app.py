@@ -1,7 +1,5 @@
 import os
 import re
-from datetime import datetime, timedelta
-from functools import wraps
 
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_wtf.csrf import CSRFError, CSRFProtect
@@ -9,6 +7,8 @@ from markupsafe import Markup, escape
 from sqlalchemy import or_
 from werkzeug.middleware.proxy_fix import ProxyFix
 
+from autenticacao import (admin_logado, limpa_falhas_login, login_bloqueado, login_obrigatorio,
+                          registra_falha_login)
 from config import config
 from dados_iniciais import cria_administrador, popula_banco
 from forms import ArtigoForm, EventoForm, InscricaoForm, LoginForm, MembroForm, TagForm
@@ -55,43 +55,6 @@ def cabecalhos_seguranca(resposta):
 def registra_requisicao():
     if not request.path.startswith("/static/"):
         app.logger.debug("%s %s", request.method, request.path)
-
-
-TENTATIVAS_MAXIMAS = 5
-TEMPO_BLOQUEIO = timedelta(minutes=15)
-tentativas_login = {}
-
-
-def login_bloqueado(ip):
-    registro = tentativas_login.get(ip)
-    if registro is None:
-        return False
-    quantidade, inicio = registro
-    if datetime.now() - inicio > TEMPO_BLOQUEIO:
-        del tentativas_login[ip]
-        return False
-    return quantidade >= TENTATIVAS_MAXIMAS
-
-
-def registra_falha_login(ip):
-    quantidade, inicio = tentativas_login.get(ip, (0, datetime.now()))
-    tentativas_login[ip] = (quantidade + 1, inicio)
-
-
-def admin_logado():
-    admin_id = session.get("admin_id")
-    if admin_id is None:
-        return None
-    return db.session.get(Administrador, admin_id)
-
-
-def login_obrigatorio(view):
-    @wraps(view)
-    def protegida(*args, **kwargs):
-        if admin_logado() is None:
-            return redirect(url_for("entrar"))
-        return view(*args, **kwargs)
-    return protegida
 
 
 @app.template_filter("negrito")
@@ -183,7 +146,7 @@ def entrar():
 
         admin = Administrador.query.filter_by(usuario=form.usuario.data).first()
         if admin and admin.confere_senha(form.senha.data):
-            tentativas_login.pop(ip, None)
+            limpa_falhas_login(ip)
             session.clear()
             session.permanent = True
             session["admin_id"] = admin.id
