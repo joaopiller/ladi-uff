@@ -1,9 +1,4 @@
-const seletoresRevelar = [
-  ".secao .titulo-secao", ".secao .linha-titulo", ".foto-quem-somos", ".card-evento",
-  ".livro", ".card-professor", ".card-missao", ".card-tripe", ".membro", ".linha-tempo li",
-  ".caixa-inscricao", ".chamada", ".card-artigo", ".card-passo", ".livro-lido",
-  ".perguntas", ".estado-vazio", ".artigo-texto p"
-].join(", ");
+const seletoresRevelar = ".card-evento, .linha-tempo li, #artigos .card-artigo";
 
 function terminarRevelar() {
   this.classList.remove("revelar", "visivel");
