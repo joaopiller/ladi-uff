@@ -22,7 +22,7 @@
 
   <section class="secao" id="lista-artigos">
     <div class="container">
-      <form method="GET" action="{{ url_for('artigos', _anchor='lista-artigos') }}" class="busca-artigos" role="search">
+      <form method="GET" action="{{ url_for('artigos') }}" class="busca-artigos" role="search">
         {% if tag_ativa %}<input type="hidden" name="tag" value="{{ tag_ativa.slug }}">{% endif %}
         <input type="search" name="q" value="{{ busca }}" class="form-control" placeholder="Pesquisar artigos..." aria-label="Pesquisar artigos">
         <button type="submit" class="btn btn-principal" aria-label="Pesquisar"><i class="bi bi-search"></i></button>
@@ -30,9 +30,9 @@
 
       {% if tags %}
       <nav class="filtro-tags" aria-label="Filtrar por tag">
-        <a href="{{ url_for('artigos', q=busca or None, _anchor='lista-artigos') }}" class="{{ 'ativa' if not tag_ativa }}">Todos</a>
+        <a href="{{ url_for('artigos', q=busca or None) }}" class="{{ 'ativa' if not tag_ativa }}">Todos</a>
         {% for tag in tags %}
-        <a href="{{ url_for('artigos', tag=tag.slug, q=busca or None, _anchor='lista-artigos') }}" class="{{ 'ativa' if tag_ativa and tag_ativa.id == tag.id }}">{{ tag.nome }}</a>
+        <a href="{{ url_for('artigos', tag=tag.slug, q=busca or None) }}" class="{{ 'ativa' if tag_ativa and tag_ativa.id == tag.id }}">{{ tag.nome }}</a>
         {% endfor %}
       </nav>
       {% endif %}
@@ -44,7 +44,7 @@
           {% if busca %}para <strong>“{{ busca }}”</strong>{% endif %}
           {% if tag_ativa %}na tag <strong>{{ tag_ativa.nome }}</strong>{% endif %}
         </span>
-        <a href="{{ url_for('artigos', _anchor='lista-artigos') }}" class="limpar-busca"><i class="bi bi-x-lg"></i> Limpar {{ "filtros" if busca and tag_ativa else ("busca" if busca else "filtro") }}</a>
+        <a href="{{ url_for('artigos') }}" class="limpar-busca"><i class="bi bi-x-lg"></i> Limpar {{ "filtros" if busca and tag_ativa else ("busca" if busca else "filtro") }}</a>
       </div>
       {% endif %}
 

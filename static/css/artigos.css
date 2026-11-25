@@ -121,13 +121,7 @@
   animation-delay: 0.16s;
 }
 
-.paginacao a,
-.filtro-tags a {
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
-}
-
-.paginacao a:active,
-.filtro-tags a:active {
+.paginacao a:active {
   transform: scale(0.92);
 }
 
@@ -363,7 +357,7 @@ a.tag-artigo:hover {
   background-color: #fff;
   color: var(--azul-escuro);
   box-shadow: 0 4px 12px rgba(39, 67, 89, 0.1);
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .paginacao a:hover {

@@ -1,5 +1,5 @@
 const grade = document.querySelector(".grade-artigos");
-const linksDaLista = document.querySelectorAll(".paginacao a, .filtro-tags a, .limpar-busca");
+const linksPaginacao = document.querySelectorAll(".paginacao a");
 const reduzirAnimacoes = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function trocarPagina(evento) {
@@ -14,8 +14,8 @@ function trocarPagina(evento) {
   }, 220);
 }
 
-for (let i = 0; i < linksDaLista.length; i++) {
-  linksDaLista[i].addEventListener("click", trocarPagina);
+for (let i = 0; i < linksPaginacao.length; i++) {
+  linksPaginacao[i].addEventListener("click", trocarPagina);
 }
 
 if (window.location.hash === "#lista-artigos" && !reduzirAnimacoes) {
