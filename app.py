@@ -1,7 +1,8 @@
 import os
 import re
 
-from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask import (Flask, flash, redirect, render_template, request, send_from_directory, session,
+                   url_for)
 from flask_wtf.csrf import CSRFError, CSRFProtect
 from markupsafe import Markup, escape
 from sqlalchemy import or_
@@ -66,6 +67,12 @@ def negrito(texto):
 @app.context_processor
 def variaveis_globais():
     return {"admin_logado": admin_logado()}
+
+
+@app.route("/favicon.ico")
+def favicon():
+    pasta = os.path.join(app.root_path, "static", "img")
+    return send_from_directory(pasta, "logo-ladi.png", mimetype="image/png")
 
 
 @app.route("/")

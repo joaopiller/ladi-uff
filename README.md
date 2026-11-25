@@ -18,7 +18,7 @@ Projeto da disciplina de Introdução ao Desenvolvimento Web (UFF), feito em dua
 
 **Tecnologias:** Python, Flask, Jinja2, Flask-WTF, Flask-SQLAlchemy (SQLite), python-dotenv, HTML, CSS, JavaScript e Bootstrap 5.
 
-**Requisitos do trabalho:** 26 rotas, 7 models (`Diretoria`, `Membro`, `Administrador`, `Artigo`, `Tag`, `Evento` e `Inscricao`), 6 formulários Flask-WTF e log em `logs/app.log`.
+**Requisitos do trabalho:** 27 rotas, 7 models (`Diretoria`, `Membro`, `Administrador`, `Artigo`, `Tag`, `Evento` e `Inscricao`), 6 formulários Flask-WTF e log em `logs/app.log`.
 
 ## Grupo
 
