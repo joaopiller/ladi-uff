@@ -97,6 +97,8 @@ ladi/
 │   │   └── admin.css      estilos do login e do painel
 │   ├── js/
 │   │   ├── global.js      cor do menu ao rolar e fechamento do menu no celular
+│   │   ├── animacoes.js   seções e cards surgindo ao rolar a página
+│   │   ├── artigos.js     transição da lista ao trocar de página, filtro ou busca
 │   │   ├── carrossel.js   setas das abas de membros com mais de 4 pessoas
 │   │   ├── confirmar.js   confirmação antes de excluir
 │   │   └── editor.js      botão de negrito do editor de artigos
