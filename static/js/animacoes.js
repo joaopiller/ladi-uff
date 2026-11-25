@@ -6,15 +6,6 @@ function terminarRevelar() {
   this.removeEventListener("transitionend", terminarRevelar);
 }
 
-function atrasoNaLinha(elemento) {
-  const coluna = elemento.closest(".row > *");
-  if (!coluna) {
-    return 0;
-  }
-  const posicao = Array.prototype.indexOf.call(coluna.parentElement.children, coluna);
-  return (posicao % 4) * 90;
-}
-
 function prepararAnimacoes() {
   const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduzir || !("IntersectionObserver" in window)) {
@@ -33,14 +24,25 @@ function prepararAnimacoes() {
   }, { threshold: 0.12 });
 
   const elementos = document.querySelectorAll(seletoresRevelar);
+  let linhaAnterior = null;
+  let posicaoNaLinha = 0;
+
   for (let i = 0; i < elementos.length; i++) {
     const elemento = elementos[i];
-    const posicao = elemento.getBoundingClientRect();
-    if (posicao.height === 0 || posicao.top < window.innerHeight || elemento.closest(".entrando")) {
+    if (elemento.getBoundingClientRect().top < window.innerHeight) {
       continue;
     }
+
+    const linha = elemento.parentElement.parentElement;
+    if (linha === linhaAnterior) {
+      posicaoNaLinha++;
+    } else {
+      posicaoNaLinha = 0;
+      linhaAnterior = linha;
+    }
+
     elemento.classList.add("revelar");
-    elemento.style.transitionDelay = atrasoNaLinha(elemento) + "ms";
+    elemento.style.transitionDelay = (posicaoNaLinha % 3) * 90 + "ms";
     observador.observe(elemento);
   }
 }
