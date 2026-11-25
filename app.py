@@ -92,7 +92,7 @@ def clube():
     return render_template("clube.html", inscricao=Inscricao.da_pagina("clube"))
 
 
-ARTIGOS_POR_PAGINA = 12
+ARTIGOS_POR_PAGINA = 15
 
 
 @app.route("/artigos")
