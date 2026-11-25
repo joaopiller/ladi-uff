@@ -5,7 +5,7 @@ Aplicação web da **Liga Acadêmica de Direito Internacional da Universidade Fe
 Na etapa 1, o grupo construiu o site institucional com HTML, CSS, JavaScript e Bootstrap. Na etapa 2, o site virou uma aplicação Flask com banco de dados e um painel administrativo, para que a própria diretoria da Liga atualize membros, artigos, eventos e inscrições sem mexer no código.
 
 - **Aplicação publicada:** https://joaopiller.pythonanywhere.com
-- **Código:** https://github.com/joaopiller/ladi
+- **Código:** https://github.com/joaopiller/ladi-uff
 
 ## Grupo
 
@@ -206,21 +206,21 @@ e acesse http://127.0.0.1:5000. O banco é criado e populado na primeira execuç
 
 1. Em **Consoles → Bash**, baixe o código e crie o ambiente virtual:
    ```bash
-   git clone https://github.com/joaopiller/ladi.git
-   cd ladi
+   git clone https://github.com/joaopiller/ladi-uff.git
+   cd ladi-uff
    mkvirtualenv --python=/usr/bin/python3.13 venv
    pip install -r requirements.txt
    ```
 2. Crie o `.env` no servidor (`nano .env`) com `APP_ENV=production`, uma `SECRET_KEY` nova, `ADMIN_USUARIO` e `ADMIN_SENHA`.
 3. Na aba **Web**, clique em **Add a new web app**, escolha **Manual configuration** e a mesma versão do Python.
-4. Preencha **Source code** e **Working directory** com `/home/<usuario>/ladi` e **Virtualenv** com `/home/<usuario>/.virtualenvs/venv`.
-5. Em **Static files**, adicione a URL `/static/` apontando para `/home/<usuario>/ladi/static`.
+4. Preencha **Source code** e **Working directory** com `/home/<usuario>/ladi-uff` e **Virtualenv** com `/home/<usuario>/.virtualenvs/venv`.
+5. Em **Static files**, adicione a URL `/static/` apontando para `/home/<usuario>/ladi-uff/static`.
 6. Substitua o conteúdo do **WSGI configuration file** por:
    ```python
    import os
    import sys
 
-   pasta = "/home/<usuario>/ladi"
+   pasta = "/home/<usuario>/ladi-uff"
    if pasta not in sys.path:
        sys.path.insert(0, pasta)
 
