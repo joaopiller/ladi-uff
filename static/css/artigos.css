@@ -141,10 +141,11 @@
   box-shadow: 0 6px 18px rgba(39, 67, 89, 0.1);
   color: var(--texto);
   text-decoration: none;
-  transition: box-shadow 0.3s;
+  transition: box-shadow 0.3s, transform 0.3s;
 }
 
 .card-artigo:hover {
+  transform: translateY(-4px);
   box-shadow: 0 10px 26px rgba(39, 67, 89, 0.2);
   color: var(--texto);
 }
