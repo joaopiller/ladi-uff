@@ -109,13 +109,15 @@ def artigos():
     if busca:
         app.logger.debug("Busca de artigos: %r", busca)
         consulta = consulta.filter(or_(
-            Artigo.titulo.contains(busca),
-            Artigo.autor.contains(busca),
-            Artigo.conteudo.contains(busca),
-            Artigo.tags.any(Tag.nome.contains(busca)),
+            Artigo.titulo.contains(busca, autoescape=True),
+            Artigo.autor.contains(busca, autoescape=True),
+            Artigo.conteudo.contains(busca, autoescape=True),
+            Artigo.tags.any(Tag.nome.contains(busca, autoescape=True)),
         ))
 
     pagina = request.args.get("pagina", 1, type=int)
+    if pagina < 1 or pagina > 10000:
+        pagina = 1
     paginacao = consulta.paginate(page=pagina, per_page=ARTIGOS_POR_PAGINA, error_out=False)
     if paginacao.pages and pagina > paginacao.pages:
         return redirect(url_for("artigos", pagina=paginacao.pages, q=busca or None,
@@ -507,6 +509,12 @@ def salvar_inscricao(id):
 @app.errorhandler(404)
 def nao_encontrado(erro):
     app.logger.warning("404: %s %s", request.method, request.path)
+    return render_template("404.html"), 404
+
+
+@app.errorhandler(OverflowError)
+def numero_grande_demais(erro):
+    app.logger.warning("Número fora do limite em %s", request.path)
     return render_template("404.html"), 404
 
 
